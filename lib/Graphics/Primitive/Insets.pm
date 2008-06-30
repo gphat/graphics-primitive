@@ -76,6 +76,10 @@ Set/Get the inset from the right.
 
 Set/Get the inset from the bottom.
 
+=item equal_to
+
+Determine if these Insets are equal to another.
+
 =item zero
 
 Sets all the insets (top, left, bottom, right) to 0.

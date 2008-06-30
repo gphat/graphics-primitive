@@ -1,10 +1,9 @@
 package Graphics::Primitive::Border;
 use Moose;
 
-use Graphics::Color;
-use Chart::Clicker::Drawing::Stroke;
-
 extends 'Graphics::Primitive::Stroke';
+
+use Graphics::Color;
 
 has 'color' => (
     is => 'rw',
@@ -50,8 +49,10 @@ component.
 
 =item new
 
-Creates a new Graphics::Primitiver::Border.  Defaults to a color of black and
-a default stroke if none are specified.
+Creates a new Graphics::Primitiver::Border.  Border extends Stroke and adds a
+color attribute. Defaults to a color of black and a default stroke if none are
+specified.  See the documentation for L<Graphics::Primitive::Stroke> for more
+information.
 
 =back
 

@@ -15,4 +15,9 @@ eval "use Pod::Coverage $min_pc";
 plan skip_all => "Pod::Coverage $min_pc required for testing POD coverage"
     if $@;
 
-all_pod_coverage_ok();
+eval "use Pod::Coverage::Moose";
+plan skip_all => "Pod::Coverage::Moose $min_pc required for testing POD coverage"
+    if $@;
+
+
+all_pod_coverage_ok({ coverage_class => 'Pod::Coverage::Moose' });

@@ -6,9 +6,11 @@ author   'Cory G Watson <cory.watson@iinteractive.com>';
 
 build_requires 'Test::More';
 
+test_requires 'Pod::Coverage::Moose';
+
 requires 'Geometry::Primitive';
 requires 'Graphics::Color';
-requires 'Moose;'
+requires 'Moose';
 requires 'MooseX::AttributeHelpers';
 
 auto_install;

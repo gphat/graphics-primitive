@@ -1,10 +1,25 @@
 package Graphics::Primitive::Insets;
 use Moose;
 
+with 'Geometry::Primitive::Equal';
+
 has 'top' => ( is => 'rw', isa => 'Num', default => 0 );
 has 'bottom' => ( is => 'rw', isa => 'Num', default => 0 );
 has 'left' => ( is => 'rw', isa => 'Num', default => 0 );
 has 'right' => ( is => 'rw', isa => 'Num', default => 0 );
+
+sub equal_to {
+    my ($self, $other) = @_;
+
+    return ($self->top == $other->top) && ($self->bottom == $other->bottom())
+        && ($self->left == $other->left) && ($self->right == $other->right);
+}
+
+sub zero {
+    my ($self) = @_;
+
+    $self->top(0); $self->bottom(0); $self->left(0); $self->right(0);
+}
 
 1;
 __END__
@@ -14,8 +29,9 @@ Graphics::Primitive::Insets
 
 =head1 DESCRIPTION
 
-Graphics::Primitive::Insets represents the amount of space a that surrounds
-something.
+Graphics::Primitive::Insets represents the amount of space that surrounds
+something.  This object can be used to represent either padding or margins
+(in the CSS sense, one being inside the bounding box, the other being outside)
 
 =head1 SYNOPSIS
 
@@ -59,6 +75,10 @@ Set/Get the inset from the right.
 =item bottom
 
 Set/Get the inset from the bottom.
+
+=item zero
+
+Sets all the insets (top, left, bottom, right) to 0.
 
 =back
 

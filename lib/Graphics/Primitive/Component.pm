@@ -1,21 +1,18 @@
 package Graphics::Primitive::Component;
 use Moose;
 
-use Moose::Util::TypeConstraints;
-
-extends 'Geometry::Primitive::Rectangle';
+with 'Layout::Manager::Component';
 
 use Geometry::Primitive::Point;
 use Geometry::Primitive::Rectangle;
-
-# enum 'Orientations' => ($CC_HORIZONTAL, $CC_VERTICAL);
-# enum 'Positions' => ($CC_TOP, $CC_BOTTOM, $CC_LEFT, $CC_RIGHT );
 
 # TODO Coerce color
 
 has 'background_color' => ( is => 'rw', isa => 'Graphics::Color');
 has 'border' => ( is => 'rw', isa => 'Graphics::Primitive::Border' );
 has 'color' => ( is => 'rw', isa => 'Graphics::Color');
+has 'name' => ( is => 'rw', isa => 'Str' );
+has '+origin' => ( default => sub { Geometry::Primitive::Point->new() } );
 has 'padding' => (
     is => 'rw',
     isa => 'Graphics::Primitive::Insets',
@@ -77,13 +74,13 @@ Graphics::Primitive::Component
 
 =head1 DESCRIPTION
 
-A Component is an entity with a graphical representation.  This class extends
-L<Geometry::Primitive::Rectangle>.
+A Component is an entity with a graphical representation.  This class
+implements L<Layout::Manager::Component> for use with a layout manager.
 
 =head1 SYNOPSIS
 
   my $c = Graphics::Primitive::Component->new({
-    location => Geometry::Primitive::Point->new({
+    origin => Geometry::Primitive::Point->new({
         x => $x, y => $y
     }),
     width => 500, height => 350
@@ -124,6 +121,11 @@ Set this component's margins, which should be an instance of
 L<Insets|Graphics::Primitive::Insets>.  Margins are the space I<outside> the
 component's bounding box, as in CSS.  The margins should be outside the
 border.
+
+=item name
+
+Set this component's name.  This is not required, but may inform consumers
+of a component.  Pay attention to that library's documentation.
 
 =item padding
 

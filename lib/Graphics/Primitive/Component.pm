@@ -11,7 +11,6 @@ use Geometry::Primitive::Rectangle;
 has 'background_color' => ( is => 'rw', isa => 'Graphics::Color');
 has 'border' => ( is => 'rw', isa => 'Graphics::Primitive::Border' );
 has 'color' => ( is => 'rw', isa => 'Graphics::Color');
-has 'name' => ( is => 'rw', isa => 'Str' );
 has '+origin' => ( default => sub { Geometry::Primitive::Point->new() } );
 has 'padding' => (
     is => 'rw',

@@ -25,6 +25,17 @@ override('prepare', sub {
     }
 });
 
+override('draw', sub {
+    my ($self) = @_;
+
+    super;
+
+    foreach my $comp (@{ $self->components }) {
+        next unless defined($comp);
+        $comp->{component}->draw();
+    }
+});
+
 1;
 __END__
 

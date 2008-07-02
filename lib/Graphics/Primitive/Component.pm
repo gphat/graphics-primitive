@@ -29,6 +29,8 @@ has 'margins' => (
 
 sub prepare { }
 
+sub draw { }
+
 sub inside_width {
     my $self = shift();
 

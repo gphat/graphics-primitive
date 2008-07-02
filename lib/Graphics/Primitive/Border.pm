@@ -9,12 +9,12 @@ has 'color' => (
     is => 'rw',
     isa => 'Graphics::Color',
     # TODO color space independent!
-    # default => sub { Chart::Clicker::Drawing::Color->new(
-    #     red     => 0,
-    #     green   => 0,
-    #     blue    => 0,
-    #     alpha   => 1
-    # ) },
+    default => sub { Graphics::Color::RGB->new(
+        red     => 0,
+        green   => 0,
+        blue    => 0,
+        alpha   => 1
+    ) },
     # TODO coerce!
     # coerce => 1
 );

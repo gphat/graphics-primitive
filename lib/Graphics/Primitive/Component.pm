@@ -9,7 +9,11 @@ use Geometry::Primitive::Rectangle;
 # TODO Coerce color
 
 has 'background_color' => ( is => 'rw', isa => 'Graphics::Color');
-has 'border' => ( is => 'rw', isa => 'Graphics::Primitive::Border' );
+has 'border' => (
+    is => 'rw',
+    isa => 'Graphics::Primitive::Border',
+    default => sub { Graphics::Primitive::Border->new() }
+);
 has 'color' => ( is => 'rw', isa => 'Graphics::Color');
 has '+origin' => ( default => sub { Geometry::Primitive::Point->new() } );
 has 'padding' => (
@@ -23,14 +27,16 @@ has 'margins' => (
     default => sub { Graphics::Primitive::Insets->new() }
 );
 
+sub prepare { }
+
 sub inside_width {
     my $self = shift();
 
     my $w = $self->width();
 
-    $w -= $self->padding->left() + $self->padding->right();
-    $w -= $self->margins->left() + $self->margins->right();
-    $w -= $self->border->width() * 2;
+    $w -= $self->padding->left + $self->padding->right;
+    $w -= $self->margins->left + $self->margins->right;
+    $w -= $self->border->width * 2;
 
     return $w;
 }
@@ -38,11 +44,11 @@ sub inside_width {
 sub inside_height {
     my $self = shift();
 
-    my $h = $self->height();
+    my $h = $self->height;
 
-    $h -= $self->padding->bottom() + $self->padding->top();
-    $h -= $self->margins->bottom() + $self->margins->top();
-    $h -= $self->border->width() * 2;
+    $h -= $self->padding->bottom + $self->padding->top;
+    $h -= $self->margins->bottom + $self->margins->top;
+    $h -= $self->border->width * 2;
 
     return $h;
 }
@@ -63,6 +69,21 @@ sub inside_bounding_box {
     );
 }
 
+sub outside_width {
+    my $self = shift();
+
+    my $w = $self->padding->left + $self->padding->right;
+    $w += $self->margins->left + $self->margins->right;
+    $w += $self->border->width * 2;
+}
+
+sub outside_height {
+    my $self = shift();
+
+    my $w = $self->padding->top + $self->padding->bottom;
+    $w += $self->margins->top + $self->margins->bottom;
+    $w += $self->border->width * 2;
+}
 
 1;
 __END__
@@ -133,24 +154,28 @@ L<Insets|Graphics::Primitive::Insets>.  Padding is the space I<inside> the
 component's bounding box, as in CSS.  This padding should be between the
 border and the component's content.
 
-=item inside_width
-
-Get the width available in this container after taking away space for
-padding, margin and borders.
-
 =item inside_bounding_box
 
 Returns a L<Rectangle|Geometry::Primitive::Rectangle> that defines the edges
 of the 'inside' box for this component.
 
-=item inside_dimension
-
-Get the dimension of this container's inside.
-
 =item inside_height
 
 Get the height available in this container after taking away space for
 padding, margin and borders.
+
+=item inside_width
+
+Get the width available in this container after taking away space for
+padding, margin and borders.
+
+=item outside_height
+
+Get the height consumed by padding, margin and borders.
+
+=item outside_width
+
+Get the width consumed by padding, margin and borders.
 
 =back
 

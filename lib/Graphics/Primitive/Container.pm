@@ -7,11 +7,23 @@ use Layout::Manager;
 
 has 'layout' => (
     is => 'rw',
-    # isa => 'Object',
-    does => 'Layout::Manager',
-    required => 0,
-    handles => 'Layout::Manager'
+    isa => 'Layout::Manager',
+    handles => [
+        'components', 'add_component', 'component_count', 'remove_component',
+        'clear_components', 'do_layout'
+    ]
 );
+
+override('prepare', sub {
+    my ($self) = @_;
+
+    super;
+
+    foreach my $comp (@{ $self->components }) {
+        next unless defined($comp);
+        $comp->{component}->prepare();
+    }
+});
 
 1;
 __END__

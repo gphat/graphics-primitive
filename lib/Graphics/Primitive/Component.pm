@@ -3,6 +3,8 @@ use Moose;
 
 with 'Layout::Manager::Component';
 
+use Graphics::Primitive::Border;
+use Graphics::Primitive::Insets;
 use Geometry::Primitive::Point;
 use Geometry::Primitive::Rectangle;
 

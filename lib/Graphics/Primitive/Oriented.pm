@@ -1,12 +1,13 @@
 package Graphics::Primitive::Oriented;
 use Moose::Role;
 
-enum 'Graphics::Primitive::Orientations' => qw(vertical horizontal)
+use Moose::Util::TypeConstraints;
+
+enum 'Graphics::Primitive::Orientations' => qw(vertical horizontal);
 
 has 'orientation' => (
     is => 'rw',
     isa => 'Graphics::Primitive::Orientations',
-    required => 1
 );
 
 sub is_vertical {

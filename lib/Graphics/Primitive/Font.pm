@@ -34,6 +34,7 @@ has 'weight' => (
     default => 'normal'
 );
 
+no Moose;
 1;
 __END__
 =head1 NAME
@@ -61,38 +62,39 @@ when rendering text.
 
 =over 4
 
-=item new
+=item I<new>
 
-Graphics::Primitive::Font.
+Creates a new Graphics::Primitive::Font.
 
 =back
 
-=head2 Class Methods
+=head2 Instance Methods
 
 =over 4
 
-=item size
+=item I<face>
 
-Set/Get the size of this text.
+Set this font's face.
 
-=item slant
+=item I<size>
 
-Set/Get the slant of this text.  Valid values are normal, italic and oblique.
+Set/Get the size of this font.
 
-=item weight
+=item I<slant>
 
-Set/Get the weight of this text.  Value valies are normal and bold.
+Set/Get the slant of this font.  Valid values are normal, italic and oblique.
+
+=item I<weight>
+
+Set/Get the weight of this font.  Value valies are normal and bold.
 
 =back
 
 =head1 AUTHOR
 
-Cory Watson, C<< <cory.watson at iinteractive.com> >>
+Cory Watson, C<< <gphat@cpan.org> >>
 
-=head1 ACKNOWLEDGEMENTS
-
-Many of the ideas here come from my experience using the Cairo library.  It is
-entirely possible that 
+Infinity Interactive, L<http://www.iinteractive.com>
 
 =head1 BUGS
 

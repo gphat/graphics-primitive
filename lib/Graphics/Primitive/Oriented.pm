@@ -66,7 +66,9 @@ The way a component is oriented. Values allowed are 'horizontal' or
 
 =head1 AUTHOR
 
-Cory Watson, C<< <cory.watson at iinteractive.com> >>
+Cory Watson, C<< <gphat@cpan.org> >>
+
+Infinity Interactive, L<http://www.iinteractive.com>
 
 =head1 SEE ALSO
 

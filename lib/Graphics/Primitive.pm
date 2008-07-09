@@ -13,14 +13,21 @@ Version 0.01
 
 our $VERSION = '0.01';
 
+no Moose;
 1;
 __END__
 
 =head1 SYNOPSIS
 
-Quick summary of what the module does.
+Graphics::Primitive is a device and library agnostic system for creating
+and manipulating colors in various graphical elements such as Borders,
+Fonts, Paths and the like.
 
-Perhaps a little code snippet.
+    my $c = Graphics::Primitive::Container->new({
+      layout => $layout_manager,
+      width => 500, height => 350,
+      border => 
+    });
 
     use Graphics::Primitive;
 
@@ -29,12 +36,13 @@ Perhaps a little code snippet.
 
 =head1 AUTHOR
 
-Cory Watson, C<< <cory.watson at iinteractive.com> >>
+Cory Watson, C<< <gphat@cpan.org> >>
+
+Infinity Interactive, L<http://www.iinteractive.com>
 
 =head1 ACKNOWLEDGEMENTS
 
-Many of the ideas here come from my experience using the Cairo library.  It is
-entirely possible that 
+Many of the ideas here come from my experience using the Cairo library.
 
 =head1 BUGS
 

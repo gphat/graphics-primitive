@@ -36,6 +36,7 @@ override('draw', sub {
     }
 });
 
+no Moose;
 1;
 __END__
 
@@ -60,7 +61,7 @@ A Container is a role for components that may contain other components.
 
 =over 4
 
-=item new
+=item I<new>
 
 Creates a new Container.
 
@@ -70,7 +71,7 @@ Creates a new Container.
 
 =over 4
 
-=item layout
+=item I<layout>
 
 Set/Get the layout manager for this Container.
 
@@ -78,12 +79,9 @@ Set/Get the layout manager for this Container.
 
 =head1 AUTHOR
 
-Cory Watson, C<< <cory.watson at iinteractive.com> >>
+Cory Watson, C<< <gphat@cpan.org> >>
 
-=head1 ACKNOWLEDGEMENTS
-
-Many of the ideas here come from my experience using the Cairo library.  It is
-entirely possible that 
+Infinity Interactive, L<http://www.iinteractive.com>
 
 =head1 BUGS
 

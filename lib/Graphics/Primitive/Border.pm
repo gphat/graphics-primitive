@@ -8,17 +8,9 @@ use Graphics::Color;
 has 'color' => (
     is => 'rw',
     isa => 'Graphics::Color',
-    # TODO color space independent!
-    default => sub { Graphics::Color::RGB->new(
-        red     => 0,
-        green   => 0,
-        blue    => 0,
-        alpha   => 1
-    ) },
-    # TODO coerce!
-    # coerce => 1
 );
 
+no Moose;
 1;
 __END__
 
@@ -36,8 +28,6 @@ component.
   use Graphics::Primitive::Border;
 
   my $border = Graphics::Primitive::Border->new({
-      # TODO Color!!
-    color => 'black',
     width => 3
   });
 
@@ -47,33 +37,29 @@ component.
 
 =over 4
 
-=item new
+=item I<new>
 
 Creates a new Graphics::Primitiver::Border.  Border extends Stroke and adds a
-color attribute. Defaults to a color of black and a default stroke if none are
-specified.  See the documentation for L<Graphics::Primitive::Stroke> for more
-information.
+color attribute. Has a default stroke if none is specified.  See the
+documentation for L<Graphics::Primitive::Stroke> for more information.
 
 =back
 
-=head2 Class Methods
+=head2 Instance Methods
 
 =over 4
 
-=item color
+=item I<color>
 
-Set/Get the Color.
+Set/Get the Color.  Expected to be a L<Graphics::Color> object.
 
 =back
 
 =head1 AUTHOR
 
-Cory Watson, C<< <cory.watson at iinteractive.com> >>
+Cory Watson, C<< <gphat@cpan.org> >>
 
-=head1 ACKNOWLEDGEMENTS
-
-Many of the ideas here come from my experience using the Cairo library.  It is
-entirely possible that 
+Infinity Interactive, L<http://www.iinteractive.com>
 
 =head1 BUGS
 

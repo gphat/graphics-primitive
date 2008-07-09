@@ -21,6 +21,7 @@ sub zero {
     $self->top(0); $self->bottom(0); $self->left(0); $self->right(0);
 }
 
+no Moose;
 1;
 __END__
 =head1 NAME
@@ -50,37 +51,37 @@ something.  This object can be used to represent either padding or margins
 
 =over 4
 
-=item new
+=item I<new>
 
 Creates a new Graphics::Primitive::Insets.
 
 =back
 
-=head2 Class Methods
+=head2 Instance Methods
 
 =over 4
 
-=item top
-
-Set/Get the inset from the top.
-
-=item left
-
-Set/Get the inset from the left.
-
-=item right
-
-Set/Get the inset from the right.
-
-=item bottom
+=item I<bottom>
 
 Set/Get the inset from the bottom.
 
-=item equal_to
+=item I<equal_to>
 
 Determine if these Insets are equal to another.
 
-=item zero
+=item I<left>
+
+Set/Get the inset from the left.
+
+=item I<right>
+
+Set/Get the inset from the right.
+
+=item I<top>
+
+Set/Get the inset from the top.
+
+=item I<zero>
 
 Sets all the insets (top, left, bottom, right) to 0.
 
@@ -88,7 +89,9 @@ Sets all the insets (top, left, bottom, right) to 0.
 
 =head1 AUTHOR
 
-Cory Watson, C<< <cory.watson at iinteractive.com> >>
+Cory Watson, C<< <gphat@cpan.org> >>
+
+Infinity Interactive, L<http://www.iinteractive.com>
 
 =head1 SEE ALSO
 

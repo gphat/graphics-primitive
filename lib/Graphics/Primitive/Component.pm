@@ -8,8 +8,6 @@ use Graphics::Primitive::Insets;
 use Geometry::Primitive::Point;
 use Geometry::Primitive::Rectangle;
 
-# TODO Coerce color
-
 has 'background_color' => ( is => 'rw', isa => 'Graphics::Color');
 has 'border' => (
     is => 'rw',
@@ -89,6 +87,7 @@ sub outside_height {
     $w += $self->border->width * 2;
 }
 
+no Moose;
 1;
 __END__
 
@@ -116,81 +115,88 @@ implements L<Layout::Manager::Component> for use with a layout manager.
 
 =over 4
 
-=item new
+=item I<new>
 
 Creates a new Component.
 
 =back
 
-=head2 Class Methods
+=head2 Instance Methods
 
 =over 4
 
-=item background_color
+=item I<background_color>
 
 Set this component's background color.
 
-=item border
+=item I<border>
 
 Set this component's border, which should be an instance of
 L<Border|Graphics::Primitive::Border>.
 
-=item color
+=item I<color>
 
 Set this component's foreground color.
 
-=item margins
+=item I<draw>
+
+Method to actually draw this component.  This is an empty sub and is meant to
+be overriden by a specific implemntation.
+
+=item I<inside_bounding_box>
+
+Returns a L<Rectangle|Geometry::Primitive::Rectangle> that defines the edges
+of the 'inside' box for this component.
+
+=item I<inside_height>
+
+Get the height available in this container after taking away space for
+padding, margin and borders.
+
+=item I<inside_width>
+
+Get the width available in this container after taking away space for
+padding, margin and borders.
+
+=item I<margins>
 
 Set this component's margins, which should be an instance of
 L<Insets|Graphics::Primitive::Insets>.  Margins are the space I<outside> the
 component's bounding box, as in CSS.  The margins should be outside the
 border.
 
-=item name
+=item I<name>
 
 Set this component's name.  This is not required, but may inform consumers
 of a component.  Pay attention to that library's documentation.
 
-=item padding
+=item I<outside_height>
+
+Get the height consumed by padding, margin and borders.
+
+=item I<outside_width>
+
+Get the width consumed by padding, margin and borders.
+
+=item I<padding>
 
 Set this component's padding, which should be an instance of
 L<Insets|Graphics::Primitive::Insets>.  Padding is the space I<inside> the
 component's bounding box, as in CSS.  This padding should be between the
 border and the component's content.
 
-=item inside_bounding_box
+=item I<prepare>
 
-Returns a L<Rectangle|Geometry::Primitive::Rectangle> that defines the edges
-of the 'inside' box for this component.
-
-=item inside_height
-
-Get the height available in this container after taking away space for
-padding, margin and borders.
-
-=item inside_width
-
-Get the width available in this container after taking away space for
-padding, margin and borders.
-
-=item outside_height
-
-Get the height consumed by padding, margin and borders.
-
-=item outside_width
-
-Get the width consumed by padding, margin and borders.
+Method to prepare this component for drawing.  This is an empty sub and is
+meant to be overriden by a specific implemntation.
 
 =back
 
 =head1 AUTHOR
 
-Cory Watson, C<< <cory.watson at iinteractive.com> >>
+Cory Watson, C<< <gphat@cpan.org> >>
 
-=head1 ACKNOWLEDGEMENTS
-
-Many of the ideas here come from my experience using the Cairo library.  It is
-entirely possible that 
+Infinity Interactive, L<http://www.iinteractive.com>
 
 =head1 BUGS
 

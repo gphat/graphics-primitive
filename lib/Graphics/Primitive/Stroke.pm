@@ -9,6 +9,7 @@ has 'width' => ( is => 'rw', isa => 'Int', default => 1 );
 has 'line_cap' => ( is => 'rw', isa => 'LineCap', default => 'butt' );
 has 'line_join' => ( is => 'rw', isa => 'LineJoin', default => 'miter' );
 
+no Moose;
 1;
 __END__
 
@@ -37,39 +38,36 @@ path.
 
 =over 4
 
-=item new
+=item I<new>
 
 Creates a new Graphics::Primitive::Stroke.  Defaults to a width of 1,
 a line_cap 'butt' and a line_join of 'miter'.
 
 =back
 
-=head2 Class Methods
+=head2 Instance Methods
 
 =over 4
 
-=item line_cap
+=item I<line_cap>
 
-Set/Get the line_cap of this stroke.
+Set/Get the line_cap of this stroke.  Valid values are butt, round and square.
 
-=item line_join
+=item I<line_join>
 
-Set/Get the line_join of this stroke.
+Set/Get the line_join of this stroke. Valid values are miter, round and bevel.
 
-=item width
+=item I<width>
 
-Set/Get the width of this stroke.
+Set/Get the width of this stroke.  Defaults to 1
 
 =back
 
 =head1 AUTHOR
 
-Cory Watson, C<< <cory.watson at iinteractive.com> >>
+Cory Watson, C<< <gphat@cpan.org> >>
 
-=head1 ACKNOWLEDGEMENTS
-
-Many of the ideas here come from my experience using the Cairo library.  It is
-entirely possible that 
+Infinity Interactive, L<http://www.iinteractive.com>
 
 =head1 BUGS
 

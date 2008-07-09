@@ -2,7 +2,7 @@ use inc::Module::Install;
 
 name     'Graphics-Primitive';
 all_from 'lib/Graphics/Primitive.pm';
-author   'Cory G Watson <cory.watson@iinteractive.com>';
+author   'Cory G Watson <gphat@cpan.org>';
 
 build_requires 'Test::More';
 

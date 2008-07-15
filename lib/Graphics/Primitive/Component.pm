@@ -15,17 +15,18 @@ has 'border' => (
     default => sub { Graphics::Primitive::Border->new() }
 );
 has 'color' => ( is => 'rw', isa => 'Graphics::Color');
+has 'margins' => (
+    is => 'rw',
+    isa => 'Graphics::Primitive::Insets',
+    default => sub { Graphics::Primitive::Insets->new() }
+);
 has '+origin' => ( default => sub { Geometry::Primitive::Point->new() } );
 has 'padding' => (
     is => 'rw',
     isa => 'Graphics::Primitive::Insets',
     default => sub { Graphics::Primitive::Insets->new() }
 );
-has 'margins' => (
-    is => 'rw',
-    isa => 'Graphics::Primitive::Insets',
-    default => sub { Graphics::Primitive::Insets->new() }
-);
+has 'visible' => ( is => 'rw', isa => 'Bool', default => sub { 1 } );
 
 sub prepare { }
 

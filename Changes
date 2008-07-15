@@ -1,5 +1,10 @@
 Revision history for Graphics-Primitive
 
+0.02
+  - Add visible to component
+  - Fix Description
+  - Add MI version because Yuval yelled at me
+
 0.01    Date/time
         First version, released on an unsuspecting world.
 

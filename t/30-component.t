@@ -1,4 +1,4 @@
-use Test::More tests => 12;
+use Test::More tests => 13;
 
 BEGIN {
     use_ok('Graphics::Primitive::Component');
@@ -35,7 +35,7 @@ ok($obj->margins->equal_to($margins), 'margins');
 ok($obj->padding->equal_to($padding), 'padding');
 cmp_ok($obj->width, '==', 100, 'width');
 cmp_ok($obj->height, '==', 200, 'height');
-
+cmp_ok($obj->visible, '==', 1, 'visible');
 
 cmp_ok($obj->inside_width, '==', 76, 'inside_width');
 cmp_ok($obj->inside_height, '==', 180, 'inside_height');

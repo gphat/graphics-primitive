@@ -1,4 +1,4 @@
-use inc::Module::Install;
+use inc::Module::Install 0.75;
 
 name     'Graphics-Primitive';
 all_from 'lib/Graphics/Primitive.pm';

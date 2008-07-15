@@ -3,15 +3,11 @@ use Moose;
 
 =head1 NAME
 
-Graphics::Primitive - 
-
-=head1 VERSION
-
-Version 0.01
+Graphics::Primitive - Device and library agnostic graphics objects
 
 =cut
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 no Moose;
 1;

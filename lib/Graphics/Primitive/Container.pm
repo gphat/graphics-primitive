@@ -20,7 +20,7 @@ override('prepare', sub {
     super;
 
     foreach my $comp (@{ $self->components }) {
-        next unless defined($comp);
+        next unless defined($comp) && defined($comp->{component});
         $comp->{component}->prepare();
     }
 });
@@ -31,7 +31,8 @@ override('draw', sub {
     super;
 
     foreach my $comp (@{ $self->components }) {
-        next unless defined($comp);
+
+        next unless defined($comp) && defined($comp->{component});
         $comp->{component}->draw();
     }
 });

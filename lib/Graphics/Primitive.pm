@@ -7,7 +7,7 @@ Graphics::Primitive - Device and library agnostic graphics objects
 
 =cut
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 no Moose;
 1;
@@ -16,8 +16,8 @@ __END__
 =head1 SYNOPSIS
 
 Graphics::Primitive is a device and library agnostic system for creating
-and manipulating colors in various graphical elements such as Borders,
-Fonts, Paths and the like.
+and manipulating various graphical elements such as Borders, Fonts, Paths
+and the like.
 
     my $c = Graphics::Primitive::Container->new({
       layout => $layout_manager,

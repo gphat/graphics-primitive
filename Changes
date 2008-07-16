@@ -1,5 +1,8 @@
 Revision history for Graphics-Primitive
 
+0.03
+  - Check for definedness of components in a Container before prepare & draw
+
 0.02
   - Add visible to component
   - Fix Description

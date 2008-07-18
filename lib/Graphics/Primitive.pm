@@ -7,7 +7,7 @@ Graphics::Primitive - Device and library agnostic graphics objects
 
 =cut
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 no Moose;
 1;

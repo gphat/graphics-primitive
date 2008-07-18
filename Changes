@@ -1,5 +1,8 @@
 Revision history for Graphics-Primitive
 
+0.05
+  - Don't prepare or draw invisible components in Containers
+
 0.04
   - POD fixes
   - Add find_component and get_component as proxies in Container

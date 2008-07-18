@@ -8,11 +8,11 @@ build_requires 'Test::More';
 
 test_requires 'Pod::Coverage::Moose';
 
-requires 'Geometry::Primitive';
-requires 'Graphics::Color';
-requires 'Layout::Manager';
-requires 'Moose';
-requires 'MooseX::AttributeHelpers';
+requires 'Geometry::Primitive' => '0.04';
+requires 'Graphics::Color' => '0.04';
+requires 'Layout::Manager' => '0.06';
+requires 'Moose' => '0.54';
+requires 'MooseX::AttributeHelpers' => '0.12';
 
 auto_install;
 

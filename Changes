@@ -1,5 +1,9 @@
 Revision history for Graphics-Primitive
 
+0.04
+  - POD fixes
+  - Add find_component and get_component as proxies in Container
+
 0.03
   - Check for definedness of components in a Container before prepare & draw
 

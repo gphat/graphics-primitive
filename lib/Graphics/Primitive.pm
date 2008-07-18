@@ -7,7 +7,7 @@ Graphics::Primitive - Device and library agnostic graphics objects
 
 =cut
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 no Moose;
 1;
@@ -19,16 +19,11 @@ Graphics::Primitive is a device and library agnostic system for creating
 and manipulating various graphical elements such as Borders, Fonts, Paths
 and the like.
 
-    my $c = Graphics::Primitive::Container->new({
+    my $c = Graphics::Primitive::Container->new(
       layout => $layout_manager,
       width => 500, height => 350,
-      border => 
-    });
-
-    use Graphics::Primitive;
-
-    my $foo = Graphics::Primitive->new();
-    ...
+      border => new Graphics::Primitive::Border->new( width => 5 )
+    );
 
 =head1 AUTHOR
 

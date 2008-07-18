@@ -10,7 +10,7 @@ has 'layout' => (
     isa => 'Layout::Manager',
     handles => [
         'components', 'add_component', 'component_count', 'remove_component',
-        'clear_components', 'do_layout'
+        'clear_components', 'do_layout', 'get_component', 'find_component'
     ]
 );
 

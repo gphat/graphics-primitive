@@ -40,6 +40,6 @@ cmp_ok($obj->visible, '==', 1, 'visible');
 cmp_ok($obj->inside_width, '==', 76, 'inside_width');
 cmp_ok($obj->inside_height, '==', 180, 'inside_height');
 
-my $ulip = Geometry::Primitive::Point->new(x => 15, y => 14);
+my $ulip = Geometry::Primitive::Point->new(x => 10, y => 8);
 my $bb = $obj->inside_bounding_box;
 ok($bb->origin->equal_to($ulip), 'bounding box');

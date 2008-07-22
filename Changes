@@ -7,6 +7,7 @@ Revision history for Graphics-Primitive
   - Move stuff from LM::Component role into Component
   - Remove LM dependency
   - Add Textbox
+  - Change Component's inside_bounding_box origin to be a relative value
 
 0.05
   - Don't prepare or draw invisible components in Containers

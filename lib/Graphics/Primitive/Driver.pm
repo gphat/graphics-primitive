@@ -18,6 +18,8 @@ sub draw {
         $self->_draw_component($comp);
     } elsif($class eq 'Graphics::Primitive::Component') {
         $self->_draw_component($comp);
+    } elsif($class eq 'Graphics::Primitive::TextBox') {
+        $self->_draw_textbox($comp);
     }
 }
 

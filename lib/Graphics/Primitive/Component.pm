@@ -71,10 +71,10 @@ sub inside_bounding_box {
 
     my $rect = Geometry::Primitive::Rectangle->new(
         origin => Geometry::Primitive::Point->new(
-            x => $self->origin->x + $self->padding->left
-                + $self->border->width + $self->margins->left,
-            y => $self->origin->y + $self->padding->top
-                + $self->border->width + $self->margins->top
+            x => $self->padding->left + $self->border->width
+                + $self->margins->left,
+            y => $self->padding->top + $self->border->width
+                + $self->margins->top
         ),
         width => $self->inside_width,
         height => $self->inside_height
@@ -154,7 +154,8 @@ Set this component's height.
 =item I<inside_bounding_box>
 
 Returns a L<Rectangle|Geometry::Primitive::Rectangle> that defines the edges
-of the 'inside' box for this component.
+of the 'inside' box for this component.  This box is relative to the origin
+of the component.
 
 =item I<inside_height>
 

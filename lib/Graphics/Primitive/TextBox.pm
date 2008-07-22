@@ -12,7 +12,7 @@ has 'font' => (
 );
 has 'text' => (
     is => 'rw',
-    isa => 'String',
+    isa => 'Str',
 );
 
 1;

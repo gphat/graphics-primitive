@@ -1,8 +1,6 @@
 package Graphics::Primitive::Component;
 use Moose;
 
-with 'Layout::Manager::Component';
-
 use Graphics::Primitive::Border;
 use Graphics::Primitive::Insets;
 use Geometry::Primitive::Point;
@@ -15,18 +13,25 @@ has 'border' => (
     default => sub { Graphics::Primitive::Border->new() }
 );
 has 'color' => ( is => 'rw', isa => 'Graphics::Color');
+has 'height' => ( is => 'rw', isa => 'Num', default => sub { 0 } );
 has 'margins' => (
     is => 'rw',
     isa => 'Graphics::Primitive::Insets',
     default => sub { Graphics::Primitive::Insets->new() }
 );
-has '+origin' => ( default => sub { Geometry::Primitive::Point->new() } );
+has 'name' => ( is => 'rw', isa => 'Str' );
+has 'origin' => (
+    is => 'rw',
+    isa => 'Geometry::Primitive::Point',
+    default =>  sub { Geometry::Primitive::Point->new( x => 0, y => 0 ) },
+);
 has 'padding' => (
     is => 'rw',
     isa => 'Graphics::Primitive::Insets',
     default => sub { Graphics::Primitive::Insets->new() }
 );
 has 'visible' => ( is => 'rw', isa => 'Bool', default => sub { 1 } );
+has 'width' => ( is => 'rw', isa => 'Num', default => sub { 0 } );
 
 sub prepare { }
 
@@ -96,8 +101,7 @@ Graphics::Primitive::Component
 
 =head1 DESCRIPTION
 
-A Component is an entity with a graphical representation.  This class
-implements L<Layout::Manager::Component> for use with a layout manager.
+A Component is an entity with a graphical representation.
 
 =head1 SYNOPSIS
 
@@ -137,6 +141,10 @@ L<Border|Graphics::Primitive::Border>.
 
 Set this component's foreground color.
 
+=item I<height>
+
+Set this component's height.
+
 =item I<inside_bounding_box>
 
 Returns a L<Rectangle|Geometry::Primitive::Rectangle> that defines the edges
@@ -164,6 +172,10 @@ border.
 Set this component's name.  This is not required, but may inform consumers
 of a component.  Pay attention to that library's documentation.
 
+=item I<origin>
+
+Set/Get the origin point for this component.
+
 =item I<outside_height>
 
 Get the height consumed by padding, margin and borders.
@@ -183,6 +195,14 @@ border and the component's content.
 
 Method to prepare this component for drawing.  This is an empty sub and is
 meant to be overriden by a specific implemntation.
+
+=item I<visible>
+
+Set/Get this component's visible flag.
+
+=item I<width>
+
+Set/Get this component's width.
 
 =back
 

@@ -9,6 +9,7 @@ has 'color' => (
     is => 'rw',
     isa => 'Graphics::Color',
 );
+has '+width' => ( default => sub { 0 });
 
 no Moose;
 1;

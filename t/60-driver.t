@@ -3,7 +3,6 @@ use strict;
 
 use Test::More tests => 4;
 
-use Layout::Manager::Compass;
 use Graphics::Primitive::Component;
 use Graphics::Primitive::Container;
 
@@ -15,13 +14,10 @@ BEGIN {
 my $driver = DummyDriver->new;
 isa_ok($driver, 'DummyDriver');
 
-my $container = Graphics::Primitive::Container->new(
-    layout => Layout::Manager::Compass->new
-);
+my $container = Graphics::Primitive::Container->new;
 my $comp = Graphics::Primitive::Component->new;
 $container->add_component($comp, 'c');
 
-$container->do_layout($container);
 $driver->draw($container);
 cmp_ok($driver->draw_component_called, '==', 2, 'component draws');
 

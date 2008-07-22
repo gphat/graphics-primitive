@@ -1,45 +1,26 @@
-use Test::More tests => 1;
+use strict;
+use Test::More tests => 7;
 
 BEGIN {
     use_ok('Graphics::Primitive::Container');
 }
 
-# use Graphics::Color::RGB;
-# use Geometry::Primitive::Point;
-# use Graphics::Primitive::Border;
-# use Graphics::Primitive::Insets;
-# 
-# my $color = Graphics::Color::RGB->new();
-# my $color2 = Graphics::Color::RGB->new(red => .58);
-# my $border = Graphics::Primitive::Border->new( width => 2 );
-# my $margins = Graphics::Primitive::Insets->new( top => 5, left => 6, bottom => 7, right => 8 );
-# my $padding = Graphics::Primitive::Insets->new( top => 1, left => 2, bottom => 3, right => 4 );
-# my $point = Geometry::Primitive::Point->new( x => 5, y => 6 );
-# 
-# my $obj = Graphics::Primitive::Component->new(
-#     background_color    => $color,
-#     border              => $border,
-#     color               => $color2,
-#     origin              => $point,
-#     margins             => $margins,
-#     padding             => $padding,
-#     width               => 100,
-#     height              => 200
-# );
-# 
-# cmp_ok($obj->background_color->red, '==', $color->red, 'background color');
-# cmp_ok($obj->color->red, '==', $color2->red, 'color');
-# cmp_ok($obj->border->width, '==', $border->width, 'border');
-# ok($obj->origin->equal_to($point), 'origin');
-# ok($obj->margins->equal_to($margins), 'margins');
-# ok($obj->padding->equal_to($padding), 'padding');
-# cmp_ok($obj->width, '==', 100, 'width');
-# cmp_ok($obj->height, '==', 200, 'height');
-# 
-# 
-# cmp_ok($obj->inside_width, '==', 76, 'inside_width');
-# cmp_ok($obj->inside_height, '==', 180, 'inside_height');
-# 
-# my $ulip = Geometry::Primitive::Point->new(x => 15, y => 14);
-# my $bb = $obj->inside_bounding_box;
-# ok($bb->origin->equal_to($ulip), 'bounding box');
+my $cont = Graphics::Primitive::Container->new;
+isa_ok($cont, 'Graphics::Primitive::Container');
+
+my $comp1 = Graphics::Primitive::Component->new(name => 'first');
+$cont->add_component($comp1);
+cmp_ok($cont->component_count, '==', 1, 'component_count');
+
+my $comp2 = Graphics::Primitive::Component->new(name => 'second');
+$cont->add_component($comp2);
+cmp_ok($cont->component_count, '==', 2, 'component_count');
+
+my $found = $cont->find_component('first');
+cmp_ok($found->name, 'eq', 'first', 'found first by name');
+
+my $index1 = $cont->get_component(0);
+cmp_ok($index1->name, 'eq', 'first', 'found first by index');
+
+my $index2 = $cont->get_component(1);
+cmp_ok($index2->name, 'eq', 'second', 'found second by index');

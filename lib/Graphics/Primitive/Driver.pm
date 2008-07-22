@@ -35,8 +35,7 @@ Graphics::Primitive::Driver
 
 =head1 DESCRIPTION
 
-A Component is an entity with a graphical representation.  This class
-implements L<Layout::Manager::Component> for use with a layout manager.
+A Component is an entity with a graphical representation.
 
 =head1 SYNOPSIS
 
@@ -48,6 +47,23 @@ implements L<Layout::Manager::Component> for use with a layout manager.
   });
 
 =head1 METHODS
+
+=over 4
+
+=item I<data>
+
+Retrieve the results of this driver's operations.
+
+=item I<draw>
+
+Draws the given Graphics::Primitive::Component.  If the component is a
+container then all components therein are drawn, recursively.
+
+=item I<write>
+
+Write out the results of this driver's operations to the specified file.
+
+=back
 
 =head1 AUTHOR
 

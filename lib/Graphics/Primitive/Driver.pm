@@ -1,6 +1,10 @@
 package Graphics::Primitive::Driver;
 use Moose;
 
+sub data {
+    my ($self) = @_;
+}
+
 sub draw {
     my ($self, $comp) = @_;
 
@@ -15,6 +19,10 @@ sub draw {
     } elsif($class eq 'Graphics::Primitive::Component') {
         $self->_draw_component($comp);
     }
+}
+
+sub write {
+    my ($self, $filename) = @_;
 }
 
 no Moose;

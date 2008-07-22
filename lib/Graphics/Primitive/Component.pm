@@ -30,6 +30,12 @@ has 'padding' => (
     isa => 'Graphics::Primitive::Insets',
     default => sub { Graphics::Primitive::Insets->new() }
 );
+has 'maximum_height' => ( is => 'rw', isa => 'Num', default => sub { 0 } );
+has 'maximum_width' => ( is => 'rw', isa => 'Num', default => sub { 0 } );
+has 'minimum_height' => ( is => 'rw', isa => 'Num', default => sub { 0 } );
+has 'minimum_width' => ( is => 'rw', isa => 'Num', default => sub { 0 } );
+has 'preferred_height' => ( is => 'rw', isa => 'Num', default => sub { 0 });
+has 'preferred_width' => ( is => 'rw', isa => 'Num', default => sub { 0 });
 has 'visible' => ( is => 'rw', isa => 'Bool', default => sub { 1 } );
 has 'width' => ( is => 'rw', isa => 'Num', default => sub { 0 } );
 
@@ -195,6 +201,30 @@ border and the component's content.
 
 Method to prepare this component for drawing.  This is an empty sub and is
 meant to be overriden by a specific implemntation.
+
+=item I<maximum_height>
+
+Set/Get this component's maximum height.  Used to inform a layout manager.
+
+item I<maximum_width>
+
+Set/Get this component's maximum width.  Used to inform a layout manager.
+
+item I<minimum_height>
+
+Set/Get this component's minimum height.  Used to inform a layout manager.
+
+item I<minimum_width>
+
+Set/Get this component's minimum width.  Used to inform a layout manager.
+
+=item I<preferred_height>
+
+Set/Get this component's preferred height.  Used to inform a layout manager.
+
+=item I<preferred_width>
+
+Set/Get this component's preferred width.  Used to inform a layout manager.
 
 =item I<visible>
 

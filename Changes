@@ -2,6 +2,10 @@ Revision history for Graphics-Primitive
 
 0.06
   - Add Driver
+  - Set default border width to 0
+  - Move component management out of LM and into Container
+  - Move stuff from LM::Component role into Component
+  - Remove LM dependency
 
 0.05
   - Don't prepare or draw invisible components in Containers

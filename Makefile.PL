@@ -10,7 +10,7 @@ test_requires 'Pod::Coverage::Moose';
 
 requires 'Geometry::Primitive' => '0.04';
 requires 'Graphics::Color' => '0.04';
-requires 'Layout::Manager' => '0.06';
+requires 'Layout::Manager' => '0.08';
 requires 'Moose' => '0.54';
 requires 'MooseX::AttributeHelpers' => '0.12';
 

@@ -30,8 +30,6 @@ has 'visible' => ( is => 'rw', isa => 'Bool', default => sub { 1 } );
 
 sub prepare { }
 
-sub draw { }
-
 sub inside_width {
     my $self = shift();
 
@@ -138,11 +136,6 @@ L<Border|Graphics::Primitive::Border>.
 =item I<color>
 
 Set this component's foreground color.
-
-=item I<draw>
-
-Method to actually draw this component.  This is an empty sub and is meant to
-be overriden by a specific implemntation.
 
 =item I<inside_bounding_box>
 

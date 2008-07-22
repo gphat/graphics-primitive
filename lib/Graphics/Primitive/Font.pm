@@ -15,19 +15,16 @@ has 'face' => (
     isa => 'Str',
     default => 'Sans'
 );
-
 has 'size' => (
     is => 'rw',
     isa => 'Num',
     default => 12
 );
-
 has 'slant' => (
     is => 'rw',
     isa => 'Slants',
     default => 'normal'
 );
-
 has 'weight' => (
     is => 'rw',
     isa => 'Weights',

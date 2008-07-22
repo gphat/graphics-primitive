@@ -1,5 +1,8 @@
 Revision history for Graphics-Primitive
 
+0.06
+  - Add Driver
+
 0.05
   - Don't prepare or draw invisible components in Containers
 

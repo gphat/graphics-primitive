@@ -7,7 +7,7 @@ Graphics::Primitive - Device and library agnostic graphics objects
 
 =cut
 
-our $VERSION = '0.06';
+our $VERSION = '0.07';
 
 no Moose;
 1;
@@ -24,6 +24,11 @@ and the like.
       width => 500, height => 350,
       border => new Graphics::Primitive::Border->new( width => 5 )
     );
+
+=head1 DISCLAIMER
+
+Graphics::Primitive is in a heavy state of flux.  Anything that depends on it
+is likely to break a lot.
 
 =head1 AUTHOR
 

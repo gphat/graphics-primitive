@@ -13,6 +13,10 @@ has 'components' => (
         'count'=> 'component_count',
     }
 );
+has 'layout_manager' => (
+    is => 'rw',
+    isa => 'Layout::Manager',
+);
 
 sub add_component {
     my ($self, $component, $args) = @_;
@@ -27,12 +31,11 @@ sub add_component {
     return 1;
 }
 
-sub do_prepare {
+sub do_layout {
     my ($self) = @_;
 
-    foreach my $c (@{ $self->components }) {
-        next unless defined($c->{component}) && $c->{component}->visible;
-        $c->{component}->prepare();
+    if(defined($self->layout_manager)) {
+        $self->layout_manager->do_layout($self);
     }
 }
 
@@ -100,13 +103,13 @@ sub validate_component {
 }
 
 override('prepare', sub {
-    my ($self) = @_;
+    my ($self, $driver) = @_;
 
-    super;
+    super($driver);
 
     foreach my $comp (@{ $self->components }) {
         next unless defined($comp) && defined($comp->{component}) && $comp->{component}->visible;
-        $comp->{component}->prepare();
+        $comp->{component}->prepare($driver);
     }
 });
 
@@ -162,10 +165,6 @@ Remove all components from the layout manager.
 =item I<count_components>
 
 Returns the number of components in this container.
-
-=item I<do_prepare>
-
-Prepare this component and all it's child components.
 
 =item I<find_component>
 

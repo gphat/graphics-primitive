@@ -10,10 +10,35 @@ has 'font' => (
     isa => 'Graphics::Primitive::Font',
     default => sub { Graphics::Primitive::Font->new }
 );
+has 'lines' => (
+    is => 'rw',
+    isa => 'ArrayRef',
+    default => sub { [] }
+);
 has 'text' => (
     is => 'rw',
     isa => 'Str',
 );
+has 'text_bounding_box' => (
+    is => 'rw',
+    isa => 'Geometry::Primitive::Rectangle'
+);
+
+override('prepare', sub {
+    my ($self, $driver) = @_;
+
+    super;
+
+    my @lines = split("\n", $self->text);
+
+    foreach my $line (@lines) {
+        my $bb = $driver->get_text_bounding_box($self->font, $self->text);
+        $self->text_bounding_box($bb);
+        $self->minimum_height($self->minimum_height + $bb->height);
+        $self->minimum_width($self->minimum_width + $bb->width);
+        push(@{ $self->lines }, { text => $line, box => $bb });
+    }
+});
 
 1;
 __END__

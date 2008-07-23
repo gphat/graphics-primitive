@@ -39,7 +39,12 @@ has 'preferred_width' => ( is => 'rw', isa => 'Num', default => sub { 0 });
 has 'visible' => ( is => 'rw', isa => 'Bool', default => sub { 1 } );
 has 'width' => ( is => 'rw', isa => 'Num', default => sub { 0 } );
 
-sub prepare { }
+sub prepare {
+    my ($self, $driver) = @_;
+
+    $self->minimum_height($self->outside_height);
+    $self->minimum_width($self->outside_width);
+}
 
 sub inside_width {
     my $self = shift();

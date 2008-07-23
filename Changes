@@ -1,5 +1,13 @@
 Revision history for Graphics-Primitive
 
+0.07
+  - Remove do_prepare
+  - Add disclaimer
+  - Add lines to Textbox and chop up input
+  - Add optional layout manager to container
+  - prepare now expects the driver to be passed in
+  - Component's prepare sets minimum sizes to the outside ones
+
 0.06
   - Add Driver
   - Set default border width to 0

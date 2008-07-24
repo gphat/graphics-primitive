@@ -8,18 +8,21 @@ sub data {
 sub draw {
     my ($self, $comp) = @_;
 
-    my $class = ref($comp);
-    if($class eq 'Graphics::Primitive::Container') {
+    die('Components must be objects.') unless ref($comp);
+    # The order of this is important, since isa will return true for any
+    # superclass...
+    if($comp->isa('Graphics::Primitive::TextBox')) {
+        $self->_draw_textbox($comp);
+    } elsif($comp->isa('Graphics::Primitive::Component')) {
+        $self->_draw_component($comp);
+    }
+
+    if($comp->isa('Graphics::Primitive::Container')) {
         if($comp->can('components')) {
             foreach my $subcomp (@{ $comp->components }) {
                 $self->draw($subcomp->{component});
             }
         }
-        $self->_draw_component($comp);
-    } elsif($class eq 'Graphics::Primitive::Component') {
-        $self->_draw_component($comp);
-    } elsif($class eq 'Graphics::Primitive::TextBox') {
-        $self->_draw_textbox($comp);
     }
 }
 

@@ -3,10 +3,19 @@ Revision history for Graphics-Primitive
 0.07
   - Remove do_prepare
   - Add disclaimer
-  - Add lines to Textbox and chop up input
+  - Add lines to Textbox and chop up input, this is likely temporary
   - Add optional layout manager to container
   - prepare now expects the driver to be passed in
   - Component's prepare sets minimum sizes to the outside ones
+  - Return default font size from coderef
+  - Use isa to check component classes and put container at the bottom
+    so that the parent container is drawn before it's children.
+  - Add get_tree method to component for visualizing the entire component
+  - Prepare children before parents
+  - Don't return inside_height or width < 0
+  - Default Component::prepare to setting a minimum height/width based on
+    outside values
+  - Add Component::to_string
 
 0.06
   - Add Driver

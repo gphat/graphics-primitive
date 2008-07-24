@@ -12,6 +12,7 @@ requires 'Geometry::Primitive' => '0.04';
 requires 'Graphics::Color' => '0.04';
 requires 'Moose' => '0.54';
 requires 'MooseX::AttributeHelpers' => '0.12';
+requires 'Tree::Simple' => '1.18';
 
 auto_install;
 

@@ -18,7 +18,7 @@ has 'face' => (
 has 'size' => (
     is => 'rw',
     isa => 'Num',
-    default => 12
+    default => sub { 12 }
 );
 has 'slant' => (
     is => 'rw',

@@ -33,6 +33,7 @@ override('prepare', sub {
 
     foreach my $line (@lines) {
         my $bb = $driver->get_text_bounding_box($self->font, $self->text);
+
         $self->text_bounding_box($bb);
         $self->minimum_height($self->minimum_height + $bb->height);
         $self->minimum_width($self->minimum_width + $bb->width);

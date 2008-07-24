@@ -1,6 +1,8 @@
 package Graphics::Primitive::Container;
 use Moose;
 
+use Tree::Simple;
+
 extends 'Graphics::Primitive::Component';
 
 has 'components' => (
@@ -32,10 +34,10 @@ sub add_component {
 }
 
 sub do_layout {
-    my ($self) = @_;
+    my ($self, $comp, $parent) = @_;
 
     if(defined($self->layout_manager)) {
-        $self->layout_manager->do_layout($self);
+        $self->layout_manager->do_layout($comp, $parent);
     }
 }
 
@@ -63,6 +65,19 @@ sub get_component {
     }
     return undef;
 }
+
+override('get_tree', sub {
+    my ($self) = @_;
+
+    my $tree = Tree::Simple->new($self);
+
+    foreach my $c (@{ $self->components }) {
+        my $comp = $c->{component};
+        $tree->addChild($comp->get_tree);
+    }
+
+    return $tree;
+});
 
 sub remove_component {
     my ($self, $component) = @_;
@@ -105,12 +120,13 @@ sub validate_component {
 override('prepare', sub {
     my ($self, $driver) = @_;
 
-    super($driver);
-
-    foreach my $comp (@{ $self->components }) {
-        next unless defined($comp) && defined($comp->{component}) && $comp->{component}->visible;
-        $comp->{component}->prepare($driver);
+    foreach my $c (@{ $self->components }) {
+        next unless defined($c) && defined($c->{component}) && $c->{component}->visible;
+        my $comp = $c->{component};
+        $comp->prepare($driver);
     }
+
+    super($driver);
 });
 
 no Moose;
@@ -173,6 +189,12 @@ Find a component with the given name.
 =item I<get_component>
 
 Get the component at the specified index.
+
+=item I<get_tree>
+
+Returns a Tree::Simple object with this component at the root and all child
+components as children.  Calling this from your root container will result
+in a tree representation of the entire scene.
 
 =item I<remove_component>
 

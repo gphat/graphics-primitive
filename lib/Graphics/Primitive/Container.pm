@@ -18,6 +18,7 @@ has 'components' => (
 has 'layout_manager' => (
     is => 'rw',
     isa => 'Layout::Manager',
+    handles => [ 'do_layout' ]
 );
 
 sub add_component {
@@ -31,14 +32,6 @@ sub add_component {
     });
 
     return 1;
-}
-
-sub do_layout {
-    my ($self, $comp, $parent) = @_;
-
-    if(defined($self->layout_manager)) {
-        $self->layout_manager->do_layout($comp, $parent);
-    }
 }
 
 sub find_component {

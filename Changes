@@ -16,6 +16,7 @@ Revision history for Graphics-Primitive
   - Default Component::prepare to setting a minimum height/width based on
     outside values
   - Add Component::to_string
+  - Let Container's layout_manager handle do_layout
 
 0.06
   - Add Driver

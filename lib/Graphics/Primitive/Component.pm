@@ -109,6 +109,8 @@ sub outside_height {
     $w += $self->border->width * 2;
 }
 
+sub pack { }
+
 sub prepare {
     my ($self, $driver) = @_;
 
@@ -122,7 +124,6 @@ sub to_string {
     my $buff = defined($self->name) ? $self->name : ref($self);
     $buff .= ': '.$self->origin->to_string;
     $buff .= ' ('.$self->width.'x'.$self->height.')';
-    $buff .= ' min('.$self->width.'x'.$self->height.')';
     return $buff;
 }
 
@@ -240,6 +241,11 @@ Get the height consumed by padding, margin and borders.
 =item I<outside_width>
 
 Get the width consumed by padding, margin and borders.
+
+=item I<pack>
+
+Method provided to give component one last opportunity to pack it's contents
+into the provided space.  Called after prepare.
 
 =item I<padding>
 

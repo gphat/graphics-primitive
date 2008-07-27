@@ -17,6 +17,7 @@ Revision history for Graphics-Primitive
     outside values
   - Add Component::to_string
   - Let Container's layout_manager handle do_layout
+  - Add 'pack' to the plan...
 
 0.06
   - Add Driver

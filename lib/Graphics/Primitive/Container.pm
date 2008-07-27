@@ -110,6 +110,18 @@ sub validate_component {
     return 1;
 }
 
+override('pack', sub {
+    my ($self) = @_;
+
+    foreach my $c (@{ $self->components }) {
+        next unless defined($c) && defined($c->{component}) && $c->{component}->visible;
+        my $comp = $c->{component};
+        $comp->pack;
+    }
+
+    super;
+});
+
 override('prepare', sub {
     my ($self, $driver) = @_;
 

@@ -267,6 +267,12 @@ Set/Get this component's preferred height.  Used to inform a layout manager.
 
 Set/Get this component's preferred width.  Used to inform a layout manager.
 
+=item I<to_string>
+
+Get a string representation of this component in the form of:
+
+  $name $x,$y ($widthx$height)
+
 =item I<visible>
 
 Set/Get this component's visible flag.

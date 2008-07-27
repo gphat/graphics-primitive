@@ -12,6 +12,7 @@ use Geometry::Primitive::Line;
 has 'current_point' => (
     is => 'rw',
     isa => 'Geometry::Primitive::Point',
+    default => sub { Geometry::Primitive::Point->new },
     clearer => 'clear_current_point'
 );
 
@@ -29,17 +30,35 @@ has 'primitives' => (
 );
 
 sub line_to {
-    my ($self, $point) = @_;
+    my ($self, $x, $y) = @_;
+
+    my $point;
+    if(!ref($x) && defined($y)) {
+        # This allows the user to pass in $x and $y as scalars, which
+        # easier sometimes.
+        $point = Geometry::Primitive::Point->new(x => $x, y => $y);
+    } else {
+        $point = $x;
+    }
 
     $self->add_primitive(Geometry::Primitive::Line->new(
-            point_start => $self->current_point(),
+            point_start => $self->current_point,
             point_end => $point
     ));
     $self->current_point($point);
 }
 
 sub move_to {
-    my ($self, $point) = @_;
+    my ($self, $x, $y) = @_;
+
+    my $point;
+    if(!ref($x) && defined($y)) {
+        # This allows the user to pass in $x and $y as scalars, which
+        # easier sometimes.
+        $point = Geometry::Primitive::Point->new(x => $x, y => $y);
+    } else {
+        $point = $x;
+    }
 
     $self->current_point($point);
 }
@@ -115,12 +134,14 @@ Returns the primitive at the specified offset.
 
 =item I<line_to>
 
-Draw a line from the current point to the one provided.
+Draw a line from the current point to the one provided. Accepts either a
+Geoemetry::Primitive::Point or two arguments for x and y.
 
 =item I<move_to>
 
 Move the current point to the one specified.  This will not add any
-primitives to the path.
+primitives to the path.  Accepts either a Geoemetry::Primitive::Point or
+two arguments for x and y.
 
 =back
 

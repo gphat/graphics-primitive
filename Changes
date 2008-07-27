@@ -19,6 +19,7 @@ Revision history for Graphics-Primitive
   - Let Container's layout_manager handle do_layout
   - Add 'pack' to the plan...
   - Path: modify line_to and move_to to accept scalars
+  - Stroke: add dash_pattern
 
 0.06
   - Add Driver

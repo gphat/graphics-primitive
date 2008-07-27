@@ -5,6 +5,7 @@ use Moose::Util::TypeConstraints;
 enum 'LineCap' => qw(butt round square);
 enum 'LineJoin' => qw(miter round bevel);
 
+has 'dash_pattern' => ( is => 'rw', isa => 'ArrayRef' );
 has 'width' => ( is => 'rw', isa => 'Int', default => 1 );
 has 'line_cap' => ( is => 'rw', isa => 'LineCap', default => 'butt' );
 has 'line_join' => ( is => 'rw', isa => 'LineJoin', default => 'miter' );
@@ -48,6 +49,12 @@ a line_cap 'butt' and a line_join of 'miter'.
 =head2 Instance Methods
 
 =over 4
+
+=item I<dash_pattern>
+
+Set/Get the dash pattern.  A dash pattern is an arrayref of numbers
+representing the lengths of the various line segments of the dash.  Event
+numbered elements are considered opaque and odd elements are transparent.
 
 =item I<line_cap>
 

@@ -3,6 +3,8 @@ use Moose;
 
 extends 'Graphics::Primitive::Operation';
 
+use Graphics::Primitive::Brush;
+
 has brush => (
     isa => 'Graphics::Primitive::Brush',
     is  => 'rw',

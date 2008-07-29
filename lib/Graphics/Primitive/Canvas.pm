@@ -29,8 +29,9 @@ has saved_paths => (
     is  => 'rw',
     default =>  sub { [] },
     provides => {
-        push => 'add_saved_path',
-        pop  => 'remove_last_saved_path'
+        push => 'push_path',
+        pop  => 'pop_path',
+        count => 'saved_path_count'
     }
 );
 
@@ -39,6 +40,20 @@ sub do {
 
     $self->add_path({ op => $op, path => $self->path });
     $self->path(Graphics::Primitive::Path->new);
+}
+
+sub save {
+    my ($self) = @_;
+
+    $self->push_path($self->path->clone);
+}
+
+sub restore {
+    my ($self) = @_;
+
+    return if($self->saved_path_count < 1);
+
+    $self->path($self->pop_path);
 }
 
 __PACKAGE__->meta->make_immutable;

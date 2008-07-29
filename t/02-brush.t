@@ -1,10 +1,10 @@
 use Test::More tests => 4;
 
 BEGIN {
-    use_ok('Graphics::Primitive::Stroke');
+    use_ok('Graphics::Primitive::Brush');
 }
 
-my $obj = Graphics::Primitive::Stroke->new(
+my $obj = Graphics::Primitive::Brush->new(
     width => 3,
     line_cap => 'round',
     line_join => 'bevel'

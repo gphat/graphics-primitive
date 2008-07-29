@@ -1,7 +1,7 @@
 package Graphics::Primitive::Border;
 use Moose;
 
-extends 'Graphics::Primitive::Stroke';
+extends 'Graphics::Primitive::Brush';
 
 use Graphics::Color;
 
@@ -40,9 +40,9 @@ component.
 
 =item I<new>
 
-Creates a new Graphics::Primitiver::Border.  Border extends Stroke and adds a
+Creates a new Graphics::Primitiver::Border.  Border extends Brush and adds a
 color attribute. Has a default stroke if none is specified.  See the
-documentation for L<Graphics::Primitive::Stroke> for more information.
+documentation for L<Graphics::Primitive::Brush> for more information.
 
 =back
 

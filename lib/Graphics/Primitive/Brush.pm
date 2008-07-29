@@ -1,4 +1,4 @@
-package Graphics::Primitive::Stroke;
+package Graphics::Primitive::Brush;
 use Moose;
 use Moose::Util::TypeConstraints;
 
@@ -16,18 +16,18 @@ __END__
 
 =head1 NAME
 
-Graphics::Primitive::Stroke
+Graphics::Primitive::Brush
 
 =head1 DESCRIPTION
 
-Graphics::Primitive::Stroke represents the visible trace of 'ink' along a
+Graphics::Primitive::Brush represents the visible trace of 'ink' along a
 path.
 
 =head1 SYNOPSIS
 
-  use Graphics::Primitive::Stroke;
+  use Graphics::Primitive::Brush;
 
-  my $stroke = Graphics::Primitive::Stroke->new({
+  my $stroke = Graphics::Primitive::Brush->new({
     line_cap => 'round',
     line_join => 'miter',
     width => 2
@@ -41,7 +41,7 @@ path.
 
 =item I<new>
 
-Creates a new Graphics::Primitive::Stroke.  Defaults to a width of 1,
+Creates a new Graphics::Primitive::Brush.  Defaults to a width of 1,
 a line_cap 'butt' and a line_join of 'miter'.
 
 =back

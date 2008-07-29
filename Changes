@@ -21,6 +21,7 @@ Revision history for Graphics-Primitive
   - Path: modify line_to and move_to to accept scalars
   - Stroke: add dash_pattern
   - Path: default starting point to 0,0
+  - Rename Graphics::Primitive::Stroke to Graphics::Primitive::Brush
 
 0.06
   - Add Driver

@@ -1,6 +1,8 @@
 package Graphics::Primitive::Path;
 use Moose;
 
+with 'MooseX::Clone';
+
 use MooseX::AttributeHelpers;
 
 extends 'Geometry::Primitive';
@@ -12,7 +14,7 @@ use Geometry::Primitive::Line;
 has 'current_point' => (
     is => 'rw',
     isa => 'Geometry::Primitive::Point',
-    default => sub { Geometry::Primitive::Point->new },
+    default => sub { Geometry::Primitive::Point->new(x => 0, y => 0) },
     clearer => 'clear_current_point'
 );
 
@@ -28,6 +30,8 @@ has 'primitives' => (
         'get' => 'get_primitive_at'
     }
 );
+
+# TODO rel_line_to, rel_move_to
 
 sub line_to {
     my ($self, $x, $y) = @_;

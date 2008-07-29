@@ -1,4 +1,4 @@
-use Test::More tests => 9;
+use Test::More tests => 10;
 
 BEGIN {
     use_ok('Graphics::Primitive::Path');
@@ -22,6 +22,13 @@ $path->move_to($mover);
 ok($path->current_point->equal_to($mover), 'move_to set current_point');
 cmp_ok($path->count_primitives, '==', 1, 'primitive count after move_to');
 
-
 $path->move_to(12, 12);
 cmp_ok($path->current_point->x, '==', 12, 'move to with scalars');
+
+my $otherpath = $path->clone;
+
+$path->move_to(30 ,30);
+ok(!$path->current_point->equal_to(
+    Geometry::Primitive::Point->new(x => 12, y => 12)
+), 'cloned path');
+

@@ -11,6 +11,7 @@ test_requires 'Pod::Coverage::Moose';
 requires 'Geometry::Primitive' => '0.04';
 requires 'Graphics::Color' => '0.04';
 requires 'Moose' => '0.54';
+requires 'MooseX::Clone' => '0.03';
 requires 'MooseX::AttributeHelpers' => '0.12';
 requires 'Tree::Simple' => '1.18';
 

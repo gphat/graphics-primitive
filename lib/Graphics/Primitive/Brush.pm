@@ -51,6 +51,10 @@ a line_cap 'butt' and a line_join of 'miter'.
 
 =over 4
 
+=item I<color>
+
+Set/Get this brush's color.
+
 =item I<dash_pattern>
 
 Set/Get the dash pattern.  A dash pattern is an arrayref of numbers

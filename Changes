@@ -22,6 +22,9 @@ Revision history for Graphics-Primitive
   - Stroke: add dash_pattern
   - Path: default starting point to 0,0
   - Rename Graphics::Primitive::Stroke to Graphics::Primitive::Brush
+  - Brush: Add Color
+  - Add Canvas calls to Driver
+  - Add Operation::Fill and Operation::Stroke
 
 0.06
   - Add Driver

@@ -52,6 +52,20 @@ sub line_to {
     $self->current_point($point);
 }
 
+sub rel_line_to {
+    my ($self, $x, $y) = @_;
+
+    my $point = $self->current_point->clone;
+    $point->x($point->x + $x);
+    $point->y($point->y + $y);
+
+    $self->add_primitive(Geometry::Primitive::Line->new(
+            point_start => $self->current_point,
+            point_end => $point
+    ));
+    $self->current_point($point);
+}
+
 sub move_to {
     my ($self, $x, $y) = @_;
 

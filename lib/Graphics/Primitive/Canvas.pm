@@ -10,7 +10,7 @@ has path => (
     isa => 'Graphics::Primitive::Path',
     is  => 'rw',
     default =>  sub { Graphics::Primitive::Path->new },
-    handles => [ 'current_point', 'line_to', 'move_to' ]
+    handles => [ 'current_point', 'line_to', 'move_to', 'rel_line_to' ]
 );
 
 has paths => (

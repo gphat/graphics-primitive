@@ -19,7 +19,8 @@ has paths => (
     is  => 'rw',
     default =>  sub { [] },
     provides => {
-        push => 'add_path'
+        push => 'add_path',
+        count=> 'path_count'
     }
 );
 

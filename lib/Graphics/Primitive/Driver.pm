@@ -11,7 +11,9 @@ sub draw {
     die('Components must be objects.') unless ref($comp);
     # The order of this is important, since isa will return true for any
     # superclass...
-    if($comp->isa('Graphics::Primitive::TextBox')) {
+    if($comp->isa('Graphics::Primitive::Canvas')) {
+        $self->_draw_canvas($comp);
+    } elsif($comp->isa('Graphics::Primitive::TextBox')) {
         $self->_draw_textbox($comp);
     } elsif($comp->isa('Graphics::Primitive::Component')) {
         $self->_draw_component($comp);

@@ -5,6 +5,7 @@ use Moose::Util::TypeConstraints;
 enum 'LineCap' => qw(butt round square);
 enum 'LineJoin' => qw(miter round bevel);
 
+has 'color' => ( is => 'rw', isa => 'Graphics::Color' );
 has 'dash_pattern' => ( is => 'rw', isa => 'ArrayRef' );
 has 'width' => ( is => 'rw', isa => 'Int', default => 1 );
 has 'line_cap' => ( is => 'rw', isa => 'LineCap', default => 'butt' );

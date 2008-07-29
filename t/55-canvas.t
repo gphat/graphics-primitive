@@ -1,9 +1,10 @@
-use Test::More tests => 6;
+use Test::More tests => 9;
 
 use Geometry::Primitive;
 
 BEGIN {
     use_ok('Graphics::Primitive::Canvas');
+    use_ok('Graphics::Primitive::Operation::Stroke');
 }
 
 my $canvas = Graphics::Primitive::Canvas->new;
@@ -25,3 +26,9 @@ ok($canvas->current_point->equal_to($point), 'move_to after save');
 $canvas->restore;
 $point->x(5); $point->y(5);
 ok($canvas->current_point->equal_to($point), 'current after restore');
+
+$canvas->do(Graphics::Primitive::Operation::Stroke->new);
+$point->x(0); $point->y(0);
+ok($canvas->current_point->equal_to($point), 'current after do');
+
+cmp_ok($canvas->path_count, '==', 1, '1 path');

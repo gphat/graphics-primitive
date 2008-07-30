@@ -1,5 +1,10 @@
 package Graphics::Primitive::Driver;
-use Moose;
+use Moose::Role;
+
+requires qw(
+    write _draw_canvas _draw_component _draw_line _draw_textbox
+    _do_stroke get_text_bounding_box
+);
 
 sub data {
     my ($self) = @_;
@@ -32,6 +37,8 @@ sub write {
     my ($self, $filename) = @_;
 }
 
+# __PACKAGE__->meta->make_immutable;
+
 no Moose;
 1;
 __END__
@@ -42,7 +49,7 @@ Graphics::Primitive::Driver
 
 =head1 DESCRIPTION
 
-A Component is an entity with a graphical representation.
+
 
 =head1 SYNOPSIS
 

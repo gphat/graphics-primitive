@@ -1,5 +1,14 @@
 Revision history for Graphics-Primitive
 
+0.08
+  - Path: default starting point to 0,0
+  - Rename Graphics::Primitive::Stroke to Graphics::Primitive::Brush
+  - Brush: Add Color
+  - Add Canvas calls to Driver
+  - Add Operation::Fill and Operation::Stroke
+  - Lots of POD
+  - Add Paint and children
+
 0.07
   - Remove do_prepare
   - Add disclaimer
@@ -20,12 +29,6 @@ Revision history for Graphics-Primitive
   - Add 'pack' to the plan...
   - Path: modify line_to and move_to to accept scalars
   - Stroke: add dash_pattern
-  - Path: default starting point to 0,0
-  - Rename Graphics::Primitive::Stroke to Graphics::Primitive::Brush
-  - Brush: Add Color
-  - Add Canvas calls to Driver
-  - Add Operation::Fill and Operation::Stroke
-  - Lots of POD
 
 0.06
   - Add Driver

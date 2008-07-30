@@ -2,8 +2,8 @@ package Graphics::Primitive::Driver;
 use Moose::Role;
 
 requires qw(
-    write _draw_canvas _draw_component _draw_line _draw_textbox
-    _do_stroke get_text_bounding_box
+    _draw_canvas _draw_component _draw_line _draw_textbox
+    _do_stroke data get_text_bounding_box write
 );
 
 sub data {
@@ -37,19 +37,21 @@ sub write {
     my ($self, $filename) = @_;
 }
 
-# __PACKAGE__->meta->make_immutable;
-
 no Moose;
 1;
 __END__
 
 =head1 NAME
 
-Graphics::Primitive::Driver
+Graphics::Primitive::Driver - Role for driver implementations
 
 =head1 DESCRIPTION
 
+What good is a library agnostic intermediary representation of graphical
+components if you can't feed them to a library specific implementation that
+turns them into drawings? Psht, none!
 
+To write a driver for Graphics::Primitive implemeent this role.  
 
 =head1 SYNOPSIS
 
@@ -60,9 +62,34 @@ Graphics::Primitive::Driver
     width => 500, height => 350
   });
 
+=head1 WARNING
+
+Only this class or the driver itself should call methods starting with an
+underscore, as this interface may change.
+
 =head1 METHODS
 
 =over 4
+
+=item I<_draw_canvas>
+
+Draw a canvas.
+
+=item I<_draw_component>
+
+Draw a component.
+
+=item I<_draw_line>
+
+Draw a line.
+
+=item I<_draw_textbox>
+
+Draw a textbox.
+
+=item I<_do_stroke>
+
+Perform a stroke.
 
 =item I<data>
 
@@ -72,6 +99,11 @@ Retrieve the results of this driver's operations.
 
 Draws the given Graphics::Primitive::Component.  If the component is a
 container then all components therein are drawn, recursively.
+
+=item I<get_text_bounding_box>
+
+Given a L<Font|Graphics::Primitive::Font> and a string, returns a bounding box
+of the rendered text.
 
 =item I<write>
 

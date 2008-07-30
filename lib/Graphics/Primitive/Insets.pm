@@ -21,6 +21,8 @@ sub zero {
     $self->top(0); $self->bottom(0); $self->left(0); $self->right(0);
 }
 
+__PACKAGE__->meta->make_immutable;
+
 no Moose;
 1;
 __END__

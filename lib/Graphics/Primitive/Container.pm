@@ -134,6 +134,8 @@ override('prepare', sub {
     super($driver);
 });
 
+__PACKAGE__->meta->make_immutable;
+
 no Moose;
 1;
 __END__
@@ -144,14 +146,23 @@ Graphics::Primitive::Container
 
 =head1 DESCRIPTION
 
-A Container is a role for components that may contain other components.
+A Container is a omponent that may contain other components.
 
 =head1 SYNOPSIS
 
   my $c = Graphics::Primitive::Container->new({
-    width => 500, height => 350
+    width => 500, height => 350,
+    layout_manager => Layout::Manager::Compass->new
   });
   $c->add_component($comp, { meta => 'data' });
+
+=head1 DESCRIPTION
+
+Containers are components that contain other components.  They can also hold
+an instance of a L<Layout::Manager> for automatic layout of their internal
+components. See the
+L<Component's Lifecycle Section|Graphics::Primitive::Component#LIFECYCLE> for
+more information.
 
 =head1 METHODS
 

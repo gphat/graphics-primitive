@@ -127,6 +127,8 @@ sub to_string {
     return $buff;
 }
 
+__PACKAGE__->meta->make_immutable;
+
 no Moose;
 1;
 __END__
@@ -147,6 +149,45 @@ A Component is an entity with a graphical representation.
     }),
     width => 500, height => 350
   });
+
+=head1 LIFECYCLE
+
+=over 4
+
+=item B<prepare>
+
+Most components do the majority of their setup in the B<prepare>.  The goal of
+prepare is to establish it's minimum height and width so that it can be
+properly positioned by a layout manager.
+
+=item B<layout>
+
+This is not a method of Component, but a phase introduced by the use of
+L<Layout::Manager>.  If the component is a container then each of it's
+child components (even the containers) will be positioned according to the
+minimum height and width determined during B<prepare>.  Different layout
+manager implementations have different rules, so consult the documentation
+for each for details.  After this phase has completed the origin, height and
+width should be set for all components.
+
+=item B<pack>
+
+This final phase provides and opportunity for the component to do any final
+changes to it's internals before being passed to a driver for drawing.
+An example might be a component that draws a fleuron at it's extremities.
+Since the final height and width isn't known until this phase, it was
+impossible for it to position these internal components until now.  It may
+even defer creation of this components until now.
+
+B<It is not ok to defer all action to the pack phase.  If you do not
+establish a minimum hieght and width during prepare then the layout manager
+may not provide you with enough space to draw.>
+
+=item B<draw>
+
+Handled by L<Graphics::Primitive::Driver>.
+
+=back
 
 =head1 METHODS
 

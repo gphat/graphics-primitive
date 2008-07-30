@@ -85,6 +85,8 @@ sub get_points {
     #TODO Implement me!
 }
 
+__PACKAGE__->meta->make_immutable;
+
 no Moose;
 1;
 

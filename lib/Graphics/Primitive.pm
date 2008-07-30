@@ -3,11 +3,13 @@ use Moose;
 
 =head1 NAME
 
-Graphics::Primitive - Device and library agnostic graphics objects
+Graphics::Primitive - Device and library agnostic graphic primitives
 
 =cut
 
 our $VERSION = '0.07';
+
+__PACKAGE__->meta->make_immutable;
 
 no Moose;
 1;
@@ -19,16 +21,63 @@ Graphics::Primitive is a device and library agnostic system for creating
 and manipulating various graphical elements such as Borders, Fonts, Paths
 and the like.
 
-    my $c = Graphics::Primitive::Container->new(
-      layout => $layout_manager,
+    my $c = Graphics::Primitive::Component->new(
+      background_color => Graphics::Color::RGB->new(
+          red => 1, green => 0, blue => 0
+      ),
       width => 500, height => 350,
       border => new Graphics::Primitive::Border->new( width => 5 )
     );
+
+    my $driver = Graphics::Primitive::Driver::Cairo->new(format => 'SVG');
+
+    $c->prepare($driver);
+    $c->pack;
+    
+    $driver->draw($c);
+    $driver->write()
 
 =head1 DISCLAIMER
 
 Graphics::Primitive is in a heavy state of flux.  Anything that depends on it
 is likely to break a lot.
+
+=head1 DESCRIPTION
+
+Graphics::Primitive is library agnostic system for drawing things.
+
+The idea is to allow you to create and manipulate graphical components and
+then pass them off to a L<Driver|Graphics::Primitive::Driver> for actual
+drawing.
+
+=head1 CONCEPTS
+
+The root object for Graphics::Primitive is the
+L<Component|Graphics::Primitive::Component>.  Components contain all the
+common elements that you'd expect: margins, padding, background color etc.
+
+The next most important is the L<Container|Graphics::Primitive::Container>.
+Containers are Components that can hold other Components.  Containers have all
+the attributes and methods of a Component with the addition of the
+I<layout_manager> attribute for us with L<Layout::Manager>.
+
+Another important Component is the L<Canvas|Graphics::Primitive::Canvas>.
+The Canvas differs from other components by being a container for various
+L<Geometry::Primitive> objects.  This allows drawing of arbitrary shapes
+that do not fit existing components.
+
+=head1 DRAWING LIFECYCLE
+
+After creating all your components, there is a lifecycle that allows them
+to do their internal housekeeping to prepare for eventual drawing.  The
+lifecycle is: B<prepare>, B<layout> and B<pack>.  Detailed explanation of
+these methods can be found in L<Component|Graphics::Primitive::Component>.
+
+=head1 INSPIRATION
+
+Most of the concepts that you'll find in Graphics::Primitive are inspired by
+L<Cairo|http://cairographics.org>'s API and
+L<CSS|http://www.w3.org/Style/CSS/>'s box model.
 
 =head1 AUTHOR
 

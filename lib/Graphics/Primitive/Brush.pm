@@ -11,6 +11,8 @@ has 'width' => ( is => 'rw', isa => 'Int', default => 1 );
 has 'line_cap' => ( is => 'rw', isa => 'LineCap', default => 'butt' );
 has 'line_join' => ( is => 'rw', isa => 'LineJoin', default => 'miter' );
 
+__PACKAGE__->meta->make_immutable;
+
 no Moose;
 1;
 __END__

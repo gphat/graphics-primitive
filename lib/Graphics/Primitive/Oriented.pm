@@ -13,6 +13,8 @@ has 'orientation' => (
 sub is_vertical {
     my ($self) = @_;
 
+    return 0 unless $self->orientation;
+
     return ($self->orientation eq 'vertical');
 }
 

@@ -161,6 +161,12 @@ Move the current point to the one specified.  This will not add any
 primitives to the path.  Accepts either a Geoemetry::Primitive::Point or
 two arguments for x and y.
 
+=item I<rel_line_to>
+
+Draw a line by adding the supplied x and y values to the current one.  For
+example if the current point is 5,5 then calling rel_line_to(2, 2) would draw
+a line from the current point to 7,7.
+
 =back
 
 =head1 AUTHOR

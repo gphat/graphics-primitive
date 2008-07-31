@@ -83,6 +83,10 @@ Draw a component.
 
 Draw a line.
 
+=item I<_draw_arc>
+
+Draw an arc.
+
 =item I<_draw_textbox>
 
 Draw a textbox.

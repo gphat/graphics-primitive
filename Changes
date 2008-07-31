@@ -1,5 +1,14 @@
 Revision history for Graphics-Primitive
 
+0.09
+  - Path: add arc, close_path
+  - Path: rename get_primitive_at to get_primitive
+  - Path: clone points rather than using them, they tend to change
+  - Path: don't inherit or implement anything out of Geo::Primitive, it's
+    not necessary
+  - Canvas: update path proxy methods
+  - Make everything cloneable
+
 0.08
   - Path: default starting point to 0,0
   - Rename Graphics::Primitive::Stroke to Graphics::Primitive::Brush

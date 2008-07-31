@@ -5,6 +5,8 @@ use Tree::Simple;
 
 extends 'Graphics::Primitive::Component';
 
+with 'MooseX::Clone';
+
 has 'components' => (
     metaclass => 'Collection::Array',
     is => 'rw',

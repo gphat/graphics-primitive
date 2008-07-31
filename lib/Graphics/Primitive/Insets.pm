@@ -3,6 +3,8 @@ use Moose;
 
 with 'Geometry::Primitive::Equal';
 
+with 'MooseX::Clone';
+
 has 'top' => ( is => 'rw', isa => 'Num', default => 0 );
 has 'bottom' => ( is => 'rw', isa => 'Num', default => 0 );
 has 'left' => ( is => 'rw', isa => 'Num', default => 0 );

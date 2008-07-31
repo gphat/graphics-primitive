@@ -3,6 +3,8 @@ use Moose;
 
 extends 'Graphics::Primitive::Component';
 
+with 'MooseX::Clone';
+
 use Graphics::Primitive::Font
 
 has 'font' => (

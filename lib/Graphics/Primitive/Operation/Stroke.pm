@@ -3,6 +3,8 @@ use Moose;
 
 extends 'Graphics::Primitive::Operation';
 
+with 'MooseX::Clone';
+
 use Graphics::Primitive::Brush;
 
 has brush => (

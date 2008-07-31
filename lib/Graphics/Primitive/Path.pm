@@ -5,10 +5,7 @@ with 'MooseX::Clone';
 
 use MooseX::AttributeHelpers;
 
-extends 'Geometry::Primitive';
-
-with 'Geometry::Primitive::Shape';
-
+use Geometry::Primitive::Arc;
 use Geometry::Primitive::Line;
 
 has 'current_point' => (
@@ -27,11 +24,36 @@ has 'primitives' => (
         'push' => 'add_primitive',
         'clear' => 'clear_primitives',
         'count' => 'count_primitives',
-        'get' => 'get_primitive_at'
+        'get' => 'get_primitive'
     }
 );
 
-# TODO rel_line_to, rel_move_to
+after('add_primitive', sub {
+    my ($self, $prim) = @_;
+
+    $self->current_point($prim->point_end->clone);
+});
+
+sub arc {
+    my ($self, $radius, $start, $end, $line_to) = @_;
+
+    my $arc = Geometry::Primitive::Arc->new(
+        origin => $self->current_point->clone,
+        radius => $radius, angle_start => $start, angle_end => $end
+    );
+
+    unless($line_to) {
+        $self->line_to($arc->point_start);
+    }
+
+    $self->add_primitive($arc);
+}
+
+sub close_path {
+    my ($self) = @_;
+
+    $self->line_to($self->get_primitive(0)->point_start->clone);
+}
 
 sub line_to {
     my ($self, $x, $y) = @_;
@@ -42,28 +64,13 @@ sub line_to {
         # easier sometimes.
         $point = Geometry::Primitive::Point->new(x => $x, y => $y);
     } else {
-        $point = $x;
+        $point = $x->clone;
     }
 
     $self->add_primitive(Geometry::Primitive::Line->new(
-            point_start => $self->current_point,
-            point_end => $point
+            start => $self->current_point->clone,
+            end => $point
     ));
-    $self->current_point($point);
-}
-
-sub rel_line_to {
-    my ($self, $x, $y) = @_;
-
-    my $point = $self->current_point->clone;
-    $point->x($point->x + $x);
-    $point->y($point->y + $y);
-
-    $self->add_primitive(Geometry::Primitive::Line->new(
-            point_start => $self->current_point,
-            point_end => $point
-    ));
-    $self->current_point($point);
 }
 
 sub move_to {
@@ -81,8 +88,24 @@ sub move_to {
     $self->current_point($point);
 }
 
-sub get_points {
-    #TODO Implement me!
+sub rel_line_to {
+    my ($self, $x, $y) = @_;
+
+    my $point = $self->current_point->clone;
+    $point->x($point->x + $x);
+    $point->y($point->y + $y);
+
+    $self->add_primitive(Geometry::Primitive::Line->new(
+            start => $self->current_point->clone,
+            end => $point
+    ));
+}
+
+sub rel_move_to {
+    my ($self, $x, $y) = @_;
+
+    my $point = $self->current_point->clone;
+    $self->move_to($point->x + $x, $point->y + $y);
 }
 
 __PACKAGE__->meta->make_immutable;
@@ -99,6 +122,7 @@ Grahics::Primitive::Path
 =head1 DESCRIPTION
 
 Graphics::Primitive::Path is a shape defined by a list of primitives.
+
 =head1 SYNOPSIS
 
   use Graphics::Primitive::Path;
@@ -123,9 +147,18 @@ Creates a new Graphics::Primitive::Path
 
 =over 4
 
-=item I<add_primitive>
+=item I<add_primitive ($prim)>
 
 Add a primitive to this Path.
+
+=item I<arc ($radius, $start, $end, [ $skip_line_to ])>
+
+  $path->arc($radius, $start_angle_in_radians, $end_angle_in_radians);
+
+Draw an arc based at the current point with the given radius from the given
+start angle to the given end angle.  B<A line will be drawn from the
+current_point to the start point of the described arc.  If you do not want
+this to happen, supply a true value as the last argument.>
 
 =item I<clear_current_point>
 
@@ -136,34 +169,39 @@ Clears the current point on this Path.
 Clears all primitives from this Path.  NOTE: This does not clear the
 current point.
 
+=item I<close_path>
+
+Close the current path by drawing a line from the I<current_point> back to
+the first point in the path.
+
 =item I<count_primitives>
 
 Returns the number of primitives on this Path.
 
 =item I<current_point>
 
-Returns the current, or last, point on this Path.
+Returns the current -- or last -- point on this Path.
 
 =item I<get_points>
 
 Get this path as a series of points.
 
-=item I<get_primitive_at>
+=item I<get_primitive>
 
 Returns the primitive at the specified offset.
 
-=item I<line_to>
+=item I<line_to ($point | $x, $y)>
 
 Draw a line from the current point to the one provided. Accepts either a
 Geoemetry::Primitive::Point or two arguments for x and y.
 
-=item I<move_to>
+=item I<move_to ($point | $x, $y)>
 
 Move the current point to the one specified.  This will not add any
 primitives to the path.  Accepts either a Geoemetry::Primitive::Point or
 two arguments for x and y.
 
-=item I<rel_line_to>
+=item I<rel_line_to ($x_amount, $y_amount)>
 
 Draw a line by adding the supplied x and y values to the current one.  For
 example if the current point is 5,5 then calling rel_line_to(2, 2) would draw

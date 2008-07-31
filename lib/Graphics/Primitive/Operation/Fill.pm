@@ -3,6 +3,8 @@ use Moose;
 
 extends 'Graphics::Primitive::Operation';
 
+with 'MooseX::Clone';
+
 has paint => (
     isa => 'Graphics::Primitive::Paint',
     is  => 'rw'

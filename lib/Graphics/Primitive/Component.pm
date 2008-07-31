@@ -1,6 +1,8 @@
 package Graphics::Primitive::Component;
 use Moose;
 
+with 'MooseX::Clone';
+
 use overload ('""' => 'to_string');
 
 use Graphics::Primitive::Border;

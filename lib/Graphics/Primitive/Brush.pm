@@ -2,6 +2,8 @@ package Graphics::Primitive::Brush;
 use Moose;
 use Moose::Util::TypeConstraints;
 
+with 'MooseX::Clone';
+
 enum 'LineCap' => qw(butt round square);
 enum 'LineJoin' => qw(miter round bevel);
 

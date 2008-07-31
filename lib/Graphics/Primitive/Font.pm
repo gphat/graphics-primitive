@@ -2,10 +2,11 @@ package Graphics::Primitive::Font;
 use Moose;
 use Moose::Util::TypeConstraints;
 
+with 'MooseX::Clone';
+
 enum 'Slants' => (
     'normal', 'italic', 'oblique'
 );
-
 enum 'Weights' => (
     'normal', 'bold'
 );

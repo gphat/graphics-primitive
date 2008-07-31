@@ -4,13 +4,18 @@ use MooseX::AttributeHelpers;
 
 extends 'Graphics::Primitive::Component';
 
+with 'MooseX::Clone';
+
 use Graphics::Primitive::Path;
 
 has path => (
     isa => 'Graphics::Primitive::Path',
     is  => 'rw',
     default =>  sub { Graphics::Primitive::Path->new },
-    handles => [ 'current_point', 'line_to', 'move_to', 'rel_line_to' ]
+    handles => [
+        'arc', 'close_path', 'current_point', 'line_to', 'move_to',
+        'rel_line_to', 'rel_move_to'
+    ]
 );
 
 has paths => (

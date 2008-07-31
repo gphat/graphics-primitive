@@ -3,6 +3,8 @@ use Moose;
 
 extends 'Graphics::Primitive::Brush';
 
+with 'MooseX::Clone';
+
 use Graphics::Color;
 
 has 'color' => (

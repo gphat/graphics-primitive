@@ -39,7 +39,7 @@ no Moose;
 __END__
 =head1 NAME
 
-Graphics::Primitive::Font
+Graphics::Primitive::Font - Text styling
 
 =head1 DESCRIPTION
 

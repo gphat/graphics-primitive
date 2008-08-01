@@ -137,7 +137,7 @@ __END__
 
 =head1 NAME
 
-Graphics::Primitive::Component
+Graphics::Primitive::Component - Base graphical unit
 
 =head1 DESCRIPTION
 

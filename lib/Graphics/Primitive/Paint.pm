@@ -7,7 +7,7 @@ no Moose;
 1;
 =head1 NAME
 
-Grahics::Primitive::Paint
+Grahics::Primitive::Paint - A source for drawing on a path
 
 =head1 DESCRIPTION
 

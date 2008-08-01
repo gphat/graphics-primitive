@@ -49,7 +49,7 @@ __PACKAGE__->meta->make_immutable;
 __END__
 =head1 NAME
 
-Graphics::Primitive::TextBox
+Graphics::Primitive::TextBox - Text component
 
 =head1 DESCRIPTION
 
@@ -67,6 +67,10 @@ Graphics::Primitive::TextBox is a Componet with text.
       ),
       text => 'I am a textbox!'
   );
+
+=head1 WARNING
+
+This component is likely to change drastically.  Here be dragons.
 
 =head1 METHODS
 

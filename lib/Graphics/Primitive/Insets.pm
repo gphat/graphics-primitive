@@ -30,7 +30,7 @@ no Moose;
 __END__
 =head1 NAME
 
-Graphics::Primitive::Insets
+Graphics::Primitive::Insets - Space between things
 
 =head1 DESCRIPTION
 

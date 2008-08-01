@@ -72,7 +72,7 @@ no Moose;
 __END__
 =head1 NAME
 
-Grahics::Primitive::Canvas
+Grahics::Primitive::Canvas - Component composed of paths
 
 =head1 DESCRIPTION
 

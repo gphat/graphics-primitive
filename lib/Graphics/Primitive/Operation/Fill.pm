@@ -17,7 +17,7 @@ no Moose;
 __END__
 =head1 NAME
 
-Graphics::Primitive::Operation::Fill
+Graphics::Primitive::Operation::Fill - Paint inside a path
 
 =head1 DESCRIPTION
 

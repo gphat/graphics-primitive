@@ -21,7 +21,7 @@ __END__
 
 =head1 NAME
 
-Graphics::Primitive::Brush
+Graphics::Primitive::Brush - Description of stroke
 
 =head1 DESCRIPTION
 

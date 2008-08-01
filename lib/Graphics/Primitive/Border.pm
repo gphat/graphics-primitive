@@ -21,7 +21,7 @@ __END__
 
 =head1 NAME
 
-Graphics::Primitive::Border
+Graphics::Primitive::Border - Line around components
 
 =head1 DESCRIPTION
 

@@ -144,7 +144,7 @@ __END__
 
 =head1 NAME
 
-Graphics::Primitive::Container
+Graphics::Primitive::Container - Component that holds other Components
 
 =head1 DESCRIPTION
 

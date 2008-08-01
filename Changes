@@ -1,13 +1,17 @@
 Revision history for Graphics-Primitive
 
 0.09
-  - Path: add arc, close_path
+  - Path: add arc, close_path, get_path
   - Path: rename get_primitive_at to get_primitive
+  - Path: rename count_primitives to primitive_count
   - Path: clone points rather than using them, they tend to change
   - Path: don't inherit or implement anything out of Geo::Primitive, it's
     not necessary
+  - Path: add hints attr with for driver hinting and add contiguous flag for
+    use with same
+  - Gradient: add line attr for guiding Gradient
   - Canvas: update path proxy methods
-  - Make everything cloneable
+  - Make everything cloneable, adding Clone trait to 'deep' clone attrs
 
 0.08
   - Path: default starting point to 0,0

@@ -215,9 +215,11 @@ current point.
 Close the current path by drawing a line from the I<current_point> back to
 the first point in the path.
 
-=item I<primitive_count>
+=item I<contiguous>
 
-Returns the number of primitives on this Path.
+Flag this path as being contiguous at this point.  Continuity is important
+so some path-based drivers such as Cairo.  You should not mess with this
+attribute unless you know what you are doing.  It's used for driver hinting.
 
 =item I<current_point>
 
@@ -231,6 +233,13 @@ Get this path as a series of points.
 
 Returns the primitive at the specified offset.
 
+=item I<hints>
+
+List of hint hashrefs. This hint arrayref matches the primitives arrayref
+one-to-one.  Hints are tidbits of information that may assist drivers in
+optimizing (or successfully handling) primitives in this path's list.  You
+should not mess with this structure unless you know what you are doing.
+
 =item I<line_to ($point | $x, $y)>
 
 Draw a line from the current point to the one provided. Accepts either a
@@ -241,6 +250,10 @@ Geoemetry::Primitive::Point or two arguments for x and y.
 Move the current point to the one specified.  This will not add any
 primitives to the path.  Accepts either a Geoemetry::Primitive::Point or
 two arguments for x and y.
+
+=item I<primitive_count>
+
+Returns the number of primitives on this Path.
 
 =item I<rel_line_to ($x_amount, $y_amount)>
 

@@ -128,6 +128,16 @@ sub move_to {
     $self->current_point($point);
 }
 
+sub rectangle {
+    my ($self, $width, $height) = @_;
+
+    $self->add_primitive(Geometry::Primitive::Rectangle->new(
+        origin => $self->current_point,
+        width => $width,
+        height => $height
+    ));
+}
+
 sub rel_line_to {
     my ($self, $x, $y) = @_;
 
@@ -254,6 +264,10 @@ two arguments for x and y.
 =item I<primitive_count>
 
 Returns the number of primitives on this Path.
+
+=item I<rectangle ($width, $height)>
+
+Draw a rectangle at I<current_position> of the specified width and height.
 
 =item I<rel_line_to ($x_amount, $y_amount)>
 

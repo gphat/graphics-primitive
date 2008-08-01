@@ -2,13 +2,9 @@ package Graphics::Primitive::Driver;
 use Moose::Role;
 
 requires qw(
-    _draw_canvas _draw_component _draw_line _draw_path _draw_textbox
-    _do_fill _do_stroke data get_text_bounding_box write
+    _draw_canvas _draw_component _draw_line _draw_path _draw_rectangle
+    _draw_textbox _do_fill _do_stroke data get_text_bounding_box write
 );
-
-sub data {
-    my ($self) = @_;
-}
 
 sub draw {
     my ($self, $comp) = @_;
@@ -31,10 +27,6 @@ sub draw {
             }
         }
     }
-}
-
-sub write {
-    my ($self, $filename) = @_;
 }
 
 no Moose;
@@ -80,12 +72,22 @@ When you pull each path from the arrayref you should pull it's accompanying
 hints via I<get_hint> (the indexes match).  The hint may provide you with
 additional information:
 
+=head2 PRIMITIVE HINTS
+
 =over 4
 
 =item I<contiguous>
 
 True if this primitive is contiguous with the previous one.  Example: Used to
 determine if a new sub-path is needed for the Cairo driver.
+
+=back
+
+=head2 OPERATION HINTS
+
+=over 4
+
+=item I<preserve>
 
 =back
 
@@ -98,29 +100,33 @@ underscore, as this interface may change.
 
 =over 4
 
-=item I<_do_stroke>
+=item I<_do_stroke ($strokeop)>
 
 Perform a stroke.
 
-=item I<_do_fill>
+=item I<_do_fill ($fillop)>
 
 Perform a fill.
 
-=item I<_draw_canvas>
+=item I<_draw_arc ($arc)>
+
+Draw an arc.
+
+=item I<_draw_canvas ($canvas)>
 
 Draw a canvas.
 
-=item I<_draw_component>
+=item I<_draw_component ($comp)>
 
 Draw a component.
 
-=item I<_draw_line>
+=item I<_draw_line ($line)>
 
 Draw a line.
 
-=item I<_draw_arc>
+=item I<_draw_rectangle ($rect)>
 
-Draw an arc.
+Draw a rectangle.
 
 =item I<_draw_textbox>
 

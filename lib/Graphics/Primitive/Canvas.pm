@@ -14,7 +14,7 @@ has path => (
     default =>  sub { Graphics::Primitive::Path->new },
     handles => [
         'arc', 'close_path', 'current_point', 'line_to', 'move_to',
-        'rel_line_to', 'rel_move_to'
+        'rectangle', 'rel_line_to', 'rel_move_to'
     ]
 );
 
@@ -48,7 +48,10 @@ sub do {
     my ($self, $op) = @_;
 
     $self->add_path({ op => $op, path => $self->path->clone });
-    $self->path(Graphics::Primitive::Path->new);
+    # Don't replace the current path if we are preserving.
+    unless($op->preserve) {
+        $self->path(Graphics::Primitive::Path->new);
+    }
 }
 
 sub save {

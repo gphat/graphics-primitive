@@ -1,5 +1,12 @@
 Revision history for Graphics-Primitive
 
+0.10
+  - Path: add rectangle
+  - New feature & hint: Add "preserve" to Operation.  Setting this causes
+    the canvas to NOT clear the current path on a do().  This operation can
+    then be used as a hint to the driver to not create a new path, but to
+    reuse the old one.
+
 0.09
   - Path: add arc, close_path, get_path
   - Path: rename get_primitive_at to get_primitive

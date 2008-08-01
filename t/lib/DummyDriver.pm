@@ -30,6 +30,8 @@ sub _draw_line { }
 
 sub _draw_path { }
 
+sub _draw_rectangle { }
+
 sub _draw_textbox { }
 
 sub data { }

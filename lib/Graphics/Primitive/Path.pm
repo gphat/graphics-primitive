@@ -261,6 +261,10 @@ Draw a line by adding the supplied x and y values to the current one.  For
 example if the current point is 5,5 then calling rel_line_to(2, 2) would draw
 a line from the current point to 7,7.
 
+=item I<rel_move_to ($x_amount, $y_amount)>
+
+Move to a new point by adding the supplied x and y values to the current ones.
+
 =back
 
 =head1 AUTHOR

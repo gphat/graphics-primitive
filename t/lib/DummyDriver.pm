@@ -10,7 +10,11 @@ has 'draw_component_called' => (
     default => sub { 0 }
 );
 
+sub _do_fill { }
+
 sub _do_stroke { }
+
+sub _draw_arc { }
 
 sub _draw_canvas { }
 
@@ -23,6 +27,8 @@ sub _draw_component {
 }
 
 sub _draw_line { }
+
+sub _draw_path { }
 
 sub _draw_textbox { }
 

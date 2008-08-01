@@ -196,7 +196,7 @@ added.
 
 Remove all components from the layout manager.
 
-=item I<count_components>
+=item I<component_count>
 
 Returns the number of components in this container.
 

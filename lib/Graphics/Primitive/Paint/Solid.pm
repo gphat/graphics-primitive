@@ -1,6 +1,8 @@
 package Graphics::Primitive::Paint::Solid;
 use Moose;
 
+extends 'Graphics::Primitive::Paint';
+
 has color => (
     isa => 'Graphics::Color',
     is  => 'rw',
@@ -16,7 +18,7 @@ Grahics::Primitive::Paint::Solid
 
 =head1 DESCRIPTION
 
-Graphics::Primitive::Paint::Solid is a
+Graphics::Primitive::Paint::Solid represents a solid color.
 
 =head1 SYNOPSIS
 

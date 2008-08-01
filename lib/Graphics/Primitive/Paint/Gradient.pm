@@ -3,10 +3,11 @@ use Moose;
 use Moose::Util::TypeConstraints;
 use MooseX::AttributeHelpers;
 
+extends 'Graphics::Primitive::Paint';
+
+enum 'Graphics::Primitive::Paint::Gradient::Styles' => qw(radial linear);
+
 # FIXME key should be <= 1
-
-use Data::Dumper;
-
 has color_stops => (
     metaclass => 'Collection::Hash',
     isa => 'HashRef',
@@ -19,9 +20,10 @@ has color_stops => (
         set  => 'add_stop'
     }
 );
-
-enum 'Graphics::Primitive::Paint::Gradient::Styles' => qw(radial linear);
-
+has line => (
+    isa => 'Geometry::Primitive::Line',
+    is => 'rw',
+);
 has style => (
     isa => 'Graphics::Primitive::Paint::Gradient::Styles',
     is  => 'rw',
@@ -45,7 +47,14 @@ Graphics::Primitive::Paint::Gradient is a
 
   use Graphics::Primitive::Paint::Gradient;
 
-  my $gradient = Graphics::Primitive::Gradient->new;
+  my $gradient = Graphics::Primitive::Gradient->new(
+      line => Geometry::Primitive::Line->new(
+          start => Graphcs::Primitive::Point->new(x => 0, y => 0),
+          end   => Graphcs::Primitive::Point->new(x => 0, y => 10),
+      )
+  );
+  $gradient->add_stop(0.0, $color1);
+  $gradient->add_stop(1.0, $color2);
 
 =head1 METHODS
 
@@ -70,6 +79,10 @@ Adds a color stop at the specified position
 =item I<colors>
 
 Hashref of colors and their stops.  The stops are the keys.
+
+=item I<line>
+
+The line along which the gradient should run.
 
 =item I<stop_count>
 

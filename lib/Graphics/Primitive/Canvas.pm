@@ -22,10 +22,12 @@ has paths => (
     metaclass => 'Collection::Array',
     isa => 'ArrayRef',
     is  => 'rw',
+    traits => [qw(Clone)],
     default =>  sub { [] },
     provides => {
         push => 'add_path',
-        count=> 'path_count'
+        count=> 'path_count',
+        get => 'get_path'
     }
 );
 
@@ -33,6 +35,7 @@ has saved_paths => (
     metaclass => 'Collection::Array',
     isa => 'ArrayRef',
     is  => 'rw',
+    traits => [qw(Copy)],
     default =>  sub { [] },
     provides => {
         push => 'push_path',
@@ -44,7 +47,7 @@ has saved_paths => (
 sub do {
     my ($self, $op) = @_;
 
-    $self->add_path({ op => $op, path => $self->path });
+    $self->add_path({ op => $op, path => $self->path->clone });
     $self->path(Graphics::Primitive::Path->new);
 }
 

@@ -11,19 +11,39 @@ use Geometry::Primitive::Line;
 has 'current_point' => (
     is => 'rw',
     isa => 'Geometry::Primitive::Point',
+    traits => [qw(Clone)],
     default => sub { Geometry::Primitive::Point->new(x => 0, y => 0) },
     clearer => 'clear_current_point'
+);
+
+has 'contiguous' => (
+    isa => 'Str',
+    is  => 'rw',
+    default =>  sub { 0 },
+);
+
+has 'hints' => (
+    metaclass => 'Collection::Array',
+    is => 'rw',
+    isa => 'ArrayRef[HashRef]',
+    traints => [qw(Clone)],
+    default => sub { [] },
+    provides => {
+        push => 'add_hint',
+        get => 'get_hint',
+    }
 );
 
 has 'primitives' => (
     metaclass => 'Collection::Array',
     is => 'rw',
     isa => 'ArrayRef[Geometry::Primitive]',
+    traits => [qw(Clone)],
     default => sub { [] },
     provides => {
         'push' => 'add_primitive',
         'clear' => 'clear_primitives',
-        'count' => 'count_primitives',
+        'count' => 'primitive_count',
         'get' => 'get_primitive'
     }
 );
@@ -31,7 +51,23 @@ has 'primitives' => (
 after('add_primitive', sub {
     my ($self, $prim) = @_;
 
-    $self->current_point($prim->point_end->clone);
+    my %hint = (
+        contiguous => 0
+    );
+    my $new_end = $prim->point_end->clone;
+
+    if($self->contiguous) {
+        # If we are contiguous we can pass that hint to the backend.  The
+        # Cairo driver needs to know this to avoid creating a sub-path
+        $hint{contiguous} = 1;
+    } else {
+        # We weren't contiguous for this hint, but we WILL be if move_to
+        # isn't used.  Set it now so we don't have to later.
+        $self->contiguous(1);
+    }
+    $self->add_hint(\%hint);
+
+    $self->current_point($new_end);
 });
 
 sub arc {
@@ -85,12 +121,17 @@ sub move_to {
         $point = $x;
     }
 
+    # Move to effectively creates a new path, so we are no longer contiguous.
+    # This mainly serves as a backend hint.
+    $self->contiguous(0);
+
     $self->current_point($point);
 }
 
 sub rel_line_to {
     my ($self, $x, $y) = @_;
 
+    # FIXME Relative hinting?
     my $point = $self->current_point->clone;
     $point->x($point->x + $x);
     $point->y($point->y + $y);
@@ -174,7 +215,7 @@ current point.
 Close the current path by drawing a line from the I<current_point> back to
 the first point in the path.
 
-=item I<count_primitives>
+=item I<primitive_count>
 
 Returns the number of primitives on this Path.
 

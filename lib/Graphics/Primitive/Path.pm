@@ -124,7 +124,6 @@ sub move_to {
     # Move to effectively creates a new path, so we are no longer contiguous.
     # This mainly serves as a backend hint.
     $self->contiguous(0);
-
     $self->current_point($point);
 }
 

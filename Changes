@@ -1,5 +1,8 @@
 Revision history for Graphics-Primitive
 
+0.11
+  - Small optimizations
+
 0.10
   - Path: add rectangle
   - New feature & hint: Add "preserve" to Operation.  Setting this causes

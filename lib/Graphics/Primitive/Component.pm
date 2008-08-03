@@ -56,8 +56,11 @@ sub inside_width {
 
     my $w = $self->width;
 
-    $w -= $self->padding->left + $self->padding->right;
-    $w -= $self->margins->left + $self->margins->right;
+    my $padding = $self->padding;
+    my $margins = $self->margins;
+
+    $w -= $padding->left + $padding->right;
+    $w -= $margins->left + $margins->right;
     $w -= $self->border->width * 2;
 
     $w = 0 if $w < 0;
@@ -70,8 +73,11 @@ sub inside_height {
 
     my $h = $self->height;
 
-    $h -= $self->padding->bottom + $self->padding->top;
-    $h -= $self->margins->bottom + $self->margins->top;
+    my $padding = $self->padding;
+    my $margins = $self->margins;
+
+    $h -= $padding->bottom + $padding->top;
+    $h -= $margins->bottom + $margins->top;
     $h -= $self->border->width * 2;
 
     $h = 0 if $h < 0;
@@ -83,12 +89,14 @@ sub inside_bounding_box {
 
     my ($self) = @_;
 
+    my $padding = $self->padding;
+    my $margins = $self->margins;
+    my $bw = $self->border->width;
+
     my $rect = Geometry::Primitive::Rectangle->new(
         origin => Geometry::Primitive::Point->new(
-            x => $self->padding->left + $self->border->width
-                + $self->margins->left,
-            y => $self->padding->top + $self->border->width
-                + $self->margins->top
+            x => $padding->left + $bw + $margins->left,
+            y => $padding->top + $bw + $margins->top
         ),
         width => $self->inside_width,
         height => $self->inside_height
@@ -98,16 +106,22 @@ sub inside_bounding_box {
 sub outside_width {
     my $self = shift();
 
-    my $w = $self->padding->left + $self->padding->right;
-    $w += $self->margins->left + $self->margins->right;
+    my $padding = $self->padding;
+    my $margins = $self->margins;
+
+    my $w = $padding->left + $padding->right;
+    $w += $margins->left + $margins->right;
     $w += $self->border->width * 2;
 }
 
 sub outside_height {
     my $self = shift();
 
-    my $w = $self->padding->top + $self->padding->bottom;
-    $w += $self->margins->top + $self->margins->bottom;
+    my $padding = $self->padding;
+    my $margins = $self->margins;
+
+    my $w = $padding->top + $padding->bottom;
+    $w += $margins->top + $margins->bottom;
     $w += $self->border->width * 2;
 }
 

@@ -3,7 +3,7 @@ use Moose::Role;
 
 requires qw(
     _draw_canvas _draw_component _draw_line _draw_path _draw_rectangle
-    _draw_textbox _do_fill _do_stroke data get_text_bounding_box write
+    _draw_textbox _do_fill _do_stroke data get_text_bounding_box reset write
 );
 
 sub draw {

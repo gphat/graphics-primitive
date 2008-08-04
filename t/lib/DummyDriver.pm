@@ -38,6 +38,8 @@ sub data { }
 
 sub get_text_bounding_box { }
 
+sub reset { }
+
 sub write { }
 
 no Moose;

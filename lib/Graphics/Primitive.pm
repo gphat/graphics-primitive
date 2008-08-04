@@ -35,7 +35,7 @@ and the like.
     $c->pack;
     
     $driver->draw($c);
-    $driver->write()
+    $driver->write
 
 =head1 DISCLAIMER
 

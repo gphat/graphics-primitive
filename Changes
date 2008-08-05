@@ -4,6 +4,7 @@ Revision history for Graphics-Primitive
   - Small optimizations
   - Driver: add reset
   - Textbox: Add angle
+  - Use Forest rather than Tree::Simple per stevan's request
 
 0.10
   - Path: add rectangle

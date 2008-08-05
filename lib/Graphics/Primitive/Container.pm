@@ -1,7 +1,7 @@
 package Graphics::Primitive::Container;
 use Moose;
 
-use Tree::Simple;
+use Forest::Tree;
 
 extends 'Graphics::Primitive::Component';
 
@@ -64,11 +64,11 @@ sub get_component {
 override('get_tree', sub {
     my ($self) = @_;
 
-    my $tree = Tree::Simple->new($self);
+    my $tree = Forest::Tree->new(node => $self);
 
     foreach my $c (@{ $self->components }) {
         my $comp = $c->{component};
-        $tree->addChild($comp->get_tree);
+        $tree->add_child($comp->get_tree);
     }
 
     return $tree;
@@ -210,7 +210,7 @@ Get the component at the specified index.
 
 =item I<get_tree>
 
-Returns a Tree::Simple object with this component at the root and all child
+Returns a Forest::Tree object with this component at the root and all child
 components as children.  Calling this from your root container will result
 in a tree representation of the entire scene.
 

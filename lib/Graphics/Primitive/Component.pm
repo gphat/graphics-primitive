@@ -10,7 +10,7 @@ use Graphics::Primitive::Insets;
 use Geometry::Primitive::Point;
 use Geometry::Primitive::Rectangle;
 
-use Tree::Simple;
+use Forest::Tree;
 
 has 'background_color' => ( is => 'rw', isa => 'Graphics::Color');
 has 'border' => (
@@ -48,7 +48,7 @@ has 'width' => ( is => 'rw', isa => 'Num', default => sub { 0 } );
 sub get_tree {
     my ($self) = @_;
 
-    return Tree::Simple->new($self);
+    return Forest::Tree->new(node => $self);
 }
 
 sub inside_width {

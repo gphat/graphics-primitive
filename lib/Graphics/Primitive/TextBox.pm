@@ -7,6 +7,10 @@ with 'MooseX::Clone';
 
 use Graphics::Primitive::Font
 
+has 'angle' => (
+    is => 'rw',
+    isa => 'Num'
+);
 has 'font' => (
     is => 'rw',
     isa => 'Graphics::Primitive::Font',
@@ -34,12 +38,14 @@ override('prepare', sub {
     my @lines = split("\n", $self->text);
 
     foreach my $line (@lines) {
-        my $bb = $driver->get_text_bounding_box($self->font, $self->text);
+        my ($bb, $tb)  = $driver->get_text_bounding_box(
+            $self->font, $self->text, $self->angle
+        );
 
-        $self->text_bounding_box($bb);
+        $self->text_bounding_box($tb);
         $self->minimum_height($self->minimum_height + $bb->height);
         $self->minimum_width($self->minimum_width + $bb->width);
-        push(@{ $self->lines }, { text => $line, box => $bb });
+        push(@{ $self->lines }, { text => $line, box => $tb });
     }
 });
 

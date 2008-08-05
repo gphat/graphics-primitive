@@ -3,6 +3,7 @@ Revision history for Graphics-Primitive
 0.11
   - Small optimizations
   - Driver: add reset
+  - Textbox: Add angle
 
 0.10
   - Path: add rectangle

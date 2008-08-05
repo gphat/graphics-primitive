@@ -13,8 +13,8 @@ has path => (
     is  => 'rw',
     default =>  sub { Graphics::Primitive::Path->new },
     handles => [
-        'arc', 'close_path', 'current_point', 'line_to', 'move_to',
-        'rectangle', 'rel_line_to', 'rel_move_to'
+        'arc', 'close_path', 'current_point', 'curve_to', 'line_to',
+        'move_to', 'rectangle', 'rel_curve_to', 'rel_line_to', 'rel_move_to'
     ]
 );
 
@@ -75,7 +75,7 @@ no Moose;
 __END__
 =head1 NAME
 
-Grahics::Primitive::Canvas - Component composed of paths
+Graphics::Primitive::Canvas - Component composed of paths
 
 =head1 DESCRIPTION
 

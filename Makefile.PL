@@ -13,7 +13,7 @@ requires 'Graphics::Color' => '0.06';
 requires 'Moose' => '0.54';
 requires 'MooseX::Clone' => '0.03';
 requires 'MooseX::AttributeHelpers' => '0.12';
-requires 'Forest::Tree' => '0.02';
+requires 'Forest' => '0.02';
 
 auto_install;
 

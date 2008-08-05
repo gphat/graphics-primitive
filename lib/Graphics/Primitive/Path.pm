@@ -6,7 +6,9 @@ with 'MooseX::Clone';
 use MooseX::AttributeHelpers;
 
 use Geometry::Primitive::Arc;
+use Geometry::Primitive::Bezier;
 use Geometry::Primitive::Line;
+use Geometry::Primitive::Rectangle;
 
 has 'current_point' => (
     is => 'rw',
@@ -88,6 +90,17 @@ sub close_path {
     $self->line_to($self->get_primitive(0)->point_start->clone);
 }
 
+sub curve_to {
+    my ($self, $c1, $c2, $end) = @_;
+
+    $self->add_primitive(Geometry::Primitive::Bezier->new(
+        start => $self->current_point->clone,
+        control1 => $c1,
+        control2 => $c2,
+        end => $end
+    ));
+}
+
 sub line_to {
     my ($self, $x, $y) = @_;
 
@@ -101,8 +114,8 @@ sub line_to {
     }
 
     $self->add_primitive(Geometry::Primitive::Line->new(
-            start => $self->current_point->clone,
-            end => $point
+        start => $self->current_point->clone,
+        end => $point
     ));
 }
 
@@ -132,6 +145,22 @@ sub rectangle {
         width => $width,
         height => $height
     ));
+}
+
+sub rel_curve_to {
+    my ($self, $x1, $y1, $x2, $y2, $x3, $y3) = @_;
+    my $curr = $self->current_point;
+    $self->curve_to(
+        Geometry::Primitive::Point->new(
+            x => $curr->x + $x1, y => $curr->y + $y1
+        ),
+        Geometry::Primitive::Point->new(
+            x => $curr->x + $x2, y => $curr->y + $y2
+        ),
+        Geometry::Primitive::Point->new(
+            x => $curr->x + $x3, y => $curr->y + $y3
+        )
+    );
 }
 
 sub rel_line_to {
@@ -231,6 +260,11 @@ attribute unless you know what you are doing.  It's used for driver hinting.
 
 Returns the current -- or last -- point on this Path.
 
+=item I<curve_to ($control1, $control2, $end)>
+
+Creates a cubic Bézier curve from the current point to the $end point using
+$control1 and $control2 as control points.
+
 =item I<get_points>
 
 Get this path as a series of points.
@@ -264,6 +298,16 @@ Returns the number of primitives on this Path.
 =item I<rectangle ($width, $height)>
 
 Draw a rectangle at I<current_position> of the specified width and height.
+
+=item I<rel_curve_to ($x1, $y1, $x2, $y2, $x3, $y3)>
+
+Creates a cubic Bézier curve from the current point using the provided values
+as offsets:
+
+  start = current point
+  control1 = current point + $x1,$y1
+  control1 = current point + $x2,$y2
+  end = current point + $x3,$y3
 
 =item I<rel_line_to ($x_amount, $y_amount)>
 

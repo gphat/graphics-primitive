@@ -1,5 +1,8 @@
 Revision history for Graphics-Primitive
 
+0.12
+  - Path: Add curve_to and rel_curve_to
+
 0.11
   - Small optimizations
   - Driver: add reset

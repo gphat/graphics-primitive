@@ -34,6 +34,10 @@ sub _draw_rectangle { }
 
 sub _draw_textbox { }
 
+sub _finish_page { }
+
+sub _resize { }
+
 sub data { }
 
 sub get_text_bounding_box { }

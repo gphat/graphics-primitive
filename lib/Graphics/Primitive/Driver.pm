@@ -12,6 +12,7 @@ sub draw {
     die('Components must be objects.') unless ref($comp);
     # The order of this is important, since isa will return true for any
     # superclass...
+    # TODO Check::ISA
     if($comp->isa('Graphics::Primitive::Canvas')) {
         $self->_draw_canvas($comp);
     } elsif($comp->isa('Graphics::Primitive::TextBox')) {
@@ -25,6 +26,42 @@ sub draw {
             foreach my $subcomp (@{ $comp->components }) {
                 $self->draw($subcomp->{component});
             }
+        }
+    }
+}
+
+sub pack {
+    my ($self, $comp) = @_;
+
+    $comp->pack($self);
+
+    # TODO Check::ISA
+    if($comp->isa('Graphics::Primitive::Container')) {
+        foreach my $c (@{ $comp->components }) {
+            next unless defined($c) && defined($c->{component}) && $c->{component}->visible;
+            $self->pack($c->{component});
+        }
+    }
+    $self->reset;
+}
+
+sub prepare {
+    my ($self, $comp) = @_;
+
+    unless(defined($self->width)) {
+        $self->width($comp->width);
+    }
+    unless(defined($self->height)) {
+        $self->height($comp->height);
+    }
+
+    $comp->prepare($self);
+
+    # TODO Check::ISA
+    if($comp->isa('Graphics::Primitive::Container')) {
+        foreach my $c (@{ $comp->components }) {
+            next unless defined($c) && defined($c->{component}) && $c->{component}->visible;
+            $self->prepare($c->{component});
         }
     }
 }
@@ -145,6 +182,14 @@ container then all components therein are drawn, recursively.
 
 Given a L<Font|Graphics::Primitive::Font> and a string, returns a bounding box
 of the rendered text.
+
+=item I<pack>
+
+Pack the supplied component and any child components, recursively.
+
+=item I<prepare>
+
+Prepare the supplied component and any child components, recursively.
 
 =item I<write>
 

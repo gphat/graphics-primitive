@@ -3,11 +3,24 @@ use Moose::Role;
 
 requires qw(
     _draw_canvas _draw_component _draw_line _draw_path _draw_rectangle
-    _draw_textbox _do_fill _do_stroke data get_text_bounding_box reset write
+    _draw_textbox _do_fill _do_stroke _finish_page _resize data 
+    get_text_bounding_box reset write
 );
 
 sub draw {
     my ($self, $comp) = @_;
+
+    if($comp->page) {
+        # FIRST_PAGE is a little protection to ensure that we don't call
+        # show page on the first page, as that would mean we'd have an
+        # empty first page all the time.
+        if($self->{FIRST_PAGE}) {
+            $self->_finish_page;
+        } else {
+            $self->{FIRST_PAGE} = 1;
+        }
+        $self->_resize($comp->width, $comp->height);
+    }
 
     die('Components must be objects.') unless ref($comp);
     # The order of this is important, since isa will return true for any
@@ -168,6 +181,15 @@ Draw a rectangle.
 =item I<_draw_textbox>
 
 Draw a textbox.
+
+=item I<_resize ($width, $height)>
+
+Resize the current working surface to the size specified.
+
+=item I<_finish_page>
+
+Finish the current 'page' and start a new one.  Some drivers that are not
+paginated may need to emulate this behaviour.
 
 =item I<data>
 

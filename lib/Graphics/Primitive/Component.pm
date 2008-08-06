@@ -36,6 +36,7 @@ has 'padding' => (
     isa => 'Graphics::Primitive::Insets',
     default => sub { Graphics::Primitive::Insets->new() }
 );
+has 'page' => ( is => 'rw', isa => 'Bool', default => sub { 0 } );
 has 'maximum_height' => ( is => 'rw', isa => 'Num', default => sub { 0 } );
 has 'maximum_width' => ( is => 'rw', isa => 'Num', default => sub { 0 } );
 has 'minimum_height' => ( is => 'rw', isa => 'Num', default => sub { 0 } );
@@ -130,8 +131,8 @@ sub pack { }
 sub prepare {
     my ($self, $driver) = @_;
 
-    $self->minimum_height($self->outside_height);
     $self->minimum_width($self->outside_width);
+    $self->minimum_height($self->outside_height);
 }
 
 sub to_string {
@@ -310,6 +311,13 @@ Set this component's padding, which should be an instance of
 L<Insets|Graphics::Primitive::Insets>.  Padding is the space I<inside> the
 component's bounding box, as in CSS.  This padding should be between the
 border and the component's content.
+
+=item I<page>
+
+If true then this component represents stand-alone page.  This informs the
+driver that this component (and any children) are to be renderered on a single
+surface.  This only really makes sense in formats that have pages such as PDF
+of PostScript.
 
 =item I<prepare>
 

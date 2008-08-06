@@ -2,6 +2,10 @@ Revision history for Graphics-Primitive
 
 0.13
   - Reorganize prepare/pack/draw API to be handled by the Driver
+  - Add _resize and _finish_page to Driver API
+  - Component: Add page attribute
+  - Driver: Don't check class of incoming component before asking if it has
+    components and treating it like a container.
 
 0.12
   - Path: Add curve_to and rel_curve_to

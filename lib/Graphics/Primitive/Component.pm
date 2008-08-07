@@ -5,25 +5,25 @@ with 'MooseX::Clone';
 
 use overload ('""' => 'to_string');
 
+use Forest::Tree;
 use Graphics::Primitive::Border;
 use Graphics::Primitive::Insets;
 use Geometry::Primitive::Point;
 use Geometry::Primitive::Rectangle;
 
-use Forest::Tree;
-
 has 'background_color' => ( is => 'rw', isa => 'Graphics::Color');
 has 'border' => (
     is => 'rw',
     isa => 'Graphics::Primitive::Border',
-    default => sub { Graphics::Primitive::Border->new() }
+    default => sub { Graphics::Primitive::Border->new }
 );
 has 'color' => ( is => 'rw', isa => 'Graphics::Color');
 has 'height' => ( is => 'rw', isa => 'Num', default => sub { 0 } );
 has 'margins' => (
     is => 'rw',
     isa => 'Graphics::Primitive::Insets',
-    default => sub { Graphics::Primitive::Insets->new() }
+    default => sub { Graphics::Primitive::Insets->new },
+    coerce => 1
 );
 has 'name' => ( is => 'rw', isa => 'Str' );
 has 'origin' => (
@@ -34,7 +34,8 @@ has 'origin' => (
 has 'padding' => (
     is => 'rw',
     isa => 'Graphics::Primitive::Insets',
-    default => sub { Graphics::Primitive::Insets->new() }
+    default => sub { Graphics::Primitive::Insets->new },
+    coerce => 1
 );
 has 'page' => ( is => 'rw', isa => 'Bool', default => sub { 0 } );
 has 'maximum_height' => ( is => 'rw', isa => 'Num', default => sub { 0 } );

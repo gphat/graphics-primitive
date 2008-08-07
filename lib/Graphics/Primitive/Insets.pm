@@ -5,6 +5,26 @@ with 'Geometry::Primitive::Equal';
 
 with 'MooseX::Clone';
 
+use Moose::Util::TypeConstraints;
+
+coerce 'Graphics::Primitive::Insets'
+    => from 'ArrayRef'
+        => via {
+            Graphics::Primitive::Insets->new(
+                top => $_->[0], right => $_->[1],
+                bottom => $_->[2], left => $_->[3]
+            )
+        };
+
+coerce 'Graphics::Primitive::Insets'
+    => from 'Num'
+        => via {
+            Graphics::Primitive::Insets->new(
+                top => $_, right => $_,
+                bottom => $_, left => $_
+            )
+        };
+
 has 'top' => ( is => 'rw', isa => 'Num', default => 0 );
 has 'bottom' => ( is => 'rw', isa => 'Num', default => 0 );
 has 'left' => ( is => 'rw', isa => 'Num', default => 0 );

@@ -1,5 +1,9 @@
 Revision history for Graphics-Primitive
 
+0.14
+  - TextBox: handle text layout with Text::Flow
+  - Component: coercion of Insets from ArrayRef and Num 
+
 0.13
   - Reorganize prepare/pack/draw API to be handled by the Driver
   - Add _resize and _finish_page to Driver API

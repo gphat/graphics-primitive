@@ -52,23 +52,25 @@ override('prepare', sub {
 
     if($self->width && $self->height) {
         $self->layout_text($driver);
-    # } else {
-        # my @lines = split("\n", $self->text);
-        # foreach my $line (@lines) {
-        #     my ($bb, $tb)  = $driver->get_text_bounding_box(
-        #         $self->font, $self->text, $self->angle
-        #     );
-        # 
-        #     $self->text_bounding_box($tb);
-        #     $self->minimum_height($self->minimum_height + $bb->height);
-        #     $self->minimum_width($self->minimum_width + $bb->width);
-        #     push(@{ $self->lines }, { text => $line, box => $tb });
-        # }
+    } else {
+        my @lines = split("\n", $self->text);
+        foreach my $line (@lines) {
+            my ($bb, $tb)  = $driver->get_text_bounding_box(
+                $self->font, $self->text, $self->angle
+            );
+
+            $self->text_bounding_box($tb);
+            $self->minimum_height($self->minimum_height + $bb->height);
+            $self->minimum_width($self->minimum_width + $bb->width);
+            push(@{ $self->lines }, { text => $line, box => $tb });
+        }
     }
 });
 
 sub layout_text {
     my ($self, $driver) = @_;
+
+    # TODO Set a minimum size if we don't need the whole thing
 
     my $flow = Text::Flow->new(
         check_height => sub {

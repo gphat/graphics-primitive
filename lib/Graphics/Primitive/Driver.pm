@@ -46,6 +46,7 @@ sub draw {
 sub pack {
     my ($self, $comp) = @_;
 
+    print "## PACK $comp\n";
     $comp->pack($self);
 
     # TODO Check::ISA
@@ -68,6 +69,7 @@ sub prepare {
         $self->height($comp->height);
     }
 
+    print "# PREP $comp\n";
     $comp->prepare($self);
 
     # TODO Check::ISA

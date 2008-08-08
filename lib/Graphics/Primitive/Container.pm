@@ -15,6 +15,7 @@ has 'components' => (
     provides => {
         'clear'=> 'clear_components',
         'count'=> 'component_count',
+        'pop' => 'pop_component'
     }
 );
 has 'layout_manager' => (

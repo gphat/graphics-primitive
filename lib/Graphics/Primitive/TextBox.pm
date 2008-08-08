@@ -17,6 +17,10 @@ has 'font' => (
     isa => 'Graphics::Primitive::Font',
     default => sub { Graphics::Primitive::Font->new }
 );
+has 'line_height' => (
+    is => 'rw',
+    isa => 'Num'
+);
 has 'lines' => (
     is => 'rw',
     isa => 'ArrayRef',
@@ -48,7 +52,7 @@ override('prepare', sub {
 
     if($self->width && $self->height) {
         $self->layout_text($driver);
-    } else {
+    # } else {
         # my @lines = split("\n", $self->text);
         # foreach my $line (@lines) {
         #     my ($bb, $tb)  = $driver->get_text_bounding_box(
@@ -69,19 +73,30 @@ sub layout_text {
     my $flow = Text::Flow->new(
         check_height => sub {
             my $paras = shift;
+
+            my $lh = $self->line_height;
+            $lh = $self->font->size unless(defined($lh));
+
             my $size = 0;
             foreach my $p (@{ $paras }) {
-                map(
-                    {
-                        # print "XX $_\n";
-                        my $r = $driver->get_text_bounding_box(
-                            $self->font, $_
-                        );
-                        $size += $r->width;
-                    } @{ $p }
-                );
+                if(defined($lh)) {
+                    # use Data::Dumper;
+                    # print Dumper($p);
+                    $size += $lh * scalar(@{ $p });
+                # } else {
+                    # map(
+                    #     {
+                            # my ($cb, $tb) = $driver->get_text_bounding_box(
+                            #     $self->font, $_
+                            # );
+                            # print $tb->origin->y." ".$cb->height."\n";
+                            # $size += abs($tb->origin->y);
+                    #     } @{ $p }
+                    # );
+                }
             }
-            if($size > $self->inside_height) {
+            # print "#### $size ".$self->inside_height."\n";
+            if(($size + $lh) >= $self->inside_height) {
                 return 0;
             }
             return 1;
@@ -89,7 +104,6 @@ sub layout_text {
         wrapper => Text::Flow::Wrap->new(
             check_width => sub {
                 my $str = shift;
-                # print "## $str\n";
                 my $r = $driver->get_text_bounding_box(
                     $self->font, $str
                 );
@@ -106,7 +120,9 @@ sub layout_text {
     # use Data::Dumper;
     # print Dumper(\@text);
 
-    foreach my $para (@text) {
+    # foreach my $para (@text) {
+        my $para = $text[0];
+        # print "XXXX\n";
         my @lines = split(/\n/, $para);
         foreach my $line (@lines) {
             my ($cb, $tb) = $driver->get_text_bounding_box($self->font, $line);
@@ -115,7 +131,7 @@ sub layout_text {
                 box => $cb
             });
         }
-    }
+    # }
 }
 
 __PACKAGE__->meta->make_immutable;

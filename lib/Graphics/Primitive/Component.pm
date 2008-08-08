@@ -178,6 +178,8 @@ Most components do the majority of their setup in the B<prepare>.  The goal of
 prepare is to establish it's minimum height and width so that it can be
 properly positioned by a layout manager.
 
+  $driver->prepare($comp);
+
 =item B<layout>
 
 This is not a method of Component, but a phase introduced by the use of
@@ -187,6 +189,8 @@ minimum height and width determined during B<prepare>.  Different layout
 manager implementations have different rules, so consult the documentation
 for each for details.  After this phase has completed the origin, height and
 width should be set for all components.
+
+  $lm->do_layout($comp);
 
 =item B<pack>
 
@@ -201,9 +205,13 @@ B<It is not ok to defer all action to the pack phase.  If you do not
 establish a minimum hieght and width during prepare then the layout manager
 may not provide you with enough space to draw.>
 
+    $driver->pack($comp);
+
 =item B<draw>
 
 Handled by L<Graphics::Primitive::Driver>.
+
+   $driver->draw($comp);
 
 =back
 

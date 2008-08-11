@@ -53,7 +53,7 @@ override('prepare', sub {
     # if($self->width && $self->height) {
     #     $self->layout_text($driver);
     # } else {
-    unless(defined($self->lines)) {
+    unless(scalar(@{ $self->lines })) {
         my @lines = split("\n", $self->text);
         foreach my $line (@lines) {
             my ($bb, $tb)  = $driver->get_text_bounding_box(
@@ -73,8 +73,7 @@ sub layout_text {
 
     # TODO Set a minimum size if we don't need the whole thing
 
-    die;
-
+    my $size = 0;
     my $flow = Text::Flow->new(
         check_height => sub {
             my $paras = shift;
@@ -82,25 +81,11 @@ sub layout_text {
             my $lh = $self->line_height;
             $lh = $self->font->size unless(defined($lh));
 
-            my $size = 0;
             foreach my $p (@{ $paras }) {
                 if(defined($lh)) {
-                    # use Data::Dumper;
-                    # print Dumper($p);
                     $size += $lh * scalar(@{ $p });
-                # } else {
-                    # map(
-                    #     {
-                            # my ($cb, $tb) = $driver->get_text_bounding_box(
-                            #     $self->font, $_
-                            # );
-                            # print $tb->origin->y." ".$cb->height."\n";
-                            # $size += abs($tb->origin->y);
-                    #     } @{ $p }
-                    # );
                 }
             }
-            # print "#### $size ".$self->inside_height."\n";
             if(($size + $lh) >= $self->inside_height) {
                 return 0;
             }
@@ -123,13 +108,12 @@ sub layout_text {
     my @text = $flow->flow($self->text);
 
     my $para = $text[0];
-    # print "XXXX\n";
     my @lines = split(/\n/, $para);
     foreach my $line (@lines) {
         my ($cb, $tb) = $driver->get_text_bounding_box($self->font, $line);
         push(@{ $self->lines }, {
             text => $line,
-        box => $cb
+            box => $cb
         });
     }
 }

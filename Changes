@@ -5,6 +5,9 @@ Revision history for Graphics-Primitive
   - Component: coercion of Insets from ArrayRef and Num 
   - Add pop_component to Container for removing the last component.
   - POD updates
+  - Component: explicitly return from outside_width and outside_height
+  - Component: if minimum width or height are set already, don't change them
+    in prepare
 
 0.13
   - Reorganize prepare/pack/draw API to be handled by the Driver

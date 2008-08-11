@@ -114,6 +114,8 @@ sub outside_width {
     my $w = $padding->left + $padding->right;
     $w += $margins->left + $margins->right;
     $w += $self->border->width * 2;
+
+    return $w;
 }
 
 sub outside_height {
@@ -125,6 +127,8 @@ sub outside_height {
     my $w = $padding->top + $padding->bottom;
     $w += $margins->top + $margins->bottom;
     $w += $self->border->width * 2;
+
+    return $w;
 }
 
 sub pack { }
@@ -132,8 +136,12 @@ sub pack { }
 sub prepare {
     my ($self, $driver) = @_;
 
-    $self->minimum_width($self->outside_width);
-    $self->minimum_height($self->outside_height);
+    unless($self->minimum_width) {
+        $self->minimum_width($self->outside_width);
+    }
+    unless($self->minimum_height) {
+        $self->minimum_height($self->outside_height);
+    }
 }
 
 sub to_string {

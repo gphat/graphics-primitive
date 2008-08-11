@@ -40,7 +40,7 @@ override('pack', sub {
 
     super;
 
-    unless(scalar(@{ $self->lines })) {
+    if(scalar(@{ $self->lines }) && $self->text) {
         $self->layout_text($driver);
     }
 });
@@ -50,9 +50,10 @@ override('prepare', sub {
 
     super;
 
-    if($self->width && $self->height) {
-        $self->layout_text($driver);
-    } else {
+    # if($self->width && $self->height) {
+    #     $self->layout_text($driver);
+    # } else {
+    unless(defined($self->lines)) {
         my @lines = split("\n", $self->text);
         foreach my $line (@lines) {
             my ($bb, $tb)  = $driver->get_text_bounding_box(
@@ -71,6 +72,8 @@ sub layout_text {
     my ($self, $driver) = @_;
 
     # TODO Set a minimum size if we don't need the whole thing
+
+    die;
 
     my $flow = Text::Flow->new(
         check_height => sub {
@@ -119,21 +122,16 @@ sub layout_text {
 
     my @text = $flow->flow($self->text);
 
-    # use Data::Dumper;
-    # print Dumper(\@text);
-
-    # foreach my $para (@text) {
-        my $para = $text[0];
-        # print "XXXX\n";
-        my @lines = split(/\n/, $para);
-        foreach my $line (@lines) {
-            my ($cb, $tb) = $driver->get_text_bounding_box($self->font, $line);
-            push(@{ $self->lines }, {
-                text => $line,
-                box => $cb
-            });
-        }
-    # }
+    my $para = $text[0];
+    # print "XXXX\n";
+    my @lines = split(/\n/, $para);
+    foreach my $line (@lines) {
+        my ($cb, $tb) = $driver->get_text_bounding_box($self->font, $line);
+        push(@{ $self->lines }, {
+            text => $line,
+        box => $cb
+        });
+    }
 }
 
 __PACKAGE__->meta->make_immutable;

@@ -41,7 +41,7 @@ override('pack', sub {
     super;
 
     if(scalar(@{ $self->lines }) && $self->text) {
-        $self->layout_text($driver);
+        $self->_layout_text($driver);
     }
 });
 
@@ -68,7 +68,7 @@ override('prepare', sub {
     }
 });
 
-sub layout_text {
+sub _layout_text {
     my ($self, $driver) = @_;
 
     # TODO Set a minimum size if we don't need the whole thing

@@ -8,8 +8,8 @@ build_requires 'Test::More';
 
 test_requires 'Pod::Coverage::Moose';
 
-requires 'Geometry::Primitive' => '0.08';
-requires 'Graphics::Color' => '0.06';
+requires 'Geometry::Primitive' => '0.09';
+requires 'Graphics::Color' => '0.08';
 requires 'Moose' => '0.54';
 requires 'MooseX::Clone' => '0.03';
 requires 'MooseX::AttributeHelpers' => '0.12';

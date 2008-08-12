@@ -32,6 +32,17 @@ has 'weight' => (
     default => 'normal'
 );
 
+sub derive {
+    my ($self, $args) = @_;
+
+    return unless ref($args) eq 'HASH';
+    my $new = $self->clone;
+    foreach my $key (keys %{ $args }) {
+        $new->$key($args->{$key}) if($new->can($key));
+    }
+    return $new;
+}
+
 __PACKAGE__->meta->make_immutable;
 
 no Moose;
@@ -71,6 +82,16 @@ Creates a new Graphics::Primitive::Font.
 =head2 Instance Methods
 
 =over 4
+
+=item I<derive>
+
+Clone this font but change one or more of it's attributes by passing in a
+hashref of options:
+
+  my $new = $font->derive({ attr => $newvalue });
+  
+The returned font will be identical to the cloned one, save the attributes
+specified.
 
 =item I<face>
 

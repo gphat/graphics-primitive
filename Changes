@@ -8,6 +8,7 @@ Revision history for Graphics-Primitive
   - Component: explicitly return from outside_width and outside_height
   - Component: if minimum width or height are set already, don't change them
     in prepare
+  - Font: add derive
 
 0.13
   - Reorganize prepare/pack/draw API to be handled by the Driver

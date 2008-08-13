@@ -7,6 +7,15 @@ requires qw(
     get_text_bounding_box reset write
 );
 
+has 'height' => (
+    is => 'rw',
+    isa => 'Num'
+);
+has 'width' => (
+    is => 'rw',
+    isa => 'Num'
+);
+
 sub draw {
     my ($self, $comp) = @_;
 
@@ -55,7 +64,7 @@ sub pack {
             $self->pack($c->{component});
         }
     }
-    $self->reset;
+    # $self->reset;
 }
 
 sub prepare {

@@ -11,41 +11,70 @@ use Graphics::Primitive::Insets;
 use Geometry::Primitive::Point;
 use Geometry::Primitive::Rectangle;
 
-has 'background_color' => ( is => 'rw', isa => 'Graphics::Color');
+has 'background_color' => (
+    is => 'rw',
+    isa => 'Graphics::Color',
+    trigger => sub { my ($self) = @_; $self->prepared(0); }
+);
 has 'border' => (
     is => 'rw',
     isa => 'Graphics::Primitive::Border',
-    default => sub { Graphics::Primitive::Border->new }
+    default => sub { Graphics::Primitive::Border->new },
+    trigger => sub { my ($self) = @_; $self->prepared(0); }
 );
-has 'color' => ( is => 'rw', isa => 'Graphics::Color');
-has 'height' => ( is => 'rw', isa => 'Num', default => sub { 0 } );
+has 'color' => (
+    is => 'rw', isa => 'Graphics::Color',
+    trigger => sub { my ($self) = @_; $self->prepared(0); },
+    trigger => sub { my ($self) = @_; $self->prepared(0); }
+);
+has 'height' => (
+    is => 'rw',
+    isa => 'Num',
+    default => sub { 0 },
+    trigger => sub { my ($self) = @_; $self->prepared(0); }
+);
 has 'margins' => (
     is => 'rw',
     isa => 'Graphics::Primitive::Insets',
     default => sub { Graphics::Primitive::Insets->new },
-    coerce => 1
+    coerce => 1,
+    trigger => sub { my ($self) = @_; $self->prepared(0); }
 );
 has 'name' => ( is => 'rw', isa => 'Str' );
 has 'origin' => (
     is => 'rw',
     isa => 'Geometry::Primitive::Point',
     default =>  sub { Geometry::Primitive::Point->new( x => 0, y => 0 ) },
+    trigger => sub { my ($self) = @_; $self->prepared(0); }
 );
 has 'padding' => (
     is => 'rw',
     isa => 'Graphics::Primitive::Insets',
     default => sub { Graphics::Primitive::Insets->new },
-    coerce => 1
+    coerce => 1,
+    trigger => sub { my ($self) = @_; $self->prepared(0); }
 );
 has 'page' => ( is => 'rw', isa => 'Bool', default => sub { 0 } );
-has 'maximum_height' => ( is => 'rw', isa => 'Num', default => sub { 0 } );
-has 'maximum_width' => ( is => 'rw', isa => 'Num', default => sub { 0 } );
-has 'minimum_height' => ( is => 'rw', isa => 'Num', default => sub { 0 } );
-has 'minimum_width' => ( is => 'rw', isa => 'Num', default => sub { 0 } );
-has 'preferred_height' => ( is => 'rw', isa => 'Num', default => sub { 0 });
-has 'preferred_width' => ( is => 'rw', isa => 'Num', default => sub { 0 });
+has 'minimum_height' => (
+    is => 'rw',
+    isa => 'Num',
+    default => sub { 0 },
+    trigger => sub { my ($self) = @_; $self->prepared(0); }
+);
+has 'minimum_width' => (
+    is => 'rw',
+    isa => 'Num',
+    default => sub { 0 },
+    trigger => sub { my ($self) = @_; $self->prepared(0); }
+);
+has 'prepared' => ( is => 'rw', isa => 'Bool', default => sub { 0 } );
 has 'visible' => ( is => 'rw', isa => 'Bool', default => sub { 1 } );
-has 'width' => ( is => 'rw', isa => 'Num', default => sub { 0 } );
+has 'width' => (
+    is => 'rw',
+    isa => 'Num',
+    default => sub { 0 },
+    trigger => sub { my ($self) = @_; $self->prepared(0); }
+);
 
 sub get_tree {
     my ($self) = @_;
@@ -135,6 +164,8 @@ sub pack { }
 
 sub prepare {
     my ($self, $driver) = @_;
+
+    return if $self->prepared;
 
     unless($self->minimum_width) {
         $self->minimum_width($self->outside_width);

@@ -13,15 +13,16 @@ has 'components' => (
     isa => 'ArrayRef',
     default => sub { [] },
     provides => {
-        'clear'=> 'clear_components',
         'count'=> 'component_count',
         'pop' => 'pop_component'
-    }
+    },
+    trigger => sub { my ($self) = @_; $self->prepared(0); }
 );
 has 'layout_manager' => (
     is => 'rw',
     isa => 'Layout::Manager',
-    handles => [ 'do_layout' ]
+    handles => [ 'do_layout' ],
+    trigger => sub { my ($self) = @_; $self->prepared(0); }
 );
 
 sub add_component {
@@ -34,7 +35,16 @@ sub add_component {
         args      => $args
     });
 
+    $self->prepared(0);
+
     return 1;
+}
+
+sub clear_components {
+    my ($self) = @_;
+
+    $self->components([]);
+    $self->prepared(0);
 }
 
 sub find_component {
@@ -75,6 +85,19 @@ override('get_tree', sub {
     return $tree;
 });
 
+sub prepare {
+    my ($self, $driver) = @_;
+
+    return if $self->prepared;
+
+    unless($self->minimum_width) {
+        $self->minimum_width($self->outside_width);
+    }
+    unless($self->minimum_height) {
+        $self->minimum_height($self->outside_height);
+    }
+}
+
 sub remove_component {
     my ($self, $component) = @_;
 
@@ -99,6 +122,7 @@ sub remove_component {
         if(defined($comp) && defined($comp->name) && $comp->name eq $name) {
 
             delete($self->components->[$count]);
+            $self->prepared(0);
             $del++;
         }
         $count++;

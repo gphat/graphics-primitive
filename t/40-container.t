@@ -1,5 +1,5 @@
 use strict;
-use Test::More tests => 7;
+use Test::More tests => 9;
 
 BEGIN {
     use_ok('Graphics::Primitive::Container');
@@ -24,3 +24,11 @@ cmp_ok($index1->name, 'eq', 'first', 'found first by index');
 
 my $index2 = $cont->get_component(1);
 cmp_ok($index2->name, 'eq', 'second', 'found second by index');
+
+$cont->valid(1);
+cmp_ok($cont->valid, '==', 1, 'valid');
+
+my $comp3 = Graphics::Primitive::Component->new;
+
+$cont->add_component($comp3);
+cmp_ok($cont->valid, '==', 0, 'not valid');

@@ -10,16 +10,19 @@ use Text::Flow;
 
 has 'angle' => (
     is => 'rw',
-    isa => 'Num'
+    isa => 'Num',
+    trigger => sub { my ($self) = @_; $self->prepared(0); }
 );
 has 'font' => (
     is => 'rw',
     isa => 'Graphics::Primitive::Font',
-    default => sub { Graphics::Primitive::Font->new }
+    default => sub { Graphics::Primitive::Font->new },
+    trigger => sub { my ($self) = @_; $self->prepared(0); }
 );
 has 'line_height' => (
     is => 'rw',
-    isa => 'Num'
+    isa => 'Num',
+    trigger => sub { my ($self) = @_; $self->prepared(0); }
 );
 has 'lines' => (
     is => 'rw',
@@ -29,10 +32,12 @@ has 'lines' => (
 has 'text' => (
     is => 'rw',
     isa => 'Str',
+    trigger => sub { my ($self) = @_; $self->prepared(0); }
 );
 has 'text_bounding_box' => (
     is => 'rw',
-    isa => 'Geometry::Primitive::Rectangle'
+    isa => 'Geometry::Primitive::Rectangle',
+    trigger => sub { my ($self) = @_; $self->prepared(0); }
 );
 
 override('pack', sub {
@@ -40,13 +45,15 @@ override('pack', sub {
 
     super;
 
-    if(scalar(@{ $self->lines }) && $self->text) {
+    if(!scalar(@{ $self->lines }) && $self->text) {
         $self->_layout_text($driver);
     }
 });
 
 override('prepare', sub {
     my ($self, $driver) = @_;
+
+    return if $self->prepared;
 
     super;
 

@@ -1,4 +1,4 @@
-use Test::More tests => 13;
+use Test::More tests => 15;
 
 BEGIN {
     use_ok('Graphics::Primitive::Component');
@@ -43,3 +43,8 @@ cmp_ok($obj->inside_height, '==', 180, 'inside_height');
 my $ulip = Geometry::Primitive::Point->new(x => 10, y => 8);
 my $bb = $obj->inside_bounding_box;
 ok($bb->origin->equal_to($ulip), 'bounding box');
+
+$obj->valid(1);
+cmp_ok($obj->valid, '==', 1, 'valid');
+$obj->width(101);
+cmp_ok($obj->valid, '==', 0, 'not valid');

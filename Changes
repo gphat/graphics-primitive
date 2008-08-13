@@ -1,5 +1,16 @@
 Revision history for Graphics-Primitive
 
+0.15
+  - Add prepared flag to components.  Attributes that affect rendering have
+    been modified to set prepared to 0 via a trigger.  Any new attributes
+    added henceforth should do the same.
+  - Containers (being Components) also have a prepared flag, but it is set
+    to true by the layout manager, not by the container itself.  Also, a
+    container is not prepared unless all of it's child components are
+    prepared.  See Layout::Manager for more details.
+  - TextBox: Fix bug when prepared & packed with text attribute set
+
+
 0.14
   - TextBox: handle text layout with Text::Flow
   - Component: coercion of Insets from ArrayRef and Num 

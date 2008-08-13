@@ -44,7 +44,7 @@ my $ulip = Geometry::Primitive::Point->new(x => 10, y => 8);
 my $bb = $obj->inside_bounding_box;
 ok($bb->origin->equal_to($ulip), 'bounding box');
 
-$obj->valid(1);
-cmp_ok($obj->valid, '==', 1, 'valid');
+$obj->prepared(1);
+cmp_ok($obj->prepared, '==', 1, 'prepared');
 $obj->width(101);
-cmp_ok($obj->valid, '==', 0, 'not valid');
+cmp_ok($obj->prepared, '==', 0, 'not prepared');

@@ -215,6 +215,11 @@ Returns a Forest::Tree object with this component at the root and all child
 components as children.  Calling this from your root container will result
 in a tree representation of the entire scene.
 
+=item I<prepare>
+
+Prepares this container.  Does not mark as prepared, as that's done by the
+layout manager.
+
 =item I<remove_component>
 
 Removes a component.  B<Components must have names to be removed.>  Returns 

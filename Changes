@@ -9,6 +9,7 @@ Revision history for Graphics-Primitive
     container is not prepared unless all of it's child components are
     prepared.  See Layout::Manager for more details.
   - TextBox: Fix bug when prepared & packed with text attribute set
+  - POD
 
 
 0.14

@@ -10,8 +10,8 @@ BEGIN {
 my $tb = Graphics::Primitive::TextBox->new;
 isa_ok($tb, 'Graphics::Primitive::TextBox');
 
-cmp_ok($tb->valid, '==', 0, 'not valid');
-$tb->valid(1);
-cmp_ok($tb->valid, '==', 1, 'valid');
+cmp_ok($tb->prepared, '==', 0, 'not prepared');
+$tb->prepared(1);
+cmp_ok($tb->prepared, '==', 1, 'prepared');
 $tb->text('Different');
-cmp_ok($tb->valid, '==', 0, 'not valid');
+cmp_ok($tb->prepared, '==', 0, 'not prepared');

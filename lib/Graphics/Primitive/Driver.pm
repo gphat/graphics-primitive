@@ -57,14 +57,13 @@ sub pack {
 
     $comp->pack($self);
 
-    # TODO Check::ISA
     if($comp->isa('Graphics::Primitive::Container')) {
         foreach my $c (@{ $comp->components }) {
-            next unless defined($c) && defined($c->{component}) && $c->{component}->visible;
+            next unless defined($c) && defined($c->{component})
+                && $c->{component}->visible;
             $self->pack($c->{component});
         }
     }
-    # $self->reset;
 }
 
 sub prepare {

@@ -1,5 +1,8 @@
 Revision history for Graphics-Primitive
 
+0.16
+  - Useless whitespace changes
+
 0.15
   - Add prepared flag to components.  Attributes that affect rendering have
     been modified to set prepared to 0 via a trigger.  Any new attributes

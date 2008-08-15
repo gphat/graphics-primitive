@@ -14,7 +14,7 @@ no Moose;
 1;
 =head1 NAME
 
-Grahics::Primitive::Paint::Solid
+Graphics::Primitive::Paint::Solid
 
 =head1 DESCRIPTION
 

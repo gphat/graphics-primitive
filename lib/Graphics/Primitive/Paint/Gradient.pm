@@ -37,7 +37,7 @@ no Moose;
 __END__
 =head1 NAME
 
-Grahics::Primitive::Paint::Gradient - Linear and radial color blending
+Graphics::Primitive::Paint::Gradient - Linear and radial color blending
 
 =head1 DESCRIPTION
 

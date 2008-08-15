@@ -13,7 +13,7 @@ no Moose;
 1;
 =head1 NAME
 
-Grahics::Primitive::Operation - A drawing instruction
+Graphics::Primitive::Operation - A drawing instruction
 
 =head1 DESCRIPTION
 

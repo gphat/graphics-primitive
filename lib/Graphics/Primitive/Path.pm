@@ -193,7 +193,7 @@ __END__
 
 =head1 NAME
 
-Grahics::Primitive::Path - Collection of primitives
+Graphics::Primitive::Path - Collection of primitives
 
 =head1 DESCRIPTION
 

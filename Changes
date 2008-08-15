@@ -3,6 +3,7 @@ Revision history for Graphics-Primitive
 0.17
   - Useless whitespace changes
   - POD typos
+  - Border: switch from a single width to per-side Brushes
 
 0.16
   - Opps, I forgot. :(

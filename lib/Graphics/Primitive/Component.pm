@@ -89,10 +89,12 @@ sub inside_width {
 
     my $padding = $self->padding;
     my $margins = $self->margins;
+    my $border = $self->border;
 
     $w -= $padding->left + $padding->right;
     $w -= $margins->left + $margins->right;
-    $w -= $self->border->width * 2;
+
+    $w -= $border->left->width + $border->right->width;
 
     $w = 0 if $w < 0;
 
@@ -106,10 +108,11 @@ sub inside_height {
 
     my $padding = $self->padding;
     my $margins = $self->margins;
+    my $border = $self->border;
 
     $h -= $padding->bottom + $padding->top;
     $h -= $margins->bottom + $margins->top;
-    $h -= $self->border->width * 2;
+    $h -= $border->top->width + $border->bottom->width;
 
     $h = 0 if $h < 0;
 
@@ -122,12 +125,12 @@ sub inside_bounding_box {
 
     my $padding = $self->padding;
     my $margins = $self->margins;
-    my $bw = $self->border->width;
+    my $border = $self->border;
 
     my $rect = Geometry::Primitive::Rectangle->new(
         origin => Geometry::Primitive::Point->new(
-            x => $padding->left + $bw + $margins->left,
-            y => $padding->top + $bw + $margins->top
+            x => $padding->left + $border->left->width + $margins->left,
+            y => $padding->top + $border->right->width + $margins->top
         ),
         width => $self->inside_width,
         height => $self->inside_height
@@ -139,10 +142,11 @@ sub outside_width {
 
     my $padding = $self->padding;
     my $margins = $self->margins;
+    my $border = $self->border;
 
     my $w = $padding->left + $padding->right;
     $w += $margins->left + $margins->right;
-    $w += $self->border->width * 2;
+    $w += $border->left->width * $border->right->width;
 
     return $w;
 }
@@ -152,10 +156,11 @@ sub outside_height {
 
     my $padding = $self->padding;
     my $margins = $self->margins;
+    my $border = $self->border;
 
     my $w = $padding->top + $padding->bottom;
     $w += $margins->top + $margins->bottom;
-    $w += $self->border->width * 2;
+    $w += $border->bottom->width * $border->top->width;
 
     return $w;
 }

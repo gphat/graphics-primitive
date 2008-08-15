@@ -1,19 +1,69 @@
 package Graphics::Primitive::Border;
 use Moose;
 
-extends 'Graphics::Primitive::Brush';
+use Graphics::Primitive::Brush;
 
 with 'MooseX::Clone';
 
 use Graphics::Color;
 
-has 'color' => (
+has 'bottom' => (
     is => 'rw',
-    isa => 'Graphics::Color',
+    isa => 'Graphics::Primitive::Brush',
+    default => sub {
+        Graphics::Primitive::Brush->new
+    }
 );
-has '+width' => ( default => sub { 0 });
+has 'left' => (
+    is => 'rw',
+    isa => 'Graphics::Primitive::Brush',
+    default => sub {
+        Graphics::Primitive::Brush->new
+    }
+);
+has 'right' => (
+    is => 'rw',
+    isa => 'Graphics::Primitive::Brush',
+    default => sub {
+        Graphics::Primitive::Brush->new
+    }
+);
+has 'top' => (
+    is => 'rw',
+    isa => 'Graphics::Primitive::Brush',
+    default => sub {
+        Graphics::Primitive::Brush->new
+    }
+);
 
 __PACKAGE__->meta->make_immutable;
+
+sub color {
+    my ($self, $c) = @_;
+
+    $self->bottom->color($c);
+    $self->left->color($c);
+    $self->right->color($c);
+    $self->top->color($c);
+}
+
+sub dash_pattern {
+    my ($self, $d) = @_;
+
+    $self->bottom->dash_pattern($d);
+    $self->left->dash_pattern($d);
+    $self->right->dash_pattern($d);
+    $self->top->dash_pattern($d);
+}
+
+sub width {
+    my ($self, $w) = @_;
+
+    $self->bottom->width($w);
+    $self->left->width($w);
+    $self->right->width($w);
+    $self->top->width($w);
+}
 
 no Moose;
 1;
@@ -32,9 +82,7 @@ component.
 
   use Graphics::Primitive::Border;
 
-  my $border = Graphics::Primitive::Border->new({
-    width => 3
-  });
+  my $border = Graphics::Primitive::Border->new;
 
 =head1 METHODS
 
@@ -44,9 +92,9 @@ component.
 
 =item I<new>
 
-Creates a new Graphics::Primitiver::Border.  Border extends Brush and adds a
-color attribute. Has a default stroke if none is specified.  See the
-documentation for L<Graphics::Primitive::Brush> for more information.
+Creates a new Graphics::Primitiver::Border.  Borders are composed of 4
+brushes, one for each of the 4 sides.  See the documentation for
+L<Graphics::Primitive::Brush> for more information.
 
 =back
 
@@ -54,9 +102,36 @@ documentation for L<Graphics::Primitive::Brush> for more information.
 
 =over 4
 
+=item I<bottom>
+
+The brush representing the bottom border.
+
 =item I<color>
 
-Set/Get the Color.  Expected to be a L<Graphics::Color> object.
+Set the Color on all 4 borders to the one supplied.  Shortcut for setting it
+with each side.
+
+=item I<dash_pattern>
+
+Set the dash pattern on all 4 borders to the one supplied. Shortcut for
+setting it with each side.
+
+=item I<left>
+
+The brush representing the left border.
+
+=item I<right>
+
+The brush representing the right border.
+
+=item I<top>
+
+The brush representing the top border.
+
+=item I<width>
+
+Set the width on all 4 borders to the one supplied.  Shortcut for setting it
+with each side.
 
 =back
 

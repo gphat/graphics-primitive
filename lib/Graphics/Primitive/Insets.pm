@@ -30,10 +30,16 @@ has 'bottom' => ( is => 'rw', isa => 'Num', default => 0 );
 has 'left' => ( is => 'rw', isa => 'Num', default => 0 );
 has 'right' => ( is => 'rw', isa => 'Num', default => 0 );
 
+sub as_array {
+    my ($self) = @_;
+
+    return ($self->top, $self->right, $self->bottom, $self->left);
+}
+
 sub equal_to {
     my ($self, $other) = @_;
 
-    return ($self->top == $other->top) && ($self->bottom == $other->bottom())
+    return ($self->top == $other->top) && ($self->bottom == $other->bottom)
         && ($self->left == $other->left) && ($self->right == $other->right);
 }
 
@@ -84,6 +90,10 @@ Creates a new Graphics::Primitive::Insets.
 =head2 Instance Methods
 
 =over 4
+
+=item I<as_array>
+
+Return these insets as an array in the form of top, right, bottom and left.
 
 =item I<bottom>
 

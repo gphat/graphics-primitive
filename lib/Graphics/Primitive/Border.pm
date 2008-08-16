@@ -12,28 +12,32 @@ has 'bottom' => (
     isa => 'Graphics::Primitive::Brush',
     default => sub {
         Graphics::Primitive::Brush->new
-    }
+    },
+    traits => [qw(Clone)]
 );
 has 'left' => (
     is => 'rw',
     isa => 'Graphics::Primitive::Brush',
     default => sub {
         Graphics::Primitive::Brush->new
-    }
+    },
+    traits => [qw(Clone)]
 );
 has 'right' => (
     is => 'rw',
     isa => 'Graphics::Primitive::Brush',
     default => sub {
         Graphics::Primitive::Brush->new
-    }
+    },
+    traits => [qw(Clone)]
 );
 has 'top' => (
     is => 'rw',
     isa => 'Graphics::Primitive::Brush',
     default => sub {
         Graphics::Primitive::Brush->new
-    }
+    },
+    traits => [qw(Clone)]
 );
 
 __PACKAGE__->meta->make_immutable;
@@ -54,6 +58,42 @@ sub dash_pattern {
     $self->left->dash_pattern($d);
     $self->right->dash_pattern($d);
     $self->top->dash_pattern($d);
+}
+
+sub equal_to {
+    my ($self, $other) = @_;
+
+    unless($self->top->equal_to($other->top)) {
+        return 0;
+    }
+    unless($self->right->equal_to($other->right)) {
+        return 0;
+    }
+    unless($self->bottom->equal_to($other->bottom)) {
+        return 0;
+    }
+    unless($self->left->equal_to($other->left)) {
+        return 0;
+    }
+
+    return 1;
+}
+
+sub homogeneous {
+    my ($self) = @_;
+
+    my $b = $self->top;
+    unless($self->bottom->equal_to($b) && $self->left->equal_to($b)
+        && $self->right->equal_to($b)) {
+            return 0;
+    }
+    return 1;
+}
+
+sub not_equal_to {
+    my ($self, $other) = @_;
+
+    return !$self->equal_to($other);
 }
 
 sub width {
@@ -106,6 +146,10 @@ L<Graphics::Primitive::Brush> for more information.
 
 The brush representing the bottom border.
 
+=item I<clone>
+
+Close this border.
+
 =item I<color>
 
 Set the Color on all 4 borders to the one supplied.  Shortcut for setting it
@@ -116,9 +160,22 @@ with each side.
 Set the dash pattern on all 4 borders to the one supplied. Shortcut for
 setting it with each side.
 
+=item I<equal_to ($other)>
+
+Returns 1 if this border is equal to the one provided, else returns 0.
+
+=item I<homogeneous>
+
+Returns 1 if all of this border's sides are the same.  Allows for driver
+optimizations.
+
 =item I<left>
 
 The brush representing the left border.
+
+=item I<not_equal_to>
+
+Opposite of C<equal_to>.
 
 =item I<right>
 

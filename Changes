@@ -1,5 +1,8 @@
 Revision history for Graphics-Primitive
 
+0.20
+  - Fix accidentally marking containers as prepared when they are not
+
 0.19
   - Component: Add class attribute
   - ComponentList: Add each and find

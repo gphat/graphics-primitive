@@ -84,9 +84,9 @@ sub prepare {
             next unless defined($c) && defined($c) && $c->visible;
             $self->prepare($c);
         }
+    } else {
+        $comp->prepared(1);
     }
-
-    $comp->prepared(1);
 }
 
 no Moose;

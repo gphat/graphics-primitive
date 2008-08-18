@@ -46,7 +46,7 @@ sub draw {
     if($comp->isa('Graphics::Primitive::Container')) {
         if($comp->can('components')) {
             foreach my $subcomp (@{ $comp->components }) {
-                $self->draw($subcomp->{component});
+                $self->draw($subcomp);
             }
         }
     }
@@ -59,9 +59,9 @@ sub pack {
 
     if($comp->isa('Graphics::Primitive::Container')) {
         foreach my $c (@{ $comp->components }) {
-            next unless defined($c) && defined($c->{component})
-                && $c->{component}->visible;
-            $self->pack($c->{component});
+            next unless defined($c) && defined($c)
+                && $c->visible;
+            $self->pack($c);
         }
     }
 }
@@ -81,10 +81,12 @@ sub prepare {
     # TODO Check::ISA
     if($comp->isa('Graphics::Primitive::Container')) {
         foreach my $c (@{ $comp->components }) {
-            next unless defined($c) && defined($c->{component}) && $c->{component}->visible;
-            $self->prepare($c->{component});
+            next unless defined($c) && defined($c) && $c->visible;
+            $self->prepare($c);
         }
     }
+
+    $comp->prepared(1);
 }
 
 no Moose;

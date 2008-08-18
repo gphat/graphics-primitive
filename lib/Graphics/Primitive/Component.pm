@@ -22,6 +22,7 @@ has 'border' => (
     default => sub { Graphics::Primitive::Border->new },
     trigger => sub { my ($self) = @_; $self->prepared(0); }
 );
+has 'class' => ( is => 'rw', isa => 'Str' );
 has 'color' => (
     is => 'rw', isa => 'Graphics::Color',
     trigger => sub { my ($self) = @_; $self->prepared(0); },
@@ -283,6 +284,12 @@ Set this component's background color.
 
 Set this component's border, which should be an instance of
 L<Border|Graphics::Primitive::Border>.
+
+=item I<class>
+
+Set/Get this component's class, which is an abitrary string.
+Graphics::Primitive has no internal use for this attribute but provides it for
+outside use.
 
 =item I<color>
 

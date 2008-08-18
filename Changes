@@ -1,5 +1,14 @@
 Revision history for Graphics-Primitive
 
+0.19
+  - Component: Add class attribute
+  - ComponentList: Add each and find
+
+0.18
+  - Add ComponentList and use it to keep container components.
+  - Container: find_component now returns the component's index, not the
+    component.
+
 0.17
   - Useless whitespace changes
   - POD typos fixed

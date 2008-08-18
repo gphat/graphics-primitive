@@ -16,7 +16,8 @@ my $comp2 = Graphics::Primitive::Component->new(name => 'second');
 $cont->add_component($comp2);
 cmp_ok($cont->component_count, '==', 2, 'component_count');
 
-my $found = $cont->find_component('first');
+my $foundi = $cont->find_component('first');
+my $found = $cont->get_component($foundi);
 cmp_ok($found->name, 'eq', 'first', 'found first by name');
 
 my $index1 = $cont->get_component(0);

@@ -15,6 +15,7 @@ lib/Graphics/Primitive/Border.pm
 lib/Graphics/Primitive/Brush.pm
 lib/Graphics/Primitive/Canvas.pm
 lib/Graphics/Primitive/Component.pm
+lib/Graphics/Primitive/ComponentList.pm
 lib/Graphics/Primitive/Container.pm
 lib/Graphics/Primitive/Driver.pm
 lib/Graphics/Primitive/Font.pm
@@ -38,6 +39,7 @@ t/01-insets.t
 t/02-brush.t
 t/20-border.t
 t/30-component.t
+t/35-componentlist.t
 t/40-container.t
 t/50-path.t
 t/55-canvas.t

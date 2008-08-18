@@ -1,21 +1,19 @@
 package Graphics::Primitive::Container;
 use Moose;
 
+use Graphics::Primitive::ComponentList;
+
 use Forest::Tree;
 
 extends 'Graphics::Primitive::Component';
 
 with 'MooseX::Clone';
 
-has 'components' => (
-    metaclass => 'Collection::Array',
+has 'component_list' => (
     is => 'rw',
-    isa => 'ArrayRef',
-    default => sub { [] },
-    provides => {
-        'count'=> 'component_count',
-        'pop' => 'pop_component'
-    },
+    isa => 'Graphics::Primitive::ComponentList',
+    default => sub { Graphics::Primitive::ComponentList->new },
+    handles => [qw(component_count components constraints each find find_component get_component get_constraint)],
     trigger => sub { my ($self) = @_; $self->prepared(0); }
 );
 has 'layout_manager' => (
@@ -30,10 +28,7 @@ sub add_component {
 
     return 0 unless $self->validate_component($component, $args);
 
-    push(@{ $self->components }, {
-        component => $component,
-        args      => $args
-    });
+    $self->component_list->add_component($component, $args);
 
     $self->prepared(0);
 
@@ -43,47 +38,21 @@ sub add_component {
 sub clear_components {
     my ($self) = @_;
 
-    $self->components([]);
+    $self->component_list->clear;
     $self->prepared(0);
 }
 
-sub find_component {
-    my ($self, $name) = @_;
-
-    foreach my $c (@{ $self->components }) {
-        my $comp = $c->{component};
-
-        if(defined($comp) && defined($comp->name) && $comp->name eq $name) {
-
-            return $comp;
-        }
-    }
-
-    return undef;
-}
-
-sub get_component {
-    my ($self, $idx) = @_;
-
-    my $comp = $self->components->[$idx];
-    if(defined($comp)) {
-        return $comp->{component};
-    }
-    return undef;
-}
-
-override('get_tree', sub {
+sub get_tree {
     my ($self) = @_;
 
     my $tree = Forest::Tree->new(node => $self);
 
     foreach my $c (@{ $self->components }) {
-        my $comp = $c->{component};
-        $tree->add_child($comp->get_tree);
+        $tree->add_child($c->get_tree);
     }
 
     return $tree;
-});
+}
 
 sub prepare {
     my ($self, $driver) = @_;
@@ -101,34 +70,12 @@ sub prepare {
 sub remove_component {
     my ($self, $component) = @_;
 
-    my $name;
-
-    # Handle either a component object or a scalar name
-    if(ref($component)) {
-        if($component->can('name')) {
-            $name = $component->name();
-        } else {
-            die('Must supply a Component or a scalar name.');
-        }
-    } else {
-        $name = $component;
+    my $count = $self->component_list->remove_component($component);
+    if($count) {
+        $self->prepared(0);
     }
 
-    my $count = 0;
-    my $del;
-    foreach my $c (@{ $self->components }) {
-        my $comp = $c->{component};
-
-        if(defined($comp) && defined($comp->name) && $comp->name eq $name) {
-
-            delete($self->components->[$count]);
-            $self->prepared(0);
-            $del++;
-        }
-        $count++;
-    }
-
-    return $del;
+    return $count;
 }
 
 sub validate_component {
@@ -149,23 +96,19 @@ Graphics::Primitive::Container - Component that holds other Components
 
 =head1 DESCRIPTION
 
-A Container is a omponent that may contain other components.
-
-=head1 SYNOPSIS
-
-  my $c = Graphics::Primitive::Container->new({
-    width => 500, height => 350,
-    layout_manager => Layout::Manager::Compass->new
-  });
-  $c->add_component($comp, { meta => 'data' });
-
-=head1 DESCRIPTION
-
 Containers are components that contain other components.  They can also hold
 an instance of a L<Layout::Manager> for automatic layout of their internal
 components. See the
 L<Component's Lifecycle Section|Graphics::Primitive::Component#LIFECYCLE> for
 more information.
+
+=head1 SYNOPSIS
+
+  my $c = Graphics::Primitive::Container->new(
+    width => 500, height => 350,
+    layout_manager => Layout::Manager::Compass->new
+  );
+  $c->add_component($comp, { meta => 'data' });
 
 =head1 METHODS
 
@@ -183,7 +126,7 @@ Creates a new Container.
 
 =over 4
 
-=item I<add_component>
+=item I<add_component ($component, [ $constraint ])>
 
 Add a component to the container.  Returns a true value if the component
 was added successfully. A second argument may be required, please consult the
@@ -201,13 +144,22 @@ Remove all components from the layout manager.
 
 Returns the number of components in this container.
 
+=item I<component_list>
+
+Returns this Container's L<ComponentList|Graphics::Primitive::ComponentList>.
+
 =item I<find_component>
 
-Find a component with the given name.
+Returns the index of the first component with the supplied name.  Returns
+undef if no component with that name is found.
 
 =item I<get_component>
 
 Get the component at the specified index.
+
+=item I<get_constraint>
+
+Get the constraint at the specified index.
 
 =item I<get_tree>
 
@@ -227,7 +179,8 @@ the number of components removed.
 
 =item I<validate_component>
 
-Optionally overriden by an implementation, allows it to deem 
+Optionally overriden by an implementation, allows it to deem a component as
+invalid.  If this sub returns false, the component won't be added.
 
 =back
 

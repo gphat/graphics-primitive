@@ -2,7 +2,7 @@ Revision history for Graphics-Primitive
 
 0.17
   - Useless whitespace changes
-  - POD typos
+  - POD typos fixed
   - Border: switch from a single width to per-side Brushes
   - Brush: add derive, equal_to and not_equal_to
   - Border: now cloneable

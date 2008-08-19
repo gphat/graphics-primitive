@@ -7,7 +7,7 @@ Graphics::Primitive - Device and library agnostic graphic primitives
 
 =cut
 
-our $VERSION = '0.21';
+our $VERSION = '0.22';
 
 __PACKAGE__->meta->make_immutable;
 

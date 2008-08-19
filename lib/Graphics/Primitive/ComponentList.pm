@@ -69,8 +69,11 @@ sub find {
 
         if($component->can('component_list')) {
             my $list = $component->find($predicate);
-            $newlist->push_components($list->components);
-            $newlist->push_constraints($list->constraints);
+
+            next unless(scalar(@{ $list->components }));
+
+            $newlist->push_components(@{ $list->components });
+            $newlist->push_constraints(@{ $list->constraints });
         }
 
         if($predicate->($component, $constraint)) {

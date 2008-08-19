@@ -1,5 +1,8 @@
 Revision history for Graphics-Primitive
 
+0.22
+  - Properly append component lists in find.
+
 0.21
   - Remove duplicate code in Driver's prepare method
 

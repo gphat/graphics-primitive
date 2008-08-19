@@ -1,5 +1,8 @@
 Revision history for Graphics-Primitive
 
+0.21
+  - Remove duplicate code in Driver's prepare method
+
 0.20
   - Fix accidentally marking containers as prepared when they are not
 

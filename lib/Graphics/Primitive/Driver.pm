@@ -81,7 +81,7 @@ sub prepare {
     # TODO Check::ISA
     if($comp->isa('Graphics::Primitive::Container')) {
         foreach my $c (@{ $comp->components }) {
-            next unless defined($c) && defined($c) && $c->visible;
+            next unless defined($c) && $c->visible;
             $self->prepare($c);
         }
     } else {

@@ -1,5 +1,12 @@
 Revision history for Graphics-Primitive
 
+0.23
+  - Component: Add parent attribute
+  - Container: Set and unset parent attribute on add/remove/clear
+  - Add Aligned role
+  - Textbox: Use Aligned role
+  - POD updates
+
 0.22
   - Properly append component lists in find.
 

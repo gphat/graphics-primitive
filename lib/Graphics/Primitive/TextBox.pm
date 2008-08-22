@@ -3,7 +3,7 @@ use Moose;
 
 extends 'Graphics::Primitive::Component';
 
-with 'MooseX::Clone';
+with qw(MooseX::Clone Graphics::Primitive::Aligned);
 
 use Graphics::Primitive::Font;
 use Text::Flow;
@@ -19,6 +19,7 @@ has 'font' => (
     default => sub { Graphics::Primitive::Font->new },
     trigger => sub { my ($self) = @_; $self->prepared(0); }
 );
+has '+horizontal_alignment' => ( default => sub { 'left'} );
 has 'line_height' => (
     is => 'rw',
     isa => 'Num',
@@ -39,6 +40,7 @@ has 'text_bounding_box' => (
     isa => 'Geometry::Primitive::Rectangle',
     trigger => sub { my ($self) = @_; $self->prepared(0); }
 );
+has '+vertical_alignment' => ( default => sub { 'top'} );
 
 override('pack', sub {
     my ($self, $driver) = @_;
@@ -170,13 +172,25 @@ Creates a new Graphics::Primitive::TextBox.
 
 =over 4
 
+=iitem I<angle>
+
+The angle this text will be rotated.
+
 =item I<font>
 
 Set this textbox's font
 
+=item I<horizontal_alignment>
+
+Horizontal alignment.  See L<Graphics::Primitive::Aligned>.
+
 =item I<text>
 
 Set this textbox's text.
+
+=item I<vertical_alignment>
+
+Vertical alignment.  See L<Graphics::Primitive::Aligned>.
 
 =back
 

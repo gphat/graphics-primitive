@@ -1,16 +1,19 @@
 use strict;
-use Test::More tests => 9;
+use Test::More tests => 12;
 
 BEGIN {
     use_ok('Graphics::Primitive::Container');
 }
 
-my $cont = Graphics::Primitive::Container->new;
+use Graphics::Primitive::Component;
+
+my $cont = Graphics::Primitive::Container->new(name => 'root');
 isa_ok($cont, 'Graphics::Primitive::Container');
 
 my $comp1 = Graphics::Primitive::Component->new(name => 'first');
 $cont->add_component($comp1);
 cmp_ok($cont->component_count, '==', 1, 'component_count');
+cmp_ok($comp1->parent->name, 'eq', $cont->name, 'parent');
 
 my $comp2 = Graphics::Primitive::Component->new(name => 'second');
 $cont->add_component($comp2);
@@ -33,3 +36,9 @@ my $comp3 = Graphics::Primitive::Component->new;
 
 $cont->add_component($comp3);
 cmp_ok($cont->prepared, '==', 0, 'not prepared');
+
+my $removed = $cont->remove_component($comp2);
+ok(!defined($comp2->parent), 'no parent after removal');
+
+$cont->clear_components;
+ok(!defined($comp1->parent), 'no parent after clear');

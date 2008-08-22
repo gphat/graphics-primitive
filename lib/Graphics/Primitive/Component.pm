@@ -56,6 +56,7 @@ has 'padding' => (
     trigger => sub { my ($self) = @_; $self->prepared(0); }
 );
 has 'page' => ( is => 'rw', isa => 'Bool', default => sub { 0 } );
+has 'parent' => ( is => 'rw', isa => 'Maybe[Graphics::Primitive::Component]' );
 has 'minimum_height' => (
     is => 'rw',
     isa => 'Num',

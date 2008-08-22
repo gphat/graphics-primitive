@@ -116,19 +116,19 @@ sub remove_component {
     }
 
     my $count = 0;
-    my $del;
+    my @dels = ();
     foreach my $comp (@{ $self->components }) {
 
         if(defined($comp) && defined($comp->name) && $comp->name eq $name) {
 
+            push(@dels, $self->components->[$count]);
             delete($self->components->[$count]);
             delete($self->constraints->[$count]);
-            $del++;
         }
         $count++;
     }
 
-    return $del;
+    return \@dels;
 }
 
 no Moose;
@@ -232,7 +232,7 @@ Get the constraint at the specified index.
 =item I<remove_component>
 
 Removes a component and it's constraint.  B<Components must have names to be
-removed.>  Returns the number of components removed.
+removed.>  Returns an arrayref of Components that were removed.
 
 =back
 

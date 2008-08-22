@@ -28,6 +28,7 @@ sub add_component {
 
     return 0 unless $self->validate_component($component, $args);
 
+    $component->parent($self);
     $self->component_list->add_component($component, $args);
 
     $self->prepared(0);
@@ -38,6 +39,12 @@ sub add_component {
 sub clear_components {
     my ($self) = @_;
 
+    # Clear all the component's parent attributes just in case some
+    # outside thingie is holding a reference to it
+    foreach my $c (@{ $self->components }) {
+        next unless(defined($c));
+        $c->parent(undef);
+    }
     $self->component_list->clear;
     $self->prepared(0);
 }
@@ -70,12 +77,14 @@ sub prepare {
 sub remove_component {
     my ($self, $component) = @_;
 
-    my $count = $self->component_list->remove_component($component);
-    if($count) {
-        $self->prepared(0);
+    my $removed = $self->component_list->remove_component($component);
+    if(scalar(@{ $removed })) {
+        foreach my $r (@{ $removed }) {
+            $r->parent(undef);
+        }
     }
 
-    return $count;
+    return $removed;
 }
 
 sub validate_component {
@@ -174,8 +183,8 @@ layout manager.
 
 =item I<remove_component>
 
-Removes a component.  B<Components must have names to be removed.>  Returns 
-the number of components removed.
+Removes a component.  B<Components must have names to be removed.>  Returns an
+arrayref of removed components.
 
 =item I<validate_component>
 

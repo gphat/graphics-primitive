@@ -38,7 +38,7 @@ specify it's horizontal and vertical alignment.
 
 =head1 METHODS
 
-=over 
+=over 4
 
 =item I<horizontal_alignment>
 

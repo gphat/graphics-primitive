@@ -172,7 +172,7 @@ Creates a new Graphics::Primitive::TextBox.
 
 =over 4
 
-=iitem I<angle>
+=item I<angle>
 
 The angle this text will be rotated.
 

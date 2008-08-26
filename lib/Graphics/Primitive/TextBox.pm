@@ -66,7 +66,7 @@ override('prepare', sub {
         my @lines = split("\n", $self->text);
         foreach my $line (@lines) {
             my ($bb, $tb)  = $driver->get_text_bounding_box(
-                $self->font, $self->text, $self->angle
+                $self->font, $line, $self->angle
             );
 
             $self->text_bounding_box($tb);

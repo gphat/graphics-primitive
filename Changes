@@ -1,5 +1,8 @@
 Revision history for Graphics-Primitive
 
+0.24
+  - TextBox: Fix broken multi-line rendering
+
 0.23
   - Component: Add parent attribute
   - Container: Set and unset parent attribute on add/remove/clear

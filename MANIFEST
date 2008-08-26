@@ -11,6 +11,7 @@ inc/Module/Install/Metadata.pm
 inc/Module/Install/Win32.pm
 inc/Module/Install/WriteAll.pm
 lib/Graphics/Primitive.pm
+lib/Graphics/Primitive/Aligned.pm
 lib/Graphics/Primitive/Border.pm
 lib/Graphics/Primitive/Brush.pm
 lib/Graphics/Primitive/Canvas.pm

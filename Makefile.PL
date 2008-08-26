@@ -6,8 +6,6 @@ author   'Cory G Watson <gphat@cpan.org>';
 
 build_requires 'Test::More';
 
-test_requires 'Pod::Coverage::Moose';
-
 requires 'Geometry::Primitive' => '0.09';
 requires 'Graphics::Color' => '0.09';
 requires 'Moose' => '0.54';

@@ -156,7 +156,7 @@ Graphics::Primitive::TextBox - Text component
 
 =head1 DESCRIPTION
 
-Graphics::Primitive::TextBox is a Componet with text.
+Graphics::Primitive::TextBox is a Component with text.
 
 =head1 SYNOPSIS
 

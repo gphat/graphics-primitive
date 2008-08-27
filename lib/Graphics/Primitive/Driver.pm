@@ -37,6 +37,8 @@ sub draw {
     # TODO Check::ISA
     if($comp->isa('Graphics::Primitive::Canvas')) {
         $self->_draw_canvas($comp);
+    } elsif($comp->isa('Graphics::Primitive::Image')) {
+        $self->_draw_image($comp);
     } elsif($comp->isa('Graphics::Primitive::TextBox')) {
         $self->_draw_textbox($comp);
     } elsif($comp->isa('Graphics::Primitive::Component')) {

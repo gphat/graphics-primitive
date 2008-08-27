@@ -59,22 +59,41 @@ override('prepare', sub {
 
     super;
 
+    my $lh = $self->line_height;
+    unless(defined($lh)) {
+        $lh = $self->font->size;
+    }
+
     # if($self->width && $self->height) {
     #     $self->layout_text($driver);
     # } else {
     unless(scalar(@{ $self->lines })) {
         my @lines = split("\n", $self->text);
+        my $twide = 0;
+        my $theight = 0;
         foreach my $line (@lines) {
             my ($bb, $tb)  = $driver->get_text_bounding_box(
                 $self->font, $line, $self->angle
             );
 
             $self->text_bounding_box($tb);
-            $self->minimum_height($self->minimum_height + $bb->height);
-            $self->minimum_width($self->minimum_width + $bb->width);
+            my $height = $bb->height;
+
+            if(defined($lh) && ($lh > $height)) {
+                $height = $lh;
+            }
+
             push(@{ $self->lines }, { text => $line, box => $tb });
+            if($twide < $bb->width) {
+                $twide = $bb->width;
+            }
+            $theight += $height;
         }
+        $self->minimum_height($theight + $self->minimum_height);
+        $self->minimum_width($twide + $self->outside_width);
     }
+
+
 });
 
 sub _layout_text {

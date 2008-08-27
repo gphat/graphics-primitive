@@ -1,5 +1,8 @@
 Revision history for Graphics-Primitive
 
+0.25
+  - TextBox: Normalize multi-line rendering on line height
+
 0.24
   - TextBox: Fix broken multi-line rendering
 

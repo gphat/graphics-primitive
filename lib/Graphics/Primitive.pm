@@ -1,19 +1,19 @@
 package Graphics::Primitive;
 use Moose;
 
-=head1 NAME
-
-Graphics::Primitive - Device and library agnostic graphic primitives
-
-=cut
-
-our $VERSION = '0.24';
+our $VERSION = '0.25';
 
 __PACKAGE__->meta->make_immutable;
 
 no Moose;
 1;
 __END__
+
+=head1 NAME
+
+Graphics::Primitive - Device and library agnostic graphic primitives
+
+=cut
 
 =head1 SYNOPSIS
 

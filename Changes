@@ -3,6 +3,7 @@ Revision history for Graphics-Primitive
 0.26
   - Add Image component (experimental)
   - POD fixes
+  - Component: make parent a weakref
 
 0.25
   - TextBox: Normalize multi-line rendering on line height

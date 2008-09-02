@@ -11,6 +11,7 @@ has brush => (
     isa => 'Graphics::Primitive::Brush',
     is  => 'rw',
     default =>  sub { Graphics::Primitive::Brush->new },
+    traits => [qw(Clone)]
 );
 
 __PACKAGE__->meta->make_immutable;

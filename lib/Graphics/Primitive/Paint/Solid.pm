@@ -3,9 +3,12 @@ use Moose;
 
 extends 'Graphics::Primitive::Paint';
 
+with qw(MooseX::Clone);
+
 has color => (
     isa => 'Graphics::Color',
     is  => 'rw',
+    traits => [qw(Clone)]
 );
 
 __PACKAGE__->meta->make_immutable;

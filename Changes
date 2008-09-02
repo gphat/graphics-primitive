@@ -2,6 +2,7 @@ Revision history for Graphics-Primitive
 
 0.27
   - Fill: Make paint a required attribute
+  - Operations: Make Fill and Stroke clone properly
 
 0.26
   - Add Image component (experimental)

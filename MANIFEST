@@ -20,6 +20,7 @@ lib/Graphics/Primitive/ComponentList.pm
 lib/Graphics/Primitive/Container.pm
 lib/Graphics/Primitive/Driver.pm
 lib/Graphics/Primitive/Font.pm
+lib/Graphics/Primitive/Image.pm
 lib/Graphics/Primitive/Insets.pm
 lib/Graphics/Primitive/Operation.pm
 lib/Graphics/Primitive/Operation/Fill.pm

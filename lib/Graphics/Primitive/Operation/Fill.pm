@@ -7,7 +7,8 @@ with 'MooseX::Clone';
 
 has paint => (
     isa => 'Graphics::Primitive::Paint',
-    is  => 'rw'
+    is  => 'rw',
+    required => 1
 );
 
 __PACKAGE__->meta->make_immutable;

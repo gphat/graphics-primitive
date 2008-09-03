@@ -1,5 +1,8 @@
 Revision history for Graphics-Primitive
 
+0.28
+  - Require _draw_polygon method for Driver role
+
 0.27
   - Fill: Make paint a required attribute
   - Operations: Make Fill and Stroke clone properly

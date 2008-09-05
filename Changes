@@ -1,5 +1,8 @@
 Revision history for Graphics-Primitive
 
+0.29
+  - MooseX::Storage support
+
 0.28
   - Require _draw_polygon method for Driver role
 

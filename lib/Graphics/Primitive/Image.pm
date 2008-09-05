@@ -1,9 +1,11 @@
 package Graphics::Primitive::Image;
 use Moose;
+use MooseX::Storage;
 
 extends 'Graphics::Primitive::Component';
 
 with qw(MooseX::Clone Graphics::Primitive::Aligned);
+with Storage (format => 'JSON', io => 'File');
 
 use Graphics::Primitive::Font;
 use Text::Flow;

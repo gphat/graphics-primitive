@@ -1,10 +1,12 @@
 package Graphics::Primitive::Canvas;
 use Moose;
 use MooseX::AttributeHelpers;
+use MooseX::Storage;
 
 extends 'Graphics::Primitive::Component';
 
 with 'MooseX::Clone';
+with Storage (format => 'JSON', io => 'File');
 
 use Graphics::Primitive::Path;
 

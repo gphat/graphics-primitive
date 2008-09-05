@@ -1,9 +1,11 @@
 package Graphics::Primitive::Operation::Fill;
 use Moose;
+use MOoseX::Storage;
 
 extends 'Graphics::Primitive::Operation';
 
 with 'MooseX::Clone';
+with Storage (format => 'JSON', io => 'File');
 
 has paint => (
     isa => 'Graphics::Primitive::Paint',

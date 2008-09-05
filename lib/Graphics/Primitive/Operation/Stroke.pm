@@ -1,9 +1,11 @@
 package Graphics::Primitive::Operation::Stroke;
 use Moose;
+use MooseX::Storage;
 
 extends 'Graphics::Primitive::Operation';
 
 with 'MooseX::Clone';
+with Storage (format => 'JSON', io => 'File');
 
 use Graphics::Primitive::Brush;
 

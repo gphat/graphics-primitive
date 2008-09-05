@@ -1,8 +1,10 @@
 package Graphics::Primitive::Font;
 use Moose;
+use MooseX::Storage;
 use Moose::Util::TypeConstraints;
 
 with 'MooseX::Clone';
+with Storage (format => 'JSON', io => 'File');
 
 enum 'Slants' => (
     'normal', 'italic', 'oblique'

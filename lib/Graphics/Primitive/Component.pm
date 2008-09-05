@@ -1,9 +1,10 @@
 package Graphics::Primitive::Component;
 use Moose;
-
-with 'MooseX::Clone';
+use MooseX::Storage;
 
 use overload ('""' => 'to_string');
+
+with Storage('format' => 'JSON', 'io' => 'File');
 
 use Forest::Tree;
 use Graphics::Primitive::Border;
@@ -41,6 +42,18 @@ has 'margins' => (
     coerce => 1,
     trigger => sub { my ($self) = @_; $self->prepared(0); }
 );
+has 'minimum_height' => (
+    is => 'rw',
+    isa => 'Num',
+    default => sub { 0 },
+    trigger => sub { my ($self) = @_; $self->prepared(0); }
+);
+has 'minimum_width' => (
+    is => 'rw',
+    isa => 'Num',
+    default => sub { 0 },
+    trigger => sub { my ($self) = @_; $self->prepared(0); }
+);
 has 'name' => ( is => 'rw', isa => 'Str' );
 has 'origin' => (
     is => 'rw',
@@ -60,18 +73,6 @@ has 'parent' => (
     is => 'rw',
     isa => 'Maybe[Graphics::Primitive::Component]',
     weak_ref => 1
-);
-has 'minimum_height' => (
-    is => 'rw',
-    isa => 'Num',
-    default => sub { 0 },
-    trigger => sub { my ($self) = @_; $self->prepared(0); }
-);
-has 'minimum_width' => (
-    is => 'rw',
-    isa => 'Num',
-    default => sub { 0 },
-    trigger => sub { my ($self) = @_; $self->prepared(0); }
 );
 has 'prepared' => ( is => 'rw', isa => 'Bool', default => sub { 0 } );
 has 'visible' => ( is => 'rw', isa => 'Bool', default => sub { 1 } );
@@ -171,7 +172,7 @@ sub outside_height {
     return $w;
 }
 
-sub pack { }
+# sub pack { }
 
 sub prepare {
     my ($self, $driver) = @_;

@@ -2,8 +2,11 @@ package Graphics::Primitive::Paint::Gradient;
 use Moose;
 use Moose::Util::TypeConstraints;
 use MooseX::AttributeHelpers;
+use MooseX::Storage;
 
 extends 'Graphics::Primitive::Paint';
+
+with Storage (format => 'JSON', io => 'File');
 
 enum 'Graphics::Primitive::Paint::Gradient::Styles' => qw(radial linear);
 

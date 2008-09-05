@@ -1,5 +1,8 @@
 package Graphics::Primitive::Container;
 use Moose;
+use MooseX::Storage;
+
+with Storage (format => 'JSON', io => 'File');
 
 use Graphics::Primitive::ComponentList;
 

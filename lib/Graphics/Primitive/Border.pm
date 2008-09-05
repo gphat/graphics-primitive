@@ -1,11 +1,12 @@
 package Graphics::Primitive::Border;
 use Moose;
-
-use Graphics::Primitive::Brush;
+use MooseX::Storage;
 
 with 'MooseX::Clone';
+with Storage (format => 'JSON', io => 'File');
 
 use Graphics::Color;
+use Graphics::Primitive::Brush;
 
 has 'bottom' => (
     is => 'rw',

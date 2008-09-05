@@ -1,9 +1,11 @@
 package Graphics::Primitive::Paint::Solid;
 use Moose;
+use MooseX::Storage;
 
 extends 'Graphics::Primitive::Paint';
 
 with qw(MooseX::Clone);
+with Storage (format => 'JSON', io => 'File');
 
 has color => (
     isa => 'Graphics::Color',

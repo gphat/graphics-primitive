@@ -1,6 +1,9 @@
 package Graphics::Primitive::ComponentList;
 use Moose;
 use MooseX::AttributeHelpers;
+use MooseX::Storage;
+
+with Storage (format => 'JSON', io => 'File');
 
 has 'components' => (
     metaclass => 'Collection::Array',

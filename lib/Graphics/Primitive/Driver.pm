@@ -54,16 +54,16 @@ sub draw {
     }
 }
 
-sub pack {
+sub finalize {
     my ($self, $comp) = @_;
 
-    $comp->pack($self);
+    $comp->finalize($self);
 
     if($comp->isa('Graphics::Primitive::Container')) {
         foreach my $c (@{ $comp->components }) {
             next unless defined($c) && defined($c)
                 && $c->visible;
-            $self->pack($c);
+            $self->finalize($c);
         }
     }
 }
@@ -217,9 +217,9 @@ container then all components therein are drawn, recursively.
 Given a L<Font|Graphics::Primitive::Font> and a string, returns a bounding box
 of the rendered text.
 
-=item I<pack>
+=item I<finalize>
 
-Pack the supplied component and any child components, recursively.
+Finalize the supplied component and any child components, recursively.
 
 =item I<prepare>
 

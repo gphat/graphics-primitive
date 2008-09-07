@@ -172,7 +172,7 @@ sub outside_height {
     return $w;
 }
 
-# sub pack { }
+sub finalize { }
 
 sub prepare {
     my ($self, $driver) = @_;
@@ -243,7 +243,7 @@ width should be set for all components.
 
   $lm->do_layout($comp);
 
-=item B<pack>
+=item B<finalize>
 
 This final phase provides and opportunity for the component to do any final
 changes to it's internals before being passed to a driver for drawing.
@@ -252,11 +252,11 @@ Since the final height and width isn't known until this phase, it was
 impossible for it to position these internal components until now.  It may
 even defer creation of this components until now.
 
-B<It is not ok to defer all action to the pack phase.  If you do not
+B<It is not ok to defer all action to the finalize phase.  If you do not
 establish a minimum hieght and width during prepare then the layout manager
 may not provide you with enough space to draw.>
 
-    $driver->pack($comp);
+    $driver->finalize($comp);
 
 =item B<draw>
 
@@ -366,9 +366,9 @@ Get the height consumed by padding, margin and borders.
 
 Get the width consumed by padding, margin and borders.
 
-=item I<pack>
+=item I<finalize>
 
-Method provided to give component one last opportunity to pack it's contents
+Method provided to give component one last opportunity to put it's contents
 into the provided space.  Called after prepare.
 
 =item I<padding>

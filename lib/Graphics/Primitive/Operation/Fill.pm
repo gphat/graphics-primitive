@@ -1,6 +1,6 @@
 package Graphics::Primitive::Operation::Fill;
 use Moose;
-use MOoseX::Storage;
+use MooseX::Storage;
 
 extends 'Graphics::Primitive::Operation';
 

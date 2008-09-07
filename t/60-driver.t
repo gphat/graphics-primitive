@@ -18,8 +18,8 @@ my $container = Graphics::Primitive::Container->new;
 my $comp = Graphics::Primitive::Component->new;
 $container->add_component($comp, 'c');
 
-$container->prepare($driver);
-$container->pack;
+$driver->prepare($container);
+$driver->finalize($container);
 $driver->draw($container);
 cmp_ok($driver->draw_component_called, '==', 2, 'component draws');
 

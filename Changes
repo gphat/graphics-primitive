@@ -2,6 +2,7 @@ Revision history for Graphics-Primitive
 
 0.29
   - MooseX::Storage support
+  - Rename pack to finalize
 
 0.28
   - Require _draw_polygon method for Driver role

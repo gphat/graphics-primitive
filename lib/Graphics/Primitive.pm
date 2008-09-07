@@ -31,11 +31,11 @@ and the like.
 
     my $driver = Graphics::Primitive::Driver::Cairo->new(format => 'SVG');
 
-    $c->prepare($driver);
-    $c->pack;
-    
+    $driver->prepare($c);
+    $driver->finalize($c);
     $driver->draw($c);
-    $driver->write
+
+    $driver->write($filename)
 
 =head1 DISCLAIMER
 

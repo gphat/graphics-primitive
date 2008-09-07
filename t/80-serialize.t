@@ -1,6 +1,6 @@
 use strict;
 
-use Test::More tests => 3;
+use Test::More tests => 4;
 
 use Graphics::Color::RGB;
 use Graphics::Primitive::Brush;
@@ -25,8 +25,5 @@ my $comp = Graphics::Primitive::Component->new(
     height => 50,
     name => 'foo'
 );
-use Data::Dumper;
-print STDERR Dumper($comp->freeze)."\n";
-# my $comp2 = Graphics::Primitive::Component->unpack($comp->pack);
-# use Data::Dumper;
-# diag Dumper($comp2);
+my $comp2 = Graphics::Primitive::Component->thaw($comp->freeze);
+is_deeply($comp, $comp2, 'component clone');

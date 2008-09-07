@@ -44,7 +44,7 @@ has 'text_bounding_box' => (
 );
 has '+vertical_alignment' => ( default => sub { 'top'} );
 
-override('pack', sub {
+override('finalize', sub {
     my ($self, $driver) = @_;
 
     super;

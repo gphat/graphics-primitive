@@ -1,5 +1,8 @@
 Revision history for Graphics-Primitive
 
+0.30
+  - Bump Forest dependency to 0.4 to ease Win32 problems
+
 0.29
   - MooseX::Storage support
   - Rename pack to finalize

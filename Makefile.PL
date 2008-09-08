@@ -12,7 +12,7 @@ requires 'Moose' => '0.54';
 requires 'MooseX::Clone' => '0.03';
 requires 'MooseX::AttributeHelpers' => '0.12';
 requires 'MooseX::Storage' => '0.14';
-requires 'Forest' => '0.03';
+requires 'Forest' => '0.04';
 requires 'Text::Flow' => '0.01';
 
 auto_install;

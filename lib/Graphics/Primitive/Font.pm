@@ -6,14 +6,17 @@ use Moose::Util::TypeConstraints;
 with 'MooseX::Clone';
 with Storage (format => 'JSON', io => 'File');
 
-enum 'Slants' => (
+enum 'Graphics::Primitive::Font::Slants' => (
     'normal', 'italic', 'oblique'
 );
-enum 'Weights' => (
+enum 'Graphics::Primitive::Font::Variants' => (
+    'normal', 'small-caps'
+);
+enum 'Graphics::Primitive::Font::Weights' => (
     'normal', 'bold'
 );
 
-has 'face' => (
+has 'family' => (
     is => 'rw',
     isa => 'Str',
     default => 'Sans'
@@ -25,14 +28,21 @@ has 'size' => (
 );
 has 'slant' => (
     is => 'rw',
-    isa => 'Slants',
+    isa => 'Graphics::Primitive::Font::Slants',
+    default => 'normal'
+);
+has 'variant' => (
+    is => 'rw',
+    isa => 'Graphics::Primitive::Font::Variants',
     default => 'normal'
 );
 has 'weight' => (
     is => 'rw',
-    isa => 'Weights',
+    isa => 'Graphics::Primitive::Font::Weights',
     default => 'normal'
 );
+
+__PACKAGE__->meta->alias_method('face' => __PACKAGE__->can('family'));
 
 sub derive {
     my ($self, $args) = @_;
@@ -57,14 +67,17 @@ Graphics::Primitive::Font - Text styling
 =head1 DESCRIPTION
 
 Graphics::Primitive::Font represents the various options that are available
-when rendering text.
+when rendering text.  The options here may or may not have an effect on your
+rendering.  They represent a cross-section of the features provided by
+various drivers.  Setting them should B<not> break anything, but may not
+have an effect if the driver doesn't understand the option.
 
 =head1 SYNOPSIS
 
   use Graphics::Primitive::Font;
 
   my $font = Graphics::Primitive::Font->new({
-    face => 'Sans',
+    family => 'Arial',
     size => 12,
     slant => 'normal'
   });
@@ -95,9 +108,9 @@ hashref of options:
 The returned font will be identical to the cloned one, save the attributes
 specified.
 
-=item I<face>
+=item I<family>
 
-Set this font's face.
+Set this font's family.
 
 =item I<size>
 
@@ -106,6 +119,10 @@ Set/Get the size of this font.
 =item I<slant>
 
 Set/Get the slant of this font.  Valid values are normal, italic and oblique.
+
+=item I<variant>
+
+Set/Get the variant of this font.  Valid values are normal or small-caps.
 
 =item I<weight>
 

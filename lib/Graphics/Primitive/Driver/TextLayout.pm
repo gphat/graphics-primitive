@@ -1,5 +1,4 @@
-package Graphics::Primitive::Driver::TextLayout
-use Moose;
+package Graphics::Primitive::Driver::TextLayout;
 use Moose::Role;
 
 no Moose;

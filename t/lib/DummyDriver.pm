@@ -44,6 +44,8 @@ sub data { }
 
 sub get_text_bounding_box { }
 
+sub get_textbox_layout { }
+
 sub reset { }
 
 sub write { }

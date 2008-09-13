@@ -51,15 +51,17 @@ has 'justify' => (
     isa => 'Bool',
     default => sub { 0 }
 );
+has 'layout' => (
+    is => 'rw',
+    does => 'Graphics::Primitive::Driver::TextLayout',
+);
+has 'lines' => (
+    is => 'rw',
+);
 has 'line_height' => (
     is => 'rw',
     isa => 'Num',
     trigger => sub { my ($self) = @_; $self->prepared(0); }
-);
-has 'lines' => (
-    is => 'rw',
-    isa => 'ArrayRef',
-    default => sub { [] }
 );
 has 'text' => (
     is => 'rw',
@@ -108,8 +110,8 @@ override('prepare', sub {
     #     foreach my $line (@lines) {
     # use Data::Dumper;
     my $layout = $driver->get_textbox_layout($self);
-    $layout->layout;
-    $self->lines($layout->lines);
+    $self->layout($layout);
+    # $self->lines($layout->lines);
     # print Dumper($layout);
 
     # $self->text_bounding_box($tb);
@@ -125,11 +127,14 @@ override('prepare', sub {
         #     }
         #     $theight += $height;
         # }
-    $self->minimum_height($layout->height + $self->minimum_height);
+
+    # print $layout->component->text."\n";
+    # print $layout->height."\n";
+    # print $layout->width."\n";
+    # print "-----\n\n";
+
+    $self->minimum_height($layout->height + $self->outside_height);
     $self->minimum_width($layout->width + $self->outside_width);
-    # }
-
-
 });
 
 # sub _layout_text {

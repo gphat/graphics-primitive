@@ -1,6 +1,26 @@
 package Graphics::Primitive::Driver::TextLayout;
 use Moose::Role;
 
+requires 'layout';
+
+has 'component' => (
+    is => 'rw',
+    isa => 'Graphics::Primitive::TextBox',
+    required => 1
+);
+has 'height' => (
+    is => 'rw',
+    isa => 'Num',
+    default => sub { -1 }
+);
+has 'width' => (
+    is => 'rw',
+    isa => 'Num',
+    lazy => 1,
+    default => sub { my ($self) = @_; $self->component->width }
+    # required => 1
+);
+
 no Moose;
 1;
 __END__;

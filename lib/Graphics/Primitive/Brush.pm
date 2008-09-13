@@ -127,7 +127,7 @@ Set/Get this brush's color.
 =item I<dash_pattern>
 
 Set/Get the dash pattern.  A dash pattern is an arrayref of numbers
-representing the lengths of the various line segments of the dash.  Event
+representing the lengths of the various line segments of the dash.  Even
 numbered elements are considered opaque and odd elements are transparent.
 
 =item I<derive>

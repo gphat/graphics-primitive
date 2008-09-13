@@ -1,5 +1,9 @@
 Revision history for Graphics-Primitive
 
+0.31
+  - Fix POD typo (thanks Brian Cassidy)
+  - 
+
 0.30
   - Bump Forest dependency to 0.4 to ease Win32 problems
 

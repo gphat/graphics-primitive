@@ -4,7 +4,7 @@ use Moose::Role;
 requires qw(
     _draw_canvas _draw_component _draw_line _draw_path _draw_polygon
     _draw_rectangle _draw_textbox _do_fill _do_stroke _finish_page _resize
-    data get_text_bounding_box get_textbox_layout reset write
+    data get_textbox_layout reset write
 );
 
 has 'height' => (

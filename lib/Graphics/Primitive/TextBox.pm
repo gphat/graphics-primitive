@@ -95,97 +95,20 @@ override('prepare', sub {
 
     super;
 
-    # my $lh = $self->line_height;
-    # unless(defined($lh)) {
-    #     $lh = $self->font->size;
-    # }
-
-    # if($self->width && $self->height) {
-    #     $self->layout_text($driver);
-    # } else {
-    # unless(scalar(@{ $self->lines })) {
-    #     my @lines = split("\n", $self->text);
-    #     my $twide = 0;
-    #     my $theight = 0;
-    #     foreach my $line (@lines) {
-    # use Data::Dumper;
     my $layout = $driver->get_textbox_layout($self);
     $self->layout($layout);
-    # $self->lines($layout->lines);
-    # print Dumper($layout);
-
-    # $self->text_bounding_box($tb);
-        #     my $height = $bb->height;
-        # 
-        #     if(defined($lh) && ($lh > $height)) {
-        #         $height = $lh;
-        #     }
-        # 
-        #     push(@{ $self->lines }, { text => $line, box => $tb });
-        #     if($twide < $bb->width) {
-        #         $twide = $bb->width;
-        #     }
-        #     $theight += $height;
-        # }
 
     # print $layout->component->text."\n";
+    # print "OH: ".$self->outside_height."\n";
     # print $layout->height."\n";
     # print $layout->width."\n";
-    # print "-----\n\n";
 
     $self->minimum_height($layout->height + $self->outside_height);
     $self->minimum_width($layout->width + $self->outside_width);
+    # print $layout->height."\n";
+    # print $self->text.": ".$self->minimum_height."\n";
+    # print "-----\n\n";
 });
-
-# sub _layout_text {
-#     my ($self, $driver) = @_;
-# 
-#     # TODO Set a minimum size if we don't need the whole thing
-# 
-#     my $size = 0;
-#     my $flow = Text::Flow->new(
-#         check_height => sub {
-#             my $paras = shift;
-# 
-#             my $lh = $self->line_height;
-#             $lh = $self->font->size unless(defined($lh));
-# 
-#             foreach my $p (@{ $paras }) {
-#                 if(defined($lh)) {
-#                     $size += $lh * scalar(@{ $p });
-#                 }
-#             }
-#             if(($size + $lh) >= $self->inside_height) {
-#                 return 0;
-#             }
-#             return 1;
-#         },
-#         wrapper => Text::Flow::Wrap->new(
-#             check_width => sub {
-#                 my $str = shift;
-#                 my $r = $driver->get_text_bounding_box(
-#                     $self, $str
-#                 );
-#                 if($r->width > $self->inside_width) {
-#                     return 0;
-#                 }
-#                 return 1;
-#             }
-#         )
-#     );
-# 
-#     my @text = $flow->flow($self->text);
-# 
-#     my $para = $text[0];
-#     my @lines = split(/\n/, $para);
-#     foreach my $line (@lines) {
-#         my ($cb, $tb) = $driver->get_text_bounding_box($self, $line);
-#         push(@{ $self->lines }, {
-#             text => $line,
-#             box => $cb
-#         });
-#     }
-# }
 
 __PACKAGE__->meta->make_immutable;
 

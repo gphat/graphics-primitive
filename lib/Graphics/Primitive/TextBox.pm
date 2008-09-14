@@ -98,16 +98,8 @@ override('prepare', sub {
     my $layout = $driver->get_textbox_layout($self);
     $self->layout($layout);
 
-    # print $layout->component->text."\n";
-    # print "OH: ".$self->outside_height."\n";
-    # print $layout->height."\n";
-    # print $layout->width."\n";
-
     $self->minimum_height($layout->height + $self->outside_height);
     $self->minimum_width($layout->width + $self->outside_width);
-    # print $layout->height."\n";
-    # print $self->text.": ".$self->minimum_height."\n";
-    # print "-----\n\n";
 });
 
 __PACKAGE__->meta->make_immutable;

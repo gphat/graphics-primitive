@@ -108,6 +108,25 @@ sub inside_width {
     return $w;
 }
 
+sub minimum_inside_width {
+    my ($self) = @_;
+
+    my $w = $self->minimum_width;
+
+    my $padding = $self->padding;
+    my $margins = $self->margins;
+    my $border = $self->border;
+
+    $w -= $padding->left + $padding->right;
+    $w -= $margins->left + $margins->right;
+
+    $w -= $border->left->width + $border->right->width;
+
+    $w = 0 if $w < 0;
+
+    return $w;
+}
+
 sub inside_height {
     my ($self) = @_;
 
@@ -125,6 +144,25 @@ sub inside_height {
 
     return $h;
 }
+
+sub minimum_inside_height {
+    my ($self) = @_;
+
+    my $h = $self->minimum_height;
+
+    my $padding = $self->padding;
+    my $margins = $self->margins;
+    my $border = $self->border;
+
+    $h -= $padding->bottom + $padding->top;
+    $h -= $margins->bottom + $margins->top;
+    $h -= $border->top->width + $border->bottom->width;
+
+    $h = 0 if $h < 0;
+
+    return $h;
+}
+
 
 sub inside_bounding_box {
 
@@ -337,15 +375,25 @@ border.
 
 Set/Get this component's maximum height.  Used to inform a layout manager.
 
-item I<maximum_width>
+=item I<maximum_width>
 
 Set/Get this component's maximum width.  Used to inform a layout manager.
 
-item I<minimum_height>
+=item I<minimum_height>
 
 Set/Get this component's minimum height.  Used to inform a layout manager.
 
-item I<minimum_width>
+=item I<minimum_inside_height>
+
+Get the minimum height available in this container after taking away space for
+padding, margin and borders.
+
+=item I<minium_inside_width>
+
+Get the minimum width available in this container after taking away space for
+padding, margin and borders.
+
+=item I<minimum_width>
 
 Set/Get this component's minimum width.  Used to inform a layout manager.
 

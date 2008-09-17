@@ -17,7 +17,6 @@ with qw(MooseX::Clone Graphics::Primitive::Aligned);
 with Storage (format => 'JSON', io => 'File');
 
 use Graphics::Primitive::Font;
-# use Text::Flow;
 
 has 'angle' => (
     is => 'rw',
@@ -79,16 +78,6 @@ has 'wrap_mode' => (
     isa => 'Graphics::Primitive::TextBox::WrapModes',
     default => sub { 'word' }
 );
-
-# override('finalize', sub {
-#     my ($self, $driver) = @_;
-# 
-#     super;
-# 
-#     if(!scalar(@{ $self->lines }) && $self->text) {
-#         $self->_layout_text($driver);
-#     }
-# });
 
 override('prepare', sub {
     my ($self, $driver) = @_;

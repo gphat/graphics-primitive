@@ -163,7 +163,6 @@ sub minimum_inside_height {
     return $h;
 }
 
-
 sub inside_bounding_box {
 
     my ($self) = @_;
@@ -388,7 +387,7 @@ Set/Get this component's minimum height.  Used to inform a layout manager.
 Get the minimum height available in this container after taking away space for
 padding, margin and borders.
 
-=item I<minium_inside_width>
+=item I<minimum_inside_width>
 
 Get the minimum width available in this container after taking away space for
 padding, margin and borders.

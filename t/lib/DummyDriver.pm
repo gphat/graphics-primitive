@@ -18,6 +18,8 @@ sub _draw_arc { }
 
 sub _draw_canvas { }
 
+sub _draw_circle { }
+
 sub _draw_component {
     my ($self, $comp) = @_;
 
@@ -25,6 +27,8 @@ sub _draw_component {
         $self->draw_component_called + 1
     );
 }
+
+sub _draw_ellipse { }
 
 sub _draw_line { }
 

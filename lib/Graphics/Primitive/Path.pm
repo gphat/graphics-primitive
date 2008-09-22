@@ -283,6 +283,12 @@ Returns the current -- or last -- point on this Path.
 Creates a cubic Bézier curve from the current point to the $end point using
 $control1 and $control2 as control points.
 
+=item I<ellipse ($width, $height, [ $skip_line_to ])>
+
+Creates an ellipse at the current point with the specified width and height.
+Optional last argument, if true, skips drawing a line to the ellipse's
+starting point.
+
 =item I<get_points>
 
 Get this path as a series of points.

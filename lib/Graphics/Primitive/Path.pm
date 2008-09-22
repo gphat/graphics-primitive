@@ -9,6 +9,7 @@ use MooseX::AttributeHelpers;
 
 use Geometry::Primitive::Arc;
 use Geometry::Primitive::Bezier;
+use Geometry::Primitive::Ellipse;
 use Geometry::Primitive::Line;
 use Geometry::Primitive::Rectangle;
 
@@ -84,6 +85,21 @@ sub arc {
     }
 
     $self->add_primitive($arc);
+}
+
+sub ellipse {
+    my ($self, $width, $height, $line_to) = @_;
+
+    my $ell = Geometry::Primitive::Ellipse->new(
+        origin => $self->current_point->clone,
+        width => $width, height => $height
+    );
+
+    unless($line_to) {
+        $self->line_to($ell->point_start);
+    }
+
+    $self->add_primitive($ell);
 }
 
 sub close_path {

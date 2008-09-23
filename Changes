@@ -3,6 +3,7 @@ Revision history for Graphics-Primitive
 0.32
   - Fix POD typo (thanks Brian Cassidy)
   - TextBox: Don't resize during prepare unless it's new minimums are bigger
+  - Fix TextLayout's POD (thanks Brian Cassidy)
 
 0.31
   - Fix POD typo (thanks Brian Cassidy)

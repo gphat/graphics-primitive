@@ -23,64 +23,37 @@ no Moose;
 __END__;
 =head1 NAME
 
-Graphics::Primitive::TextBox - Text component
+Graphics::Primitive::Driver::TextLayout - TextLayout role
 
 =head1 DESCRIPTION
 
-Graphics::Primitive::TextBox is a Component with text.
+Graphics::Primitive::Driver::TextLayout is a role for Driver text layout
+engines.
 
 =head1 SYNOPSIS
 
-  use Graphics::Primitive::Font;
-  use Graphics::Primitive::TextBox;
+    package MyLayout;
+    use Moose;
 
-  my $tx = Graphics::Primitive::TextBox->new(
-      font => Graphics::Primitive::Font->new(
-          face => 'Myriad Pro',
-          size => 12
-      ),
-      text => 'I am a textbox!'
-  );
+    with 'Graphics::Primitive::Driver::TextLayout';
 
-=head1 WARNING
-
-This component is likely to change drastically.  Here be dragons.
+    ...
 
 =head1 METHODS
 
-=head2 Constructor
-
 =over 4
 
-=item I<new>
+=item I<component>
 
-Creates a new Graphics::Primitive::TextBox.
+Set/Get the component from which to draw layout information.
 
-=back
+=item I<height>
 
-=head2 Instance Methods
+Set/Get this layout's height
 
-=over 4
+=item I<width>
 
-=item I<angle>
-
-The angle this text will be rotated.
-
-=item I<font>
-
-Set this textbox's font
-
-=item I<horizontal_alignment>
-
-Horizontal alignment.  See L<Graphics::Primitive::Aligned>.
-
-=item I<text>
-
-Set this textbox's text.
-
-=item I<vertical_alignment>
-
-Vertical alignment.  See L<Graphics::Primitive::Aligned>.
+Set/Get this layout's width.  Defaults to the width of the component supplied.
 
 =back
 

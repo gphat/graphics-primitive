@@ -4,6 +4,7 @@ Revision history for Graphics-Primitive
   - Fix POD typo (thanks Brian Cassidy)
   - Driver: Add _draw_circle and _draw_ellipse
   - Bump Deps
+  - Revamp text handling, see Driver::TextLayout
 
 0.30
   - Bump Forest dependency to 0.4 to ease Win32 problems

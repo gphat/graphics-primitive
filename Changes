@@ -1,5 +1,9 @@
 Revision history for Graphics-Primitive
 
+0.32
+  - Fix POD typo (thanks Brian Cassidy)
+  - TextBox: Don't resize during prepare unless it's new minimums are bigger
+
 0.31
   - Fix POD typo (thanks Brian Cassidy)
   - Driver: Add _draw_circle and _draw_ellipse

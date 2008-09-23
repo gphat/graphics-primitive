@@ -32,8 +32,8 @@ performed on a path.
 
   use Graphics::Primitive::Operation::Fill;
 
-  my $stroke = Graphics::Primitive::Operation::Fill->new;
-  $stroke->paint(Graphics::Primitive::Paint::Solid->new);
+  my $fill = Graphics::Primitive::Operation::Fill->new;
+  $fill->paint(Graphics::Primitive::Paint::Solid->new);
 
 =head1 METHODS
 

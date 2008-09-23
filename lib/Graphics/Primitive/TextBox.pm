@@ -87,8 +87,15 @@ override('prepare', sub {
     my $layout = $driver->get_textbox_layout($self);
     $self->layout($layout);
 
-    $self->minimum_height($layout->height + $self->outside_height);
-    $self->minimum_width($layout->width + $self->outside_width);
+    my $mh = $layout->height + $self->outside_height;
+    unless($mh < $self->minimum_height) {
+        $self->minimum_height($mh);
+    }
+
+    my $mw = $layout->width + $self->outside_width;
+    unless($mw < $self->minimum_width) {
+        $self->minimum_width($mw);
+    }
 });
 
 __PACKAGE__->meta->make_immutable;

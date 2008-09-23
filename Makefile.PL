@@ -15,6 +15,4 @@ requires 'MooseX::Storage' => '0.14';
 requires 'Forest' => '0.04';
 requires 'Text::Flow' => '0.01';
 
-auto_install;
-
 WriteAll;

@@ -4,6 +4,7 @@ Revision history for Graphics-Primitive
   - Fix POD typo (thanks Brian Cassidy)
   - TextBox: Don't resize during prepare unless it's new minimums are bigger
   - Fix TextLayout's POD (thanks Brian Cassidy)
+  - Driver: add _draw_bezier to requires (thanks Budrica Petre Cosmin)
 
 0.31
   - Fix POD typo (thanks Brian Cassidy)

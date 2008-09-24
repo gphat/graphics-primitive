@@ -16,6 +16,8 @@ sub _do_stroke { }
 
 sub _draw_arc { }
 
+sub _draw_bezier { }
+
 sub _draw_canvas { }
 
 sub _draw_circle { }

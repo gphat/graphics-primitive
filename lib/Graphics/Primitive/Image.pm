@@ -7,9 +7,6 @@ extends 'Graphics::Primitive::Component';
 with qw(MooseX::Clone Graphics::Primitive::Aligned);
 with Storage (format => 'JSON', io => 'File');
 
-use Graphics::Primitive::Font;
-use Text::Flow;
-
 has image => (
     is => 'rw',
     isa => 'Str'

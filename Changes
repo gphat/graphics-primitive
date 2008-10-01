@@ -1,5 +1,8 @@
 Revision history for Graphics-Primitive
 
+0.34
+  - Move pod tests to t/author
+
 0.33
   - Driver: Don't mark things prepared, that's Layout::Manager's job
   - TextBox: simplify logic and return from prepare immediately after super if

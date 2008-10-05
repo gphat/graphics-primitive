@@ -1,5 +1,8 @@
 Revision history for Graphics-Primitive
 
+0.36
+  - POD fixes
+
 0.35
   - Gradient: Break out into separate Line and Radial classes
 

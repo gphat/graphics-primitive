@@ -6,10 +6,6 @@ use MooseX::Storage;
 
 extends 'Graphics::Primitive::Paint';
 
-with Storage (format => 'JSON', io => 'File');
-
-enum 'Graphics::Primitive::Paint::Gradient::Styles' => qw(radial linear);
-
 # FIXME key should be <= 1
 has color_stops => (
     metaclass => 'Collection::Hash',
@@ -23,15 +19,6 @@ has color_stops => (
         set  => 'add_stop'
     }
 );
-has line => (
-    isa => 'Geometry::Primitive::Line',
-    is => 'rw',
-);
-has style => (
-    isa => 'Graphics::Primitive::Paint::Gradient::Styles',
-    is  => 'rw',
-    default => sub { 'linear' }
-);
 
 __PACKAGE__->meta->make_immutable;
 
@@ -40,24 +27,12 @@ no Moose;
 __END__
 =head1 NAME
 
-Graphics::Primitive::Paint::Gradient - Linear and radial color blending
+Graphics::Primitive::Paint::Gradient - Color blending
 
 =head1 DESCRIPTION
 
-Graphics::Primitive::Paint::Gradient is a
-
-=head1 SYNOPSIS
-
-  use Graphics::Primitive::Paint::Gradient;
-
-  my $gradient = Graphics::Primitive::Gradient->new(
-      line => Geometry::Primitive::Line->new(
-          start => Graphcs::Primitive::Point->new(x => 0, y => 0),
-          end   => Graphcs::Primitive::Point->new(x => 0, y => 10),
-      )
-  );
-  $gradient->add_stop(0.0, $color1);
-  $gradient->add_stop(1.0, $color2);
+Graphics::Primitive::Paint::Gradient is a base class used by color blending
+techniques such as linear and radial.  You should not use this class directly.
 
 =head1 METHODS
 
@@ -83,10 +58,6 @@ Adds a color stop at the specified position
 
 Hashref of colors and their stops.  The stops are the keys.
 
-=item I<line>
-
-The line along which the gradient should run.
-
 =item I<stop_count>
 
 Count of stops added to this Gradient.
@@ -94,10 +65,6 @@ Count of stops added to this Gradient.
 =item I<stops>
 
 Get the keys of all color stops.
-
-=item I<style>
-
-Get/Set the style of this Gradient.
 
 =back
 

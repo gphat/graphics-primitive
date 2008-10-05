@@ -1,22 +1,42 @@
-use Test::More tests => 5;
+use Test::More tests => 7;
 
-BEGIN {
-    use_ok('Graphics::Primitive::Paint::Gradient');
-}
-
+use Geometry::Primitive::Circle;
+use Geometry::Primitive::Line;
 use Graphics::Color::RGB;
 
-my $grad = Graphics::Primitive::Paint::Gradient->new;
-isa_ok($grad, 'Graphics::Primitive::Paint::Gradient');
+BEGIN {
+    use_ok('Graphics::Primitive::Paint::Gradient::Linear');
+    use_ok('Graphics::Primitive::Paint::Gradient::Radial');
+}
+
+my $line = Graphics::Primitive::Paint::Gradient::Linear->new(
+    line => Geometry::Primitive::Line->new(
+        start => [0, 0],
+        end => [10, 10]
+    )
+);
+isa_ok($line, 'Graphics::Primitive::Paint::Gradient::Linear');
 
 my $red = Graphics::Color::RGB->new(red => 1, green => 0, blue => 0);
 my $blue = Graphics::Color::RGB->new(red => 0, green => 0, blue => 1);
 
-cmp_ok($grad->stop_count, '==', 0, 'stop count');
+cmp_ok($line->stop_count, '==', 0, 'stop count');
 
-$grad->add_stop(0.0, $red);
-cmp_ok($grad->stop_count, '==', 1, 'stop count');
-$grad->add_stop(0.75, $blue);
+$line->add_stop(0.0, $red);
+cmp_ok($line->stop_count, '==', 1, 'stop count');
+$line->add_stop(0.75, $blue);
 
-my @stops = $grad->stops;
+my @stops = $line->stops;
 cmp_ok(scalar(@stops), '==', 2, '2 stops');
+
+my $rad = Graphics::Primitive::Paint::Gradient::Radial->new(
+    start => Geometry::Primitive::Circle->new(
+        origin => [0, 0],
+        radius => 5
+    ),
+    end => Geometry::Primitive::Circle->new(
+        origin => [10, 10],
+        radius => 3
+    )
+);
+isa_ok($rad, 'Graphics::Primitive::Paint::Gradient::Radial');

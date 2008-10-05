@@ -26,6 +26,8 @@ lib/Graphics/Primitive/Operation/Stroke.pm
 lib/Graphics/Primitive/Oriented.pm
 lib/Graphics/Primitive/Paint.pm
 lib/Graphics/Primitive/Paint/Gradient.pm
+lib/Graphics/Primitive/Paint/Gradient/Linear.pm
+lib/Graphics/Primitive/Paint/Gradient/Radial.pm
 lib/Graphics/Primitive/Paint/Solid.pm
 lib/Graphics/Primitive/Path.pm
 lib/Graphics/Primitive/TextBox.pm

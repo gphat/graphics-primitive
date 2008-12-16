@@ -1,7 +1,7 @@
 package Graphics::Primitive;
 use Moose;
 
-our $VERSION = '0.36';
+our $VERSION = '0.37';
 
 __PACKAGE__->meta->make_immutable;
 
@@ -78,7 +78,7 @@ these methods can be found in L<Component|Graphics::Primitive::Component>.
 Graphics::Primitive::Component has a C<prepared> flag.  This flag is set as
 part of the C<prepare> method (shocking, I know).  If this flag is set, then
 subsequent calls to C<prepare> are ignored.  Containers also have a prepare
-flag, but this flag is B<not> set when calling C<prepare>.  A Contianer's flag
+flag, but this flag is B<not> set when calling C<prepare>.  A Container's flag
 should be set by the layout manager.  More information may be found with
 L<Layout::Manager>.
 

@@ -19,7 +19,7 @@ no Moose;
 1;
 =head1 NAME
 
-Graphics::Primitive::Paint::Solid
+Graphics::Primitive::Paint::Solid - Solid patch of color
 
 =head1 DESCRIPTION
 

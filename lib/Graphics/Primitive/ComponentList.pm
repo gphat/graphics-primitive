@@ -139,7 +139,7 @@ no Moose;
 
 =head1 NAME
 
-Graphics::Primitive::ComponentList - List of Component
+Graphics::Primitive::ComponentList - List of Components
 
 =head1 DESCRIPTION
 

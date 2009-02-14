@@ -38,17 +38,13 @@ specify it's horizontal and vertical alignment.
 
 =head1 METHODS
 
-=over 4
-
-=item I<horizontal_alignment>
+=head2 horizontal_alignment
 
 Horizontal alignment value.  Valid values are 'center', 'left' and 'right'.
 
-=item I<vertical_alignment>
+=head2 vertical_alignment
 
 Vertical alignment value.  Valid values are 'bottom', 'center' and 'top'.
-
-=back
 
 =head1 AUTHOR
 

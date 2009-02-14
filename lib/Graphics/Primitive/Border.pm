@@ -127,71 +127,59 @@ component.
 
 =head1 METHODS
 
-=head2 Constructor
-
-=over 4
-
-=item I<new>
+=head2 new
 
 Creates a new Graphics::Primitiver::Border.  Borders are composed of 4
 brushes, one for each of the 4 sides.  See the documentation for
 L<Graphics::Primitive::Brush> for more information.
 
-=back
-
-=head2 Instance Methods
-
-=over 4
-
-=item I<bottom>
+=head2 bottom
 
 The brush representing the bottom border.
 
-=item I<clone>
+=head2 clone
 
 Close this border.
 
-=item I<color>
+=head2 color
 
 Set the Color on all 4 borders to the one supplied.  Shortcut for setting it
 with each side.
 
-=item I<dash_pattern>
+=head2 dash_pattern
 
 Set the dash pattern on all 4 borders to the one supplied. Shortcut for
 setting it with each side.
 
-=item I<equal_to ($other)>
+=head2 equal_to ($other)
 
 Returns 1 if this border is equal to the one provided, else returns 0.
 
-=item I<homogeneous>
+=head2 homogeneous
 
 Returns 1 if all of this border's sides are the same.  Allows for driver
 optimizations.
 
-=item I<left>
+=head2 left
 
 The brush representing the left border.
 
-=item I<not_equal_to>
+=head2 not_equal_to
 
 Opposite of C<equal_to>.
 
-=item I<right>
+=head2 right
 
 The brush representing the right border.
 
-=item I<top>
+=head2 top
 
 The brush representing the top border.
 
-=item I<width>
+=head2 width
 
 Set the width on all 4 borders to the one supplied.  Shortcut for setting it
 with each side.
-
-=back
 
 =head1 AUTHOR
 

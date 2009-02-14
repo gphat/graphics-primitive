@@ -1,5 +1,8 @@
 Revision history for Graphics-Primitive
 
+0.38
+  - Fix error in Component->outside_width
+
 0.37
   - More POD fixes
 

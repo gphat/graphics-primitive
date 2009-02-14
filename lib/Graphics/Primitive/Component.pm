@@ -190,7 +190,7 @@ sub outside_width {
 
     my $w = $padding->left + $padding->right;
     $w += $margins->left + $margins->right;
-    $w += $border->left->width * $border->right->width;
+    $w += $border->left->width + $border->right->width;
 
     return $w;
 }
@@ -204,7 +204,7 @@ sub outside_height {
 
     my $w = $padding->top + $padding->bottom;
     $w += $margins->top + $margins->bottom;
-    $w += $border->bottom->width * $border->top->width;
+    $w += $border->bottom->width + $border->top->width;
 
     return $w;
 }

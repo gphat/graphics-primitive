@@ -37,11 +37,6 @@ and the like.
 
     $driver->write($filename)
 
-=head1 DISCLAIMER
-
-Graphics::Primitive is in a heavy state of flux.  Anything that depends on it
-is likely to break a lot.
-
 =head1 DESCRIPTION
 
 Graphics::Primitive is library agnostic system for drawing things.

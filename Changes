@@ -1,5 +1,8 @@
 Revision history for Graphics-Primitive
 
+0.40
+  - Fix some deprecated Moose stuff
+
 0.39
   - POD fixes
   - Don't short-circuit TextBox prepare if there are lines or a layout.

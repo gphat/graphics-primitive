@@ -42,7 +42,7 @@ has 'weight' => (
     default => 'normal'
 );
 
-__PACKAGE__->meta->alias_method('face' => __PACKAGE__->can('family'));
+__PACKAGE__->meta->add_method('face' => __PACKAGE__->can('family'));
 
 sub derive {
     my ($self, $args) = @_;

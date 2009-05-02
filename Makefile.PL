@@ -8,8 +8,8 @@ build_requires 'Test::More';
 
 requires 'Geometry::Primitive' => '0.13';
 requires 'Graphics::Color' => '0.20';
-requires 'Moose' => '0.74';
-requires 'MooseX::Clone' => '0.03';
+requires 'Moose' => '0.76';
+requires 'MooseX::Clone' => '0.04';
 requires 'MooseX::AttributeHelpers' => '0.17';
 requires 'MooseX::Storage' => '0.17';
 requires 'Forest' => '0.06';

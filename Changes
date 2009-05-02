@@ -1,5 +1,8 @@
 Revision history for Graphics-Primitive
 
+0.41
+  - Don't re-layout already laid out textboxes (might get reverted)
+
 0.40
   - Fix some deprecated Moose stuff
 

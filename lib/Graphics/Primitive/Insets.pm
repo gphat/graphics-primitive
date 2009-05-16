@@ -45,10 +45,17 @@ sub equal_to {
         && ($self->left == $other->left) && ($self->right == $other->right);
 }
 
+sub width {
+    my ($self, $width) = @_;
+
+    $self->top($width); $self->bottom($width);
+    $self->left($width); $self->right($width);
+}
+
 sub zero {
     my ($self) = @_;
 
-    $self->top(0); $self->bottom(0); $self->left(0); $self->right(0);
+    $self->width(0);
 }
 
 __PACKAGE__->meta->make_immutable;

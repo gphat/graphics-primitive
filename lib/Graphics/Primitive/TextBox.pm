@@ -83,8 +83,6 @@ override('prepare', sub {
 
     return unless defined($self->text) || defined($self->lines) || defined($self->layout);
 
-    return if $self->layout;
-
     unless($self->lines) {
         my $layout = $driver->get_textbox_layout($self);
         $self->layout($layout);

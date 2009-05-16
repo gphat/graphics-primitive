@@ -1,5 +1,8 @@
 Revision history for Graphics-Primitive
 
+0.42
+  - Reverting 0.41 (ha!)
+
 0.41
   - Don't re-layout already laid out textboxes (might get reverted)
 

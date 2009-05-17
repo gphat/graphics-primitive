@@ -1,5 +1,8 @@
 Revision history for Graphics-Primitive
 
+0.43
+  - Container: Make layout_manager attribute required
+
 0.42
   - Reverting 0.41 (ha!)
   - Add width to insets, sets all insets in one call

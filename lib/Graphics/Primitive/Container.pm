@@ -24,7 +24,6 @@ has 'layout_manager' => (
     isa => 'Layout::Manager',
     handles => [ 'do_layout' ],
     trigger => sub { my ($self) = @_; $self->prepared(0); },
-    required => 1
 );
 
 sub add_component {

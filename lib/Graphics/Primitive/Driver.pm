@@ -86,8 +86,6 @@ sub prepare {
             next unless defined($c) && $c->visible;
             $self->prepare($c);
         }
-    # } else {
-    #     $comp->prepared(1);
     }
 }
 

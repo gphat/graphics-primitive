@@ -6,9 +6,9 @@ author   'Cory G Watson <gphat@cpan.org>';
 
 build_requires 'Test::More';
 
-requires 'Geometry::Primitive' => '0.13';
+requires 'Geometry::Primitive' => '0.16';
 requires 'Graphics::Color' => '0.20';
-requires 'Moose' => '0.76';
+requires 'Moose' => '0.79';
 requires 'MooseX::Clone' => '0.04';
 requires 'MooseX::AttributeHelpers' => '0.17';
 requires 'MooseX::Storage' => '0.17';

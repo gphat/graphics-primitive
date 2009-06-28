@@ -1,5 +1,8 @@
 Revision history for Graphics-Primitive
 
+0.44
+  - Fix typo in Canvas' hints attribute
+
 0.43
   - README update
 

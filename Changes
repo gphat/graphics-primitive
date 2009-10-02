@@ -1,5 +1,9 @@
 Revision history for Graphics-Primitive
 
+0.45    October 2nd, 2009
+  - Add antialias_mode, hint_style, hint_metrics and subpixel_order attributes
+    to Font.
+
 0.44
   - Fix typo in Canvas' hints attribute
 

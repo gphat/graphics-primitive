@@ -74,8 +74,6 @@ Set/Get the vertical alignment of this component's image.
 
 Cory Watson, C<< <gphat@cpan.org> >>
 
-Infinity Interactive, L<http://www.iinteractive.com>
-
 =head1 BUGS
 
 Please report any bugs or feature requests to C<bug-geometry-primitive at rt.cpan.org>, or through
@@ -84,9 +82,7 @@ automatically be notified of progress on your bug as I make changes.
 
 =head1 COPYRIGHT & LICENSE
 
-Copyright 2008 by Infinity Interactive, Inc.
-
-L<http://www.iinteractive.com>
+Copyright 2008-2009 by Cory G Watson.
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.

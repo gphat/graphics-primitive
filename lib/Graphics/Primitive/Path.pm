@@ -349,13 +349,9 @@ Move to a new point by adding the supplied x and y values to the current ones.
 
 Cory Watson <gphat@cpan.org>
 
-Infinity Interactive, L<http://www.iinteractive.com>
-
 =head1 COPYRIGHT & LICENSE
 
-Copyright 2008 by Infinity Interactive, Inc.
-
-L<http://www.iinteractive.com>
+Copyright 2008-2009 by Cory G Watson.
 
 You can redistribute and/or modify this code under the same terms as Perl
 itself.

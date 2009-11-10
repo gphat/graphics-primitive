@@ -1,5 +1,8 @@
 Revision history for Graphics-Primitive
 
+0.46    November 10th, 2009
+  - Add JSON::Any dependency (Thanks NPW via RT)
+
 0.45    October 2nd, 2009
   - Add antialias_mode, hint_style, hint_metrics and subpixel_order attributes
     to Font.

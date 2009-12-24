@@ -2,9 +2,10 @@ package Graphics::Primitive::Driver;
 use Moose::Role;
 
 requires qw(
-    _draw_bezier _draw_canvas _draw_circle _draw_component _draw_ellipse _draw_line _draw_path _draw_polygon
-    _draw_rectangle _draw_textbox _do_fill _do_stroke _finish_page _resize
-    data get_textbox_layout reset write
+    _draw_arc _draw_bezier _draw_canvas _draw_circle _draw_component
+    _draw_ellipse _draw_line _draw_path _draw_polygon _draw_rectangle
+    _draw_textbox _do_fill _do_stroke _finish_page _resize data
+    get_textbox_layout reset write
 );
 
 has 'height' => (

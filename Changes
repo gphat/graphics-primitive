@@ -1,5 +1,9 @@
 Revision history for Graphics-Primitive
 
+0.47    December 24th, 2009
+  - Use BUILD and triggers to handle Border's color & width in constructor
+    and via setting width/color.
+
 0.46    November 10th, 2009
   - Add JSON::Any dependency (Thanks NPW via RT)
 

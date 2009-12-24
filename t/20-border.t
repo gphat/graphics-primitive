@@ -1,4 +1,4 @@
-use Test::More tests => 13;
+use Test::More;
 
 BEGIN {
     use_ok('Graphics::Primitive::Border');
@@ -6,7 +6,7 @@ BEGIN {
 
 use Graphics::Color::RGB;
 
-my $color = Graphics::Color::RGB->new;
+my $color = Graphics::Color::RGB->new(red => .3);
 
 my $obj = Graphics::Primitive::Border->new;
 
@@ -34,3 +34,9 @@ ok(!$other->homogeneous, 'not homogeneous');
 $other->width(3);
 $other->color($color);
 ok($other->homogeneous, 'homogenous');
+
+my $b2 = Graphics::Primitive::Border->new( color => $color, width => 5 );
+cmp_ok($b2->top->width, '==', 5, 'width in constructor');
+cmp_ok($b2->top->color->red, '==', .3, 'color in constructor');
+
+done_testing;

@@ -16,6 +16,18 @@ has 'bottom' => (
     },
     traits => [qw(Clone)]
 );
+has 'color' => (
+    is => 'rw',
+    isa => 'Graphics::Color',
+    trigger => sub {
+        my ($self, $newval) = @_;
+        $self->bottom->color($newval);
+        $self->left->color($newval);
+        $self->right->color($newval);
+        $self->top->color($newval);
+    },
+    predicate => 'has_color'
+);
 has 'left' => (
     is => 'rw',
     isa => 'Graphics::Primitive::Brush',
@@ -40,17 +52,48 @@ has 'top' => (
     },
     traits => [qw(Clone)]
 );
+has 'width' => (
+    is => 'rw',
+    isa => 'Int',
+    trigger => sub {
+        my ($self, $newval) = @_;
+        $self->bottom->width($newval);
+        $self->left->width($newval);
+        $self->right->width($newval);
+        $self->top->width($newval);
+    },
+    predicate => 'has_width'
+);
 
 __PACKAGE__->meta->make_immutable;
 
-sub color {
-    my ($self, $c) = @_;
+sub BUILD {
+    my ($self) = @_;
 
-    $self->bottom->color($c);
-    $self->left->color($c);
-    $self->right->color($c);
-    $self->top->color($c);
+    if($self->has_width) {
+        my $w = $self->width;
+        $self->bottom->width($w);
+        $self->left->width($w);
+        $self->right->width($w);
+        $self->top->width($w);
+    }
+    if($self->has_color) {
+        my $c = $self->color;
+        $self->bottom->color($c);
+        $self->left->color($c);
+        $self->right->color($c);
+        $self->top->color($c);
+    }
 }
+
+# sub color {
+#     my ($self, $c) = @_;
+# 
+#     $self->bottom->color($c);
+#     $self->left->color($c);
+#     $self->right->color($c);
+#     $self->top->color($c);
+# }
 
 sub dash_pattern {
     my ($self, $d) = @_;
@@ -97,14 +140,14 @@ sub not_equal_to {
     return !$self->equal_to($other);
 }
 
-sub width {
-    my ($self, $w) = @_;
-
-    $self->bottom->width($w);
-    $self->left->width($w);
-    $self->right->width($w);
-    $self->top->width($w);
-}
+# sub width {
+#     my ($self, $w) = @_;
+# 
+#     $self->bottom->width($w);
+#     $self->left->width($w);
+#     $self->right->width($w);
+#     $self->top->width($w);
+# }
 
 no Moose;
 1;
@@ -131,7 +174,9 @@ component.
 
 Creates a new Graphics::Primitiver::Border.  Borders are composed of 4
 brushes, one for each of the 4 sides.  See the documentation for
-L<Graphics::Primitive::Brush> for more information.
+L<Graphics::Primitive::Brush> for more information.  Note that you can
+provide a C<width> and C<color> argument to the constructor and it will create
+brushes of that width for each side.
 
 =head2 bottom
 

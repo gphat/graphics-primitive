@@ -3,8 +3,7 @@ use Moose;
 use Moose::Util::TypeConstraints;
 use MooseX::Storage;
 
-with 'MooseX::Clone';
-with Storage (format => 'JSON', io => 'File');
+with qw(MooseX::Clone MooseX::Storage::Deferred);
 
 enum 'LineCap' => qw(butt round square);
 enum 'LineJoin' => qw(miter round bevel);

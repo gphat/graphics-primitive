@@ -5,8 +5,7 @@ use MooseX::Storage;
 
 extends 'Graphics::Primitive::Component';
 
-with 'MooseX::Clone';
-with Storage (format => 'JSON', io => 'File');
+with qw(MooseX::Clone MooseX::Storage::Deferred);
 
 use Graphics::Primitive::Path;
 

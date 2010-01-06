@@ -2,7 +2,7 @@ package Graphics::Primitive::Container;
 use Moose;
 use MooseX::Storage;
 
-with Storage (format => 'JSON', io => 'File');
+with 'MooseX::Storage::Deferred';
 
 use Graphics::Primitive::ComponentList;
 

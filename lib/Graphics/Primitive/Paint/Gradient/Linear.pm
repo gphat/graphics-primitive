@@ -6,7 +6,7 @@ use MooseX::Storage;
 
 extends 'Graphics::Primitive::Paint::Gradient';
 
-with Storage (format => 'JSON', io => 'File');
+with qw(MooseX::Clone MooseX::Storage::Deferred);
 
 has line => (
     isa => 'Geometry::Primitive::Line',

@@ -2,8 +2,7 @@ package Graphics::Primitive::Path;
 use Moose;
 use MooseX::Storage;
 
-with 'MooseX::Clone';
-with Storage (format => 'JSON', io => 'File');
+with qw(MooseX::Clone MooseX::Storage::Deferred);
 
 use MooseX::AttributeHelpers;
 

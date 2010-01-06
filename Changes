@@ -4,6 +4,7 @@ Revision history for Graphics-Primitive
   - Use Scene::Graph
   - Remove use of Moose in Graphics::Primitive package (not the whole thing, 
     just that one package, since it has nothing in it)
+  - Use MooseX::Storage::Deferred
 
 0.48    December 24th, 2009
   - Add _draw_arc to Driver's require

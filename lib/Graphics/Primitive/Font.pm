@@ -3,8 +3,7 @@ use Moose;
 use MooseX::Storage;
 use Moose::Util::TypeConstraints;
 
-with 'MooseX::Clone';
-with Storage (format => 'JSON', io => 'File');
+with qw(MooseX::Clone MooseX::Storage::Deferred);
 
 enum 'Graphics::Primitive::Font::AntialiasModes' => (
     qw(default none gray subpixel)

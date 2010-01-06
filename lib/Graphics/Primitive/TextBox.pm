@@ -13,8 +13,7 @@ use Moose::Util::TypeConstraints;
 
 extends 'Graphics::Primitive::Component';
 
-with qw(MooseX::Clone Graphics::Primitive::Aligned);
-with Storage (format => 'JSON', io => 'File');
+with qw(Graphics::Primitive::Aligned MooseX::Clone MooseX::Storage::Deferred);
 
 use Graphics::Primitive::Font;
 

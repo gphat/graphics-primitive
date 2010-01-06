@@ -4,8 +4,7 @@ use MooseX::Storage;
 
 extends 'Graphics::Primitive::Component';
 
-with qw(MooseX::Clone Graphics::Primitive::Aligned);
-with Storage (format => 'JSON', io => 'File');
+with qw(MooseX::Clone MooseX::Storage::Deferred Graphics::Primitive::Aligned);
 
 has image => (
     is => 'rw',

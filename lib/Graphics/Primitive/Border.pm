@@ -2,8 +2,7 @@ package Graphics::Primitive::Border;
 use Moose;
 use MooseX::Storage;
 
-with 'MooseX::Clone';
-with Storage (format => 'JSON', io => 'File');
+with qw(MooseX::Clone MooseX::Storage::Deferred);
 
 use Graphics::Color;
 use Graphics::Primitive::Brush;

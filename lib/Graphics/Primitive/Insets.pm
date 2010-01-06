@@ -2,10 +2,7 @@ package Graphics::Primitive::Insets;
 use Moose;
 use MooseX::Storage;
 
-with 'Geometry::Primitive::Equal';
-
-with 'MooseX::Clone';
-with Storage (format => 'JSON', io => 'File');
+with qw(MooseX::Clone MooseX::Storage::Deferred Geometry::Primitive::Equal);
 
 use Moose::Util::TypeConstraints;
 

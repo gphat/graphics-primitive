@@ -4,8 +4,7 @@ use MooseX::Storage;
 
 extends 'Graphics::Primitive::Operation';
 
-with 'MooseX::Clone';
-with Storage (format => 'JSON', io => 'File');
+with qw(MooseX::Clone MooseX::Storage::Deferred);
 
 has paint => (
     isa => 'Graphics::Primitive::Paint',

@@ -12,6 +12,7 @@ requires 'Moose' => '0.79';
 requires 'MooseX::Clone' => '0.04';
 requires 'MooseX::AttributeHelpers' => '0.17';
 requires 'MooseX::Storage' => '0.17';
+requires 'MooseX::Types' => '0.21';
 requires 'Forest' => '0.06';
 requires 'Scene::Graph' => '0.02';
 

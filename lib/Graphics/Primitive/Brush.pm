@@ -5,16 +5,13 @@ use MooseX::Storage;
 
 with qw(MooseX::Clone MooseX::Storage::Deferred);
 
-enum 'LineCap' => qw(butt round square);
-enum 'LineJoin' => qw(miter round bevel);
+use Graphics::Primitive::Types qw(LineJoin LineCap);
 
 has 'color' => ( is => 'rw', isa => 'Graphics::Color', traits => [qw(Clone)] );
 has 'dash_pattern' => ( is => 'rw', isa => 'ArrayRef' );
 has 'width' => ( is => 'rw', isa => 'Int', default => 0 );
-has 'line_cap' => ( is => 'rw', isa => 'LineCap', default => 'butt' );
-has 'line_join' => ( is => 'rw', isa => 'LineJoin', default => 'miter' );
-
-__PACKAGE__->meta->make_immutable;
+has 'line_cap' => ( is => 'rw', isa => LineCap, default => 'butt' );
+has 'line_join' => ( is => 'rw', isa => LineJoin, default => 'miter' );
 
 sub derive {
     my ($self, $args) = @_;
@@ -78,6 +75,8 @@ sub not_equal_to {
 
     return !$self->equal_to($other);
 }
+
+__PACKAGE__->meta->make_immutable;
 
 no Moose;
 1;

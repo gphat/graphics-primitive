@@ -2,9 +2,11 @@ package Graphics::Primitive::Component;
 use Moose;
 use MooseX::Storage;
 
+extends 'Scene::Graph::Node::Spatial';
+
 use overload ('""' => 'to_string');
 
-with Storage('format' => 'JSON', 'io' => 'File');
+# with 'MooseX::Deferred::Storage';
 
 use Forest::Tree;
 use Graphics::Primitive::Border;
@@ -32,7 +34,7 @@ has 'color' => (
 has 'height' => (
     is => 'rw',
     isa => 'Num',
-    default => sub { 0 },
+    default => 0,
     trigger => sub { my ($self) = @_; $self->prepared(0); }
 );
 has 'margins' => (
@@ -45,20 +47,17 @@ has 'margins' => (
 has 'minimum_height' => (
     is => 'rw',
     isa => 'Num',
-    default => sub { 0 },
+    default => 0,
     trigger => sub { my ($self) = @_; $self->prepared(0); }
 );
 has 'minimum_width' => (
     is => 'rw',
     isa => 'Num',
-    default => sub { 0 },
+    default => 0,
     trigger => sub { my ($self) = @_; $self->prepared(0); }
 );
 has 'name' => ( is => 'rw', isa => 'Str' );
-has 'origin' => (
-    is => 'rw',
-    isa => 'Geometry::Primitive::Point',
-    default =>  sub { Geometry::Primitive::Point->new( x => 0, y => 0 ) },
+has '+origin' => (
     trigger => sub { my ($self) = @_; $self->prepared(0); }
 );
 has 'padding' => (
@@ -68,18 +67,18 @@ has 'padding' => (
     coerce => 1,
     trigger => sub { my ($self) = @_; $self->prepared(0); }
 );
-has 'page' => ( is => 'rw', isa => 'Bool', default => sub { 0 } );
+has 'page' => ( is => 'rw', isa => 'Bool', default => 0 );
 has 'parent' => (
     is => 'rw',
     isa => 'Maybe[Graphics::Primitive::Component]',
     weak_ref => 1
 );
-has 'prepared' => ( is => 'rw', isa => 'Bool', default => sub { 0 } );
-has 'visible' => ( is => 'rw', isa => 'Bool', default => sub { 1 } );
+has 'prepared' => ( is => 'rw', isa => 'Bool', default => 0 );
+has 'visible' => ( is => 'rw', isa => 'Bool', default => 1 );
 has 'width' => (
     is => 'rw',
     isa => 'Num',
-    default => sub { 0 },
+    default => 0,
     trigger => sub { my ($self) = @_; $self->prepared(0); }
 );
 

@@ -41,12 +41,12 @@ has '+horizontal_alignment' => ( default => sub { 'left'} );
 has 'indent' => (
     is => 'rw',
     isa => 'Num',
-    default => sub { 0 }
+    default => 0
 );
 has 'justify' => (
     is => 'rw',
     isa => 'Bool',
-    default => sub { 0 }
+    default => 0
 );
 has 'layout' => (
     is => 'rw',

@@ -51,7 +51,7 @@ has 'hint_style' => (
 has 'size' => (
     is => 'rw',
     isa => 'Num',
-    default => sub { 12 }
+    default => 12
 );
 has 'slant' => (
     is => 'rw',

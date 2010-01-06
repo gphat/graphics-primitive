@@ -11,7 +11,7 @@ has 'component' => (
 has 'height' => (
     is => 'rw',
     isa => 'Num',
-    default => sub { -1 }
+    default => -1
 );
 has 'width' => (
     is => 'rw',

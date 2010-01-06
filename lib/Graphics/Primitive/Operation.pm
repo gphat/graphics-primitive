@@ -4,7 +4,7 @@ use Moose;
 has 'preserve' => (
     isa => 'Bool',
     is  => 'rw',
-    default =>  sub { 0 },
+    default => 0 ,
 );
 
 __PACKAGE__->meta->make_immutable;

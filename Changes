@@ -1,5 +1,8 @@
 Revision history for Graphics-Primitive
 
+  - Remove various uses of sub { } for default that weren't necessary
+  - Use Scene::Graph
+
 0.48    December 24th, 2009
   - Add _draw_arc to Driver's require
 

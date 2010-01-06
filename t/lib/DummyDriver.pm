@@ -7,7 +7,7 @@ with 'Graphics::Primitive::Driver';
 has 'draw_component_called' => (
     is => 'rw',
     isa => 'Int',
-    default => sub { 0 }
+    default => 0
 );
 
 sub _do_fill { }

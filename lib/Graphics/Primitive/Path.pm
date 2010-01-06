@@ -23,7 +23,7 @@ has 'current_point' => (
 has 'contiguous' => (
     isa => 'Str',
     is  => 'rw',
-    default =>  sub { 0 },
+    default => 0,
 );
 has 'hints' => (
     metaclass => 'Collection::Array',

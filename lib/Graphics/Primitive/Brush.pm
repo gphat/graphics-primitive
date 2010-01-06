@@ -11,7 +11,7 @@ enum 'LineJoin' => qw(miter round bevel);
 
 has 'color' => ( is => 'rw', isa => 'Graphics::Color', traits => [qw(Clone)] );
 has 'dash_pattern' => ( is => 'rw', isa => 'ArrayRef' );
-has 'width' => ( is => 'rw', isa => 'Int', default => sub { 0 } );
+has 'width' => ( is => 'rw', isa => 'Int', default => 0 );
 has 'line_cap' => ( is => 'rw', isa => 'LineCap', default => 'butt' );
 has 'line_join' => ( is => 'rw', isa => 'LineJoin', default => 'miter' );
 

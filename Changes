@@ -6,6 +6,7 @@ Revision history for Graphics-Primitive
     just that one package, since it has nothing in it)
   - Use MooseX::Storage::Deferred, removing dependency on JSON::Any
   - Use MooseX::Types rather than defining types in the class
+  - Remove MX::AH, use native traits
 
 0.48    December 24th, 2009
   - Add _draw_arc to Driver's require

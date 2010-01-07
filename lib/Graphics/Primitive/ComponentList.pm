@@ -1,34 +1,33 @@
 package Graphics::Primitive::ComponentList;
 use Moose;
-use MooseX::AttributeHelpers;
 use MooseX::Storage;
 
 with qw(MooseX::Storage::Deferred);
 
 has 'components' => (
-    metaclass => 'Collection::Array',
+    traits => [ 'Array' ],
     is => 'rw',
     isa => 'ArrayRef',
     default => sub { [] },
-    provides => {
-        'count'=> 'component_count',
-        'get' => 'get_component',
-        'push' => 'push_components',
-        'set'=> 'set_component'
-    },
+    handles => {
+        component_count => 'count',
+        get_component   => 'get',
+        push_components => 'push',
+        set_component   => 'set'
+    }
 );
 
 has 'constraints' => (
-    metaclass => 'Collection::Array',
+    traits => [ 'Array' ],
     is => 'rw',
     isa => 'ArrayRef',
     default => sub { [] },
-    provides => {
-        'count'=> 'constraint_count',
-        'get' => 'get_constraint',
-        'push' => 'push_constraints',
-        'set' => 'set_constraint'
-    },
+    handles => {
+        constraint_count    => 'count',
+        get_constraint      => 'get',
+        push_constraints    => 'push',
+        set_constraint      => 'set'
+    }
 );
 
 

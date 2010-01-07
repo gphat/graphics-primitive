@@ -4,8 +4,6 @@ use MooseX::Storage;
 
 with qw(MooseX::Clone MooseX::Storage::Deferred);
 
-use MooseX::AttributeHelpers;
-
 use Geometry::Primitive::Arc;
 use Geometry::Primitive::Bezier;
 use Geometry::Primitive::Ellipse;
@@ -25,27 +23,27 @@ has 'contiguous' => (
     default => 0,
 );
 has 'hints' => (
-    metaclass => 'Collection::Array',
+    traits => [ 'Array' ],
     is => 'rw',
     isa => 'ArrayRef[HashRef]',
     traits => [qw(Clone)],
     default => sub { [] },
-    provides => {
-        push => 'add_hint',
-        get => 'get_hint',
+    handles => {
+        add_hint    => 'push',
+        get_hint    => 'get'
     }
 );
 has 'primitives' => (
-    metaclass => 'Collection::Array',
+    traits => [ 'Array' ],
     is => 'rw',
     isa => 'ArrayRef[Geometry::Primitive]',
     traits => [qw(Clone)],
     default => sub { [] },
-    provides => {
-        'push' => 'add_primitive',
-        'clear' => 'clear_primitives',
-        'count' => 'primitive_count',
-        'get' => 'get_primitive'
+    handles => {
+        add_primitive   => 'push',
+        clear_primitives=> 'clear',
+        get_primitive   => 'get',
+        primitive_count => 'count'
     }
 );
 

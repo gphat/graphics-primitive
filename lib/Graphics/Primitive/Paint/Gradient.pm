@@ -1,22 +1,21 @@
 package Graphics::Primitive::Paint::Gradient;
 use Moose;
 use Moose::Util::TypeConstraints;
-use MooseX::AttributeHelpers;
 use MooseX::Storage;
 
 extends 'Graphics::Primitive::Paint';
 
 # FIXME key should be <= 1
 has color_stops => (
-    metaclass => 'Collection::Hash',
+    traits => [ 'Hash' ],
     isa => 'HashRef',
     is  => 'rw',
     default =>  sub { {} },
-    provides => {
-        count => 'stop_count',
-        keys => 'stops',
-        get  => 'get_stop',
-        set  => 'add_stop'
+    handles => {
+        get_stop    => 'get',
+        set_stop    => 'set',
+        stop_count  => 'count',
+        stops       => 'keys'
     }
 );
 

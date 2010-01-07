@@ -57,9 +57,6 @@ has 'minimum_width' => (
     trigger => sub { my ($self) = @_; $self->prepared(0); }
 );
 has 'name' => ( is => 'rw', isa => 'Str' );
-has '+origin' => (
-    trigger => sub { my ($self) = @_; $self->prepared(0); }
-);
 has 'padding' => (
     is => 'rw',
     isa => 'Graphics::Primitive::Insets',

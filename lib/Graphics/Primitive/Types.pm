@@ -5,8 +5,8 @@ use MooseX::Types -declare => [qw(
     LineJoin
 )];
 
-enum 'LineCap' => qw(butt round square);
-enum 'LineJoin' => qw(miter round bevel);
+enum LineCap, (qw(butt round square));
+enum LineJoin, (qw(miter round bevel));
 
 1;
 

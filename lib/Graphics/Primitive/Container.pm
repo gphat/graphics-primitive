@@ -10,7 +10,7 @@ use Forest::Tree;
 
 extends 'Graphics::Primitive::Component';
 
-with 'MooseX::Clone';
+with [ 'MooseX::Clone', 'Graphics::Primitive::Node::Role::Layoutable' ];
 
 has 'component_list' => (
     is => 'rw',
@@ -18,12 +18,6 @@ has 'component_list' => (
     default => sub { Graphics::Primitive::ComponentList->new },
     handles => [qw(component_count components constraints each find find_component get_component get_constraint)],
     trigger => sub { my ($self) = @_; $self->prepared(0); }
-);
-has 'layout_manager' => (
-    is => 'rw',
-    isa => 'Layout::Manager',
-    handles => [ 'do_layout' ],
-    trigger => sub { my ($self) = @_; $self->prepared(0); },
 );
 
 sub add_component {

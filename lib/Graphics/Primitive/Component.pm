@@ -3,10 +3,10 @@ use Moose;
 use MooseX::Storage;
 
 extends 'Scene::Graph::Node::Spatial';
+with 'MooseX::Storage::Deferred';
+
 
 use overload ('""' => 'to_string');
-
-# with 'MooseX::Deferred::Storage';
 
 use Forest::Tree;
 use Graphics::Primitive::Border;

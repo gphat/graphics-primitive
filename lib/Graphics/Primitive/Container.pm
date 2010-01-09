@@ -9,7 +9,7 @@ use Graphics::Primitive::ComponentList;
 
 extends 'Graphics::Primitive::Component';
 
-with [ 'MooseX::Clone', 'Graphics::Primitive::Node::Role::Layoutable' ];
+with ( 'MooseX::Clone', 'Graphics::Primitive::Node::Role::Layoutable' );
 
 # has 'component_list' => (
 #     is => 'rw',

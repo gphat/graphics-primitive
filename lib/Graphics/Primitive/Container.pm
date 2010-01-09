@@ -1,62 +1,48 @@
 package Graphics::Primitive::Container;
 use Moose;
+use MooseX::Aliases;
 use MooseX::Storage;
 
 with 'MooseX::Storage::Deferred';
 
 use Graphics::Primitive::ComponentList;
 
-use Forest::Tree;
-
 extends 'Graphics::Primitive::Component';
 
 with [ 'MooseX::Clone', 'Graphics::Primitive::Node::Role::Layoutable' ];
 
-has 'component_list' => (
-    is => 'rw',
-    isa => 'Graphics::Primitive::ComponentList',
-    default => sub { Graphics::Primitive::ComponentList->new },
-    handles => [qw(component_count components constraints each find find_component get_component get_constraint)],
-    trigger => sub { my ($self) = @_; $self->prepared(0); }
-);
+# has 'component_list' => (
+#     is => 'rw',
+#     isa => 'Graphics::Primitive::ComponentList',
+#     default => sub { Graphics::Primitive::ComponentList->new },
+#     handles => [qw(component_count components constraints each find find_component get_component get_constraint)],
+#     trigger => sub { my ($self) = @_; $self->prepared(0); }
+# );
 
-sub add_component {
-    my ($self, $component, $args) = @_;
+# sub clear_components {
+#     my ($self) = @_;
+# 
+#     # Clear all the component's parent attributes just in case some
+#     # outside thingie is holding a reference to it
+#     foreach my $c (@{ $self->components }) {
+#         next unless(defined($c));
+#         $c->parent(undef);
+#     }
+#     $self->component_list->clear;
+#     $self->prepared(0);
+# }
 
-    return 0 unless $self->validate_component($component, $args);
-
-    $component->parent($self);
-    $self->component_list->add_component($component, $args);
-
-    $self->prepared(0);
-
-    return 1;
-}
-
-sub clear_components {
-    my ($self) = @_;
-
-    # Clear all the component's parent attributes just in case some
-    # outside thingie is holding a reference to it
-    foreach my $c (@{ $self->components }) {
-        next unless(defined($c));
-        $c->parent(undef);
-    }
-    $self->component_list->clear;
-    $self->prepared(0);
-}
-
-sub get_tree {
-    my ($self) = @_;
-
-    my $tree = Forest::Tree->new(node => $self);
-
-    foreach my $c (@{ $self->components }) {
-        $tree->add_child($c->get_tree);
-    }
-
-    return $tree;
-}
+# sub get_tree {
+#     my ($self) = @_;
+# 
+#     my $tree = Forest::Tree->new(node => $self);
+# 
+#     foreach my $c (@{ $self->components }) {
+#         $tree->add_child($c->get_tree);
+#     }
+# 
+#     return $tree;
+# }
 
 sub prepare {
     my ($self, $driver) = @_;
@@ -71,18 +57,18 @@ sub prepare {
     }
 }
 
-sub remove_component {
-    my ($self, $component) = @_;
-
-    my $removed = $self->component_list->remove_component($component);
-    if(scalar(@{ $removed })) {
-        foreach my $r (@{ $removed }) {
-            $r->parent(undef);
-        }
-    }
-
-    return $removed;
-}
+# sub remove_component {
+#     my ($self, $component) = @_;
+# 
+#     my $removed = $self->component_list->remove_component($component);
+#     if(scalar(@{ $removed })) {
+#         foreach my $r (@{ $removed }) {
+#             $r->parent(undef);
+#         }
+#     }
+# 
+#     return $removed;
+# }
 
 sub validate_component {
     my ($self, $c, $a) = @_;

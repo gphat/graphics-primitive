@@ -11,22 +11,22 @@ my $cont = Graphics::Primitive::Container->new(name => 'root');
 isa_ok($cont, 'Graphics::Primitive::Container');
 
 my $comp1 = Graphics::Primitive::Component->new(name => 'first');
-$cont->add_component($comp1);
-cmp_ok($cont->component_count, '==', 1, 'component_count');
+$cont->add_child($comp1);
+cmp_ok($cont->child_count, '==', 1, 'child_count');
 cmp_ok($comp1->parent->name, 'eq', $cont->name, 'parent');
 
 my $comp2 = Graphics::Primitive::Component->new(name => 'second');
-$cont->add_component($comp2);
-cmp_ok($cont->component_count, '==', 2, 'component_count');
+$cont->add_child($comp2);
+cmp_ok($cont->child_count, '==', 2, 'child_count');
 
-my $foundi = $cont->find_component('first');
-my $found = $cont->get_component($foundi);
+my $foundi = $cont->find_by_id('first');
+my $found = $cont->get_child_at($foundi);
 cmp_ok($found->name, 'eq', 'first', 'found first by name');
 
-my $index1 = $cont->get_component(0);
+my $index1 = $cont->get_child_at(0);
 cmp_ok($index1->name, 'eq', 'first', 'found first by index');
 
-my $index2 = $cont->get_component(1);
+my $index2 = $cont->get_child_at(1);
 cmp_ok($index2->name, 'eq', 'second', 'found second by index');
 
 $cont->prepared(1);
@@ -34,7 +34,7 @@ cmp_ok($cont->prepared, '==', 1, 'prepared');
 
 my $comp3 = Graphics::Primitive::Component->new;
 
-$cont->add_component($comp3);
+$cont->add_child($comp3);
 cmp_ok($cont->prepared, '==', 0, 'not prepared');
 
 my $removed = $cont->remove_component($comp2);

@@ -1,5 +1,5 @@
 use strict;
-use Test::More tests => 12;
+use Test::More;
 
 BEGIN {
     use_ok('Graphics::Primitive::Container');
@@ -35,10 +35,11 @@ cmp_ok($cont->prepared, '==', 1, 'prepared');
 my $comp3 = Graphics::Primitive::Component->new;
 
 $cont->add_child($comp3);
-cmp_ok($cont->prepared, '==', 0, 'not prepared');
 
-my $removed = $cont->remove_component($comp2);
+my $removed = $cont->remove_child_at(1);
 ok(!defined($comp2->parent), 'no parent after removal');
 
-$cont->clear_components;
-ok(!defined($comp1->parent), 'no parent after clear');
+$cont->clear_children;
+cmp_ok($cont->child_count, '==', 1, '1 child removed');
+
+done_testing;

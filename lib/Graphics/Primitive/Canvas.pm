@@ -19,10 +19,9 @@ has path => (
 );
 
 has paths => (
-    traits => [ 'Array' ],
+    traits => [ qw(Array Clone) ],
     isa => 'ArrayRef',
-    is  => 'rw',
-    traits => [qw(Clone)],
+    is  => 'ro',
     default =>  sub { [] },
     handles => {
         add_path    => 'push',
@@ -32,10 +31,9 @@ has paths => (
 );
 
 has saved_paths => (
-    traits => [ 'Array' ],
+    traits => [ qw(Array Clone) ],
     isa => 'ArrayRef',
-    is  => 'rw',
-    traits => [qw(Copy)],
+    is  => 'ro',
     default =>  sub { [] },
     handles => {
         push_path   => 'push',

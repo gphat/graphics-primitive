@@ -23,10 +23,9 @@ has 'contiguous' => (
     default => 0,
 );
 has 'hints' => (
-    traits => [ 'Array' ],
-    is => 'rw',
+    traits => [ qw(Array Clone) ],
+    is => 'ro',
     isa => 'ArrayRef[HashRef]',
-    traits => [qw(Clone)],
     default => sub { [] },
     handles => {
         add_hint    => 'push',
@@ -34,10 +33,9 @@ has 'hints' => (
     }
 );
 has 'primitives' => (
-    traits => [ 'Array' ],
-    is => 'rw',
+    traits => [ qw(Array Clone) ],
+    is => 'ro',
     isa => 'ArrayRef[Geometry::Primitive]',
-    traits => [qw(Clone)],
     default => sub { [] },
     handles => {
         add_primitive   => 'push',

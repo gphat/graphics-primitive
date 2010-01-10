@@ -13,7 +13,7 @@ has color_stops => (
     default =>  sub { {} },
     handles => {
         get_stop    => 'get',
-        set_stop    => 'set',
+        add_stop    => 'set',
         stop_count  => 'count',
         stops       => 'keys'
     }

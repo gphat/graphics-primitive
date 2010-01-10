@@ -47,9 +47,6 @@ my $ulip = Geometry::Primitive::Point->new(x => 10, y => 8);
 my $bb = $obj->inside_bounding_box;
 ok($bb->origin->equal_to($ulip), 'bounding box');
 
-$obj->dimensions->width(101);
-cmp_ok($obj->prepared, '==', 0, 'not prepared');
-
 $obj->dimensions->width(100);
 $obj->border->left->width(3);
 cmp_ok($obj->inside_width, '==', 75, 'left border width');

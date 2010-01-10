@@ -3,8 +3,11 @@ use Moose;
 use MooseX::Storage;
 
 extends 'Scene::Graph::Node::Spatial';
-with qw(MooseX::Storage::Deferred);
-
+with qw(
+    MooseX::Clone
+    MooseX::Storage::Deferred
+    Graphics::Primitive::Node::Role::Layoutable
+);
 
 use overload ('""' => 'to_string');
 

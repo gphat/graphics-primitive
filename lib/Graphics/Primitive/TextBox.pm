@@ -20,7 +20,6 @@ use Graphics::Primitive::Font;
 has 'angle' => (
     is => 'rw',
     isa => 'Num',
-    trigger => sub { my ($self) = @_; $self->prepared(0); }
 );
 has 'direction' => (
     is => 'rw',
@@ -34,7 +33,6 @@ has 'font' => (
     is => 'rw',
     isa => 'Graphics::Primitive::Font',
     default => sub { Graphics::Primitive::Font->new },
-    trigger => sub { my ($self) = @_; $self->prepared(0); }
 );
 has '+horizontal_alignment' => ( default => sub { 'left'} );
 has 'indent' => (
@@ -57,17 +55,14 @@ has 'lines' => (
 has 'line_height' => (
     is => 'rw',
     isa => 'Num',
-    trigger => sub { my ($self) = @_; $self->prepared(0); }
 );
 has 'text' => (
     is => 'rw',
     isa => 'Str',
-    trigger => sub { my ($self) = @_; $self->prepared(0); }
 );
 has 'text_bounding_box' => (
     is => 'rw',
     isa => 'Geometry::Primitive::Rectangle',
-    trigger => sub { my ($self) = @_; $self->prepared(0); }
 );
 has '+vertical_alignment' => ( default => sub { 'top'} );
 has 'wrap_mode' => (

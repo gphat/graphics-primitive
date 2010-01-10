@@ -16,7 +16,6 @@ with ( 'MooseX::Clone', 'Graphics::Primitive::Node::Role::Layoutable' );
 #     isa => 'Graphics::Primitive::ComponentList',
 #     default => sub { Graphics::Primitive::ComponentList->new },
 #     handles => [qw(component_count components constraints each find find_component get_component get_constraint)],
-#     trigger => sub { my ($self) = @_; $self->prepared(0); }
 # );
 
 # sub clear_components {
@@ -29,7 +28,6 @@ with ( 'MooseX::Clone', 'Graphics::Primitive::Node::Role::Layoutable' );
 #         $c->parent(undef);
 #     }
 #     $self->component_list->clear;
-#     $self->prepared(0);
 # }
 
 # sub get_tree {
@@ -46,8 +44,6 @@ with ( 'MooseX::Clone', 'Graphics::Primitive::Node::Role::Layoutable' );
 
 sub prepare {
     my ($self, $driver) = @_;
-
-    return if $self->prepared;
 
     unless($self->minimum_width) {
         $self->minimum_width($self->outside_width);
@@ -158,11 +154,6 @@ Get the constraint at the specified index.
 Returns a Forest::Tree object with this component at the root and all child
 components as children.  Calling this from your root container will result
 in a tree representation of the entire scene.
-
-=item I<prepare>
-
-Prepares this container.  Does not mark as prepared, as that's done by the
-layout manager.
 
 =item I<remove_component>
 

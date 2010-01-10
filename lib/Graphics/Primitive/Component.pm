@@ -32,157 +32,9 @@ has 'color' => (
     is => 'rw',
     isa => 'Graphics::Color',
 );
-has 'dimensions' => (
-    is => 'rw',
-    isa => 'Geometry::Primitive::Dimension',
-    default => sub { Geometry::Primitive::Dimension->new },
-);
-has 'margins' => (
-    is => 'rw',
-    isa => 'Graphics::Primitive::Insets',
-    default => sub { Graphics::Primitive::Insets->new },
-    coerce => 1,
-);
-has 'minimum_dimensions' => (
-    is => 'rw',
-    isa => 'Geometry::Primitive::Dimension',
-    default => sub { Geometry::Primitive::Dimension->new },
-);
-
 has 'name' => ( is => 'rw', isa => 'Str' );
-has 'padding' => (
-    is => 'rw',
-    isa => 'Graphics::Primitive::Insets',
-    default => sub { Graphics::Primitive::Insets->new },
-    coerce => 1,
-);
 has 'page' => ( is => 'rw', isa => 'Bool', default => 0 );
-has 'parent' => (
-    is => 'rw',
-    isa => 'Maybe[Graphics::Primitive::Component]',
-    weak_ref => 1
-);
 has 'visible' => ( is => 'rw', isa => 'Bool', default => 1 );
-
-sub inside_width {
-    my ($self) = @_;
-
-    my $w = $self->dimensions->width;
-
-    my $padding = $self->padding;
-    my $margins = $self->margins;
-    my $border = $self->border;
-
-    $w -= $padding->left + $padding->right;
-    $w -= $margins->left + $margins->right;
-
-    $w -= $border->left->width + $border->right->width;
-
-    $w = 0 if $w < 0;
-
-    return $w;
-}
-
-sub minimum_inside_width {
-    my ($self) = @_;
-
-    my $w = $self->minimum_width;
-
-    my $padding = $self->padding;
-    my $margins = $self->margins;
-    my $border = $self->border;
-
-    $w -= $padding->left + $padding->right;
-    $w -= $margins->left + $margins->right;
-
-    $w -= $border->left->width + $border->right->width;
-
-    $w = 0 if $w < 0;
-
-    return $w;
-}
-
-sub inside_height {
-    my ($self) = @_;
-
-    my $h = $self->dimensions->height;
-
-    my $padding = $self->padding;
-    my $margins = $self->margins;
-    my $border = $self->border;
-
-    $h -= $padding->bottom + $padding->top;
-    $h -= $margins->bottom + $margins->top;
-    $h -= $border->top->width + $border->bottom->width;
-
-    $h = 0 if $h < 0;
-
-    return $h;
-}
-
-sub minimum_inside_height {
-    my ($self) = @_;
-
-    my $h = $self->minimum_height;
-
-    my $padding = $self->padding;
-    my $margins = $self->margins;
-    my $border = $self->border;
-
-    $h -= $padding->bottom + $padding->top;
-    $h -= $margins->bottom + $margins->top;
-    $h -= $border->top->width + $border->bottom->width;
-
-    $h = 0 if $h < 0;
-
-    return $h;
-}
-
-sub inside_bounding_box {
-
-    my ($self) = @_;
-
-    my $padding = $self->padding;
-    my $margins = $self->margins;
-    my $border = $self->border;
-
-    my $rect = Geometry::Primitive::Rectangle->new(
-        origin => Geometry::Primitive::Point->new(
-            x => $padding->left + $border->left->width + $margins->left,
-            y => $padding->top + $border->right->width + $margins->top
-        ),
-        width => $self->inside_width,
-        height => $self->inside_height
-    );
-}
-
-sub outside_width {
-    my $self = shift();
-
-    my $padding = $self->padding;
-    my $margins = $self->margins;
-    my $border = $self->border;
-
-    my $w = $padding->left + $padding->right;
-    $w += $margins->left + $margins->right;
-    $w += $border->left->width + $border->right->width;
-
-    return $w;
-}
-
-sub outside_height {
-    my $self = shift();
-
-    my $padding = $self->padding;
-    my $margins = $self->margins;
-    my $border = $self->border;
-
-    my $w = $padding->top + $padding->bottom;
-    $w += $margins->top + $margins->bottom;
-    $w += $border->bottom->width + $border->top->width;
-
-    return $w;
-}
 
 sub finalize { }
 
@@ -263,7 +115,7 @@ impossible for it to position these internal components until now.  It may
 even defer creation of this components until now.
 
 B<It is not ok to defer all action to the finalize phase.  If you do not
-establish a minimum hieght and width during prepare then the layout manager
+establish a minimum height and width during prepare then the layout manager
 may not provide you with enough space to draw.>
 
     $driver->finalize($comp);
@@ -338,31 +190,6 @@ L<Insets|Graphics::Primitive::Insets>.  Margins are the space I<outside> the
 component's bounding box, as in CSS.  The margins should be outside the
 border.
 
-=item I<maximum_height>
-
-Set/Get this component's maximum height.  Used to inform a layout manager.
-
-=item I<maximum_width>
-
-Set/Get this component's maximum width.  Used to inform a layout manager.
-
-=item I<minimum_height>
-
-Set/Get this component's minimum height.  Used to inform a layout manager.
-
-=item I<minimum_inside_height>
-
-Get the minimum height available in this container after taking away space for
-padding, margin and borders.
-
-=item I<minimum_inside_width>
-
-Get the minimum width available in this container after taking away space for
-padding, margin and borders.
-
-=item I<minimum_width>
-
-Set/Get this component's minimum width.  Used to inform a layout manager.
 
 =item I<name>
 

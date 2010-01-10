@@ -4,7 +4,6 @@ use strict;
 use Test::More tests => 4;
 
 use Graphics::Primitive::Component;
-use Graphics::Primitive::Container;
 
 BEGIN {
     use_ok('Graphics::Primitive::Driver');
@@ -14,9 +13,9 @@ BEGIN {
 my $driver = DummyDriver->new;
 isa_ok($driver, 'DummyDriver');
 
-my $container = Graphics::Primitive::Container->new;
-my $comp = Graphics::Primitive::Component->new;
-$container->add_component($comp, 'c');
+my $container = Graphics::Primitive::Component->new(width => 100, height => 100);
+my $comp = Graphics::Primitive::Component->new(width => 10, height => 10);
+$container->add_child($comp, 'c');
 
 $driver->prepare($container);
 $driver->finalize($container);

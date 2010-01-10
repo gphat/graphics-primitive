@@ -1,6 +1,8 @@
 package Graphics::Primitive::Driver;
 use Moose::Role;
 
+use Geometry::Primitive::Dimension;
+
 requires qw(
     _draw_arc _draw_bezier _draw_canvas _draw_circle _draw_component
     _draw_ellipse _draw_line _draw_path _draw_polygon _draw_rectangle
@@ -8,13 +10,10 @@ requires qw(
     get_textbox_layout reset write
 );
 
-has 'height' => (
-    is => 'rw',
-    isa => 'Num'
-);
-has 'width' => (
-    is => 'rw',
-    isa => 'Num'
+has 'dimensions' => (
+    is => 'ro',
+    isa => 'Geometry::Primitive::Dimension',
+    default => sub { Geometry::Primitive::Dimension->new }
 );
 
 sub draw {
@@ -46,11 +45,9 @@ sub draw {
         $self->_draw_component($comp);
     }
 
-    if($comp->isa('Graphics::Primitive::Container')) {
-        if($comp->can('components')) {
-            foreach my $subcomp (@{ $comp->components }) {
-                $self->draw($subcomp);
-            }
+    unless($comp->is_leaf) {
+        foreach my $subcomp (@{ $comp->children }) {
+            $self->draw($subcomp);
         }
     }
 }
@@ -72,11 +69,11 @@ sub finalize {
 sub prepare {
     my ($self, $comp) = @_;
 
-    unless(defined($self->width)) {
-        $self->width($comp->width);
+    unless($self->dimensions->width) {
+        $self->dimensions->width($comp->dimensions->width);
     }
-    unless(defined($self->height)) {
-        $self->height($comp->height);
+    unless($self->dimensions->height) {
+        $self->dimensions->height($comp->dimensions->height);
     }
 
     $comp->prepare($self);

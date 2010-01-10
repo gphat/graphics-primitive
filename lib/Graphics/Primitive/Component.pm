@@ -3,16 +3,17 @@ use Moose;
 use MooseX::Storage;
 
 extends 'Scene::Graph::Node::Spatial';
-with 'MooseX::Storage::Deferred';
+with qw(MooseX::Storage::Deferred);
 
 
 use overload ('""' => 'to_string');
 
 use Forest::Tree;
-use Graphics::Primitive::Border;
-use Graphics::Primitive::Insets;
+use Geometry::Primitive::Dimension;
 use Geometry::Primitive::Point;
 use Geometry::Primitive::Rectangle;
+use Graphics::Primitive::Border;
+use Graphics::Primitive::Insets;
 
 has 'background_color' => (
     is => 'rw',
@@ -27,15 +28,15 @@ has 'border' => (
 );
 has 'class' => ( is => 'rw', isa => 'Str' );
 has 'color' => (
-    is => 'rw', isa => 'Graphics::Color',
-    trigger => sub { my ($self) = @_; $self->prepared(0); },
+    is => 'rw',
+    isa => 'Graphics::Color',
     trigger => sub { my ($self) = @_; $self->prepared(0); }
 );
-has 'height' => (
+has 'dimensions' => (
     is => 'rw',
-    isa => 'Num',
-    default => 0,
-    trigger => sub { my ($self) = @_; $self->prepared(0); }
+    isa => 'Geometry::Primitive::Dimension',
+    default => sub { Geometry::Primitive::Dimension->new },
+    #trigger => sub { my ($self) = @_; $self->prepared(0); }
 );
 has 'margins' => (
     is => 'rw',
@@ -44,18 +45,13 @@ has 'margins' => (
     coerce => 1,
     trigger => sub { my ($self) = @_; $self->prepared(0); }
 );
-has 'minimum_height' => (
+has 'minimum_dimensions' => (
     is => 'rw',
-    isa => 'Num',
-    default => 0,
+    isa => 'Geometry::Primitive::Dimension',
+    default => sub { Geometry::Primitive::Dimension->new },
     trigger => sub { my ($self) = @_; $self->prepared(0); }
 );
-has 'minimum_width' => (
-    is => 'rw',
-    isa => 'Num',
-    default => 0,
-    trigger => sub { my ($self) = @_; $self->prepared(0); }
-);
+
 has 'name' => ( is => 'rw', isa => 'Str' );
 has 'padding' => (
     is => 'rw',
@@ -72,12 +68,6 @@ has 'parent' => (
 );
 has 'prepared' => ( is => 'rw', isa => 'Bool', default => 0 );
 has 'visible' => ( is => 'rw', isa => 'Bool', default => 1 );
-has 'width' => (
-    is => 'rw',
-    isa => 'Num',
-    default => 0,
-    trigger => sub { my ($self) = @_; $self->prepared(0); }
-);
 
 sub get_tree {
     my ($self) = @_;
@@ -212,11 +202,11 @@ sub prepare {
 
     return if $self->prepared;
 
-    unless($self->minimum_width) {
-        $self->minimum_width($self->outside_width);
+    unless($self->minimum_dimensions->width) {
+        $self->minimum_dimensions->width($self->outside_width);
     }
-    unless($self->minimum_height) {
-        $self->minimum_height($self->outside_height);
+    unless($self->minimum_dimensions->height) {
+        $self->minimum_dimensions->height($self->outside_height);
     }
 }
 

@@ -18,38 +18,32 @@ use Graphics::Primitive::Insets;
 has 'background_color' => (
     is => 'rw',
     isa => 'Graphics::Color',
-    trigger => sub { my ($self) = @_; $self->prepared(0); }
 );
 has 'border' => (
     is => 'rw',
     isa => 'Graphics::Primitive::Border',
     default => sub { Graphics::Primitive::Border->new },
-    trigger => sub { my ($self) = @_; $self->prepared(0); }
 );
 has 'class' => ( is => 'rw', isa => 'Str' );
 has 'color' => (
     is => 'rw',
     isa => 'Graphics::Color',
-    trigger => sub { my ($self) = @_; $self->prepared(0); }
 );
 has 'dimensions' => (
     is => 'rw',
     isa => 'Geometry::Primitive::Dimension',
     default => sub { Geometry::Primitive::Dimension->new },
-    #trigger => sub { my ($self) = @_; $self->prepared(0); }
 );
 has 'margins' => (
     is => 'rw',
     isa => 'Graphics::Primitive::Insets',
     default => sub { Graphics::Primitive::Insets->new },
     coerce => 1,
-    trigger => sub { my ($self) = @_; $self->prepared(0); }
 );
 has 'minimum_dimensions' => (
     is => 'rw',
     isa => 'Geometry::Primitive::Dimension',
     default => sub { Geometry::Primitive::Dimension->new },
-    trigger => sub { my ($self) = @_; $self->prepared(0); }
 );
 
 has 'name' => ( is => 'rw', isa => 'Str' );
@@ -58,7 +52,6 @@ has 'padding' => (
     isa => 'Graphics::Primitive::Insets',
     default => sub { Graphics::Primitive::Insets->new },
     coerce => 1,
-    trigger => sub { my ($self) = @_; $self->prepared(0); }
 );
 has 'page' => ( is => 'rw', isa => 'Bool', default => 0 );
 has 'parent' => (
@@ -66,7 +59,6 @@ has 'parent' => (
     isa => 'Maybe[Graphics::Primitive::Component]',
     weak_ref => 1
 );
-has 'prepared' => ( is => 'rw', isa => 'Bool', default => 0 );
 has 'visible' => ( is => 'rw', isa => 'Bool', default => 1 );
 
 sub inside_width {
@@ -193,8 +185,6 @@ sub finalize { }
 
 sub prepare {
     my ($self, $driver) = @_;
-
-    return if $self->prepared;
 
     unless($self->minimum_dimensions->width) {
         $self->minimum_dimensions->width($self->outside_width);

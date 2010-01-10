@@ -1,8 +1,6 @@
 package Graphics::Primitive::Node::Role::Layoutable;
 use Moose::Role;
 
-requires 'prepared';
-
 has 'layout_manager' => (
     is => 'rw',
     isa => 'Layout::Manager',

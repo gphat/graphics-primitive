@@ -29,9 +29,6 @@ cmp_ok($index1->name, 'eq', 'first', 'found first by index');
 my $index2 = $cont->get_child_at(1);
 cmp_ok($index2->name, 'eq', 'second', 'found second by index');
 
-$cont->prepared(1);
-cmp_ok($cont->prepared, '==', 1, 'prepared');
-
 my $comp3 = Graphics::Primitive::Component->new;
 
 $cont->add_child($comp3);

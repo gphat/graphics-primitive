@@ -35,7 +35,7 @@ has 'hints' => (
 has 'primitives' => (
     traits => [ qw(Array Clone) ],
     is => 'ro',
-    isa => 'ArrayRef[Geometry::Primitive]',
+    isa => 'ArrayRef',
     default => sub { [] },
     handles => {
         add_primitive   => 'push',
@@ -155,8 +155,9 @@ sub rectangle {
 
     $self->add_primitive(Geometry::Primitive::Rectangle->new(
         origin => $self->current_point,
-        width => $width,
-        height => $height
+        dimensions => Geometry::Primitive::Dimension->new(
+            width => $width, height => $height
+        )
     ));
 }
 

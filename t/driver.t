@@ -13,8 +13,12 @@ BEGIN {
 my $driver = DummyDriver->new;
 isa_ok($driver, 'DummyDriver');
 
-my $container = Graphics::Primitive::Component->new(width => 100, height => 100);
-my $comp = Graphics::Primitive::Component->new(width => 10, height => 10);
+my $container = Graphics::Primitive::Component->new(
+    width => 100, height => 100
+);
+my $comp = Graphics::Primitive::Component->new(
+    width => 10, height => 10
+);
 $container->add_child($comp, 'c');
 
 $driver->prepare($container);

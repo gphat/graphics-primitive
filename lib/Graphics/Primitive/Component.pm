@@ -69,16 +69,10 @@ has 'parent' => (
 has 'prepared' => ( is => 'rw', isa => 'Bool', default => 0 );
 has 'visible' => ( is => 'rw', isa => 'Bool', default => 1 );
 
-sub get_tree {
-    my ($self) = @_;
-
-    return Forest::Tree->new(node => $self);
-}
-
 sub inside_width {
     my ($self) = @_;
 
-    my $w = $self->width;
+    my $w = $self->dimensions->width;
 
     my $padding = $self->padding;
     my $margins = $self->margins;
@@ -116,7 +110,7 @@ sub minimum_inside_width {
 sub inside_height {
     my ($self) = @_;
 
-    my $h = $self->height;
+    my $h = $self->dimensions->height;
 
     my $padding = $self->padding;
     my $margins = $self->margins;
@@ -323,11 +317,6 @@ outside use.
 =item I<color>
 
 Set this component's foreground color.
-
-=item I<get_tree>
-
-Get a tree for this component.  Since components are -- by definiton -- leaf
-nodes, this tree will only have the one member at it's root.
 
 =item I<height>
 

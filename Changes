@@ -1,5 +1,8 @@
 Revision history for Graphics-Primitive
 
+0.49    January 10th, 2009
+  - Remove typing for Path's primitives accessor
+
 0.48    December 24th, 2009
   - Add _draw_arc to Driver's require
 

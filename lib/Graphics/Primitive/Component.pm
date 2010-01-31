@@ -38,17 +38,6 @@ has 'visible' => ( is => 'rw', isa => 'Bool', default => 1 );
 
 sub finalize { }
 
-sub prepare {
-    my ($self, $driver) = @_;
-
-    unless($self->minimum_dimensions->width) {
-        $self->minimum_dimensions->width($self->outside_width);
-    }
-    unless($self->minimum_dimensions->height) {
-        $self->minimum_dimensions->height($self->outside_height);
-    }
-}
-
 sub to_string {
     my ($self) = @_;
 

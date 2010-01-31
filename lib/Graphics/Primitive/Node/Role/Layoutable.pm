@@ -61,13 +61,13 @@ sub minimum_dimensions {
     my $margins = $self->margins;
     my $border = $self->border;
 
-    my $w = $self->minimum_width;
+    my $w = 0;
     $w -= $padding->left + $padding->right;
     $w -= $margins->left + $margins->right;
     $w -= $border->left->width + $border->right->width;
     $w = 0 if $w < 0;
 
-    my $h = $self->minimum_height;
+    my $h = 0;
     $h -= $padding->bottom + $padding->top;
     $h -= $margins->bottom + $margins->top;
     $h -= $border->top->width + $border->bottom->width;
@@ -111,6 +111,12 @@ sub outside_dimensions {
     $h += $border->bottom->width + $border->top->width;
 
     return Geometry::Primitive::Dimension->new(width => $w, height => $h);
+}
+
+sub prepare {
+    my ($self, $driver) = @_;
+
+    1;
 }
 
 1;

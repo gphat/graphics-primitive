@@ -7,8 +7,8 @@ BEGIN {
 
 use Graphics::Primitive::Component;
 
-my $cont = Graphics::Primitive::Container->new(name => 'root');
-isa_ok($cont, 'Graphics::Primitive::Container');
+my $cont = Graphics::Primitive::Component->new(name => 'root');
+isa_ok($cont, 'Graphics::Primitive::Component');
 
 my $comp1 = Graphics::Primitive::Component->new(name => 'first');
 $cont->add_child($comp1);

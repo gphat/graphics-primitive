@@ -57,8 +57,8 @@ sub finalize {
 
     $comp->finalize($self);
 
-    if($comp->isa('Graphics::Primitive::Container')) {
-        foreach my $c (@{ $comp->components }) {
+    unless($comp->is_leaf) {
+        foreach my $c (@{ $comp->children }) {
             next unless defined($c) && defined($c)
                 && $c->visible;
             $self->finalize($c);

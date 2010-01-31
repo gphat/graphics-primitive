@@ -7,6 +7,10 @@ Revision history for Graphics-Primitive
   - Use MooseX::Storage::Deferred, removing dependency on JSON::Any
   - Use MooseX::Types rather than defining types in the class
   - Remove MX::AH, use native traits
+  - Define font's types in ::Types
+
+0.49    January 10th, 2009
+  - Remove typing for Path's primitives accessor
 
 0.48    December 24th, 2009
   - Add _draw_arc to Driver's require

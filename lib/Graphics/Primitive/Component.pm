@@ -32,11 +32,127 @@ has 'color' => (
     is => 'rw',
     isa => 'Graphics::Color',
 );
+has 'dimensions' => (
+    is => 'rw',
+    isa => 'Geometry::Primitive::Dimension',
+    default => sub { Geometry::Primitive::Dimension->new },
+    coerce => 1
+);
+has 'layout_manager' => (
+    is => 'rw',
+    isa => 'Layout::Manager',
+    handles => [ 'do_layout' ],
+    predicate => 'has_layout_manager'
+);
+has 'margins' => (
+    is => 'rw',
+    isa => 'Graphics::Primitive::Insets',
+    default => sub { Graphics::Primitive::Insets->new },
+    coerce => 1,
+);
 has 'name' => ( is => 'rw', isa => 'Str' );
+has 'padding' => (
+    is => 'rw',
+    isa => 'Graphics::Primitive::Insets',
+    default => sub { Graphics::Primitive::Insets->new },
+    coerce => 1,
+);
 has 'page' => ( is => 'rw', isa => 'Bool', default => 0 );
 has 'visible' => ( is => 'rw', isa => 'Bool', default => 1 );
 
 sub finalize { }
+
+sub inside_dimensions {
+    my ($self) = @_;
+
+    my $w = $self->dimensions->width;
+
+    my $padding = $self->padding;
+    my $margins = $self->margins;
+    my $border = $self->border;
+
+    $w -= $padding->left + $padding->right;
+    $w -= $margins->left + $margins->right;
+
+    $w -= $border->left->width + $border->right->width;
+
+    $w = 0 if $w < 0;
+
+    my $h = $self->dimensions->height;
+
+    $h -= $padding->bottom + $padding->top;
+    $h -= $margins->bottom + $margins->top;
+    $h -= $border->top->width + $border->bottom->width;
+
+    $h = 0 if $h < 0;
+
+    return Geometry::Primitive::Dimension->new(width => $w, height => $h);
+}
+
+sub minimum_dimensions {
+    my ($self) = @_;
+
+    my $padding = $self->padding;
+    my $margins = $self->margins;
+    my $border = $self->border;
+
+    my $w = 0;
+    $w -= $padding->left + $padding->right;
+    $w -= $margins->left + $margins->right;
+    $w -= $border->left->width + $border->right->width;
+    $w = 0 if $w < 0;
+
+    my $h = 0;
+    $h -= $padding->bottom + $padding->top;
+    $h -= $margins->bottom + $margins->top;
+    $h -= $border->top->width + $border->bottom->width;
+    $h = 0 if $h < 0;
+
+    return Geometry::Primitive::Dimension->new(width => $w, height => $h);
+}
+
+sub inside_bounding_box {
+
+    my ($self) = @_;
+
+    my $padding = $self->padding;
+    my $margins = $self->margins;
+    my $border = $self->border;
+
+    my $id = $self->inside_dimensions;
+    my $rect = Geometry::Primitive::Rectangle->new(
+        origin => Geometry::Primitive::Point->new(
+            x => $padding->left + $border->left->width + $margins->left,
+            y => $padding->top + $border->right->width + $margins->top
+        ),
+        width => $id->width,
+        height => $id->height
+    );
+}
+
+sub outside_dimensions {
+    my ($self) = @_;
+
+    my $padding = $self->padding;
+    my $margins = $self->margins;
+    my $border = $self->border;
+
+    my $w = $padding->left + $padding->right;
+    $w += $margins->left + $margins->right;
+    $w += $border->left->width + $border->right->width;
+
+    my $h = $padding->top + $padding->bottom;
+    $h += $margins->top + $margins->bottom;
+    $h += $border->bottom->width + $border->top->width;
+
+    return Geometry::Primitive::Dimension->new(width => $w, height => $h);
+}
+
+sub prepare {
+    my ($self, $driver) = @_;
+
+    1;
+}
 
 sub to_string {
     my ($self) = @_;
@@ -117,147 +233,109 @@ Handled by L<Graphics::Primitive::Driver>.
 
 =back
 
-=head1 METHODS
+=head1 ATTRIBUTES
 
-=head2 Constructor
+=head2 background_color
 
-=over 4
+This component's background color.
 
-=item I<new>
+=head2 border
 
-Creates a new Component.
-
-=back
-
-=head2 Instance Methods
-
-=over 4
-
-=item I<background_color>
-
-Set this component's background color.
-
-=item I<border>
-
-Set this component's border, which should be an instance of
+This component's border, which should be an instance of
 L<Border|Graphics::Primitive::Border>.
 
-=item I<class>
+=head2 class
 
-Set/Get this component's class, which is an abitrary string.
-Graphics::Primitive has no internal use for this attribute but provides it for
-outside use.
+This component's class, which is an abitrary string. Graphics::Primitive has
+no internal use for this attribute but provides it for outside use.
 
-=item I<color>
+=head2 color
 
-Set this component's foreground color.
+This component's foreground color.
 
-=item I<height>
+=head2 dimensions
 
-Set this component's height.
+This node's dimensions.  See L<Geometry::Primitive::Dimension>.
 
-=item I<inside_bounding_box>
+head2 margins
 
-Returns a L<Rectangle|Geometry::Primitive::Rectangle> that defines the edges
-of the 'inside' box for this component.  This box is relative to the origin
-of the component.
-
-=item I<inside_height>
-
-Get the height available in this container after taking away space for
-padding, margin and borders.
-
-=item I<inside_width>
-
-Get the width available in this container after taking away space for
-padding, margin and borders.
-
-=item I<margins>
-
-Set this component's margins, which should be an instance of
+This component's margins, which should be an instance of
 L<Insets|Graphics::Primitive::Insets>.  Margins are the space I<outside> the
 component's bounding box, as in CSS.  The margins should be outside the
 border.
 
+=head2 name
 
-=item I<name>
+This component's name.  This is not required, but may inform consumers of a
+component.  Pay attention to that library's documentation.
 
-Set this component's name.  This is not required, but may inform consumers
-of a component.  Pay attention to that library's documentation.
+=head2 origin
 
-=item I<origin>
+The origin point for this component.  Provided by
+L<Scene::Graph::Node::Spatial>.
 
-Set/Get the origin point for this component.
-
-=item I<outside_height>
-
-Get the height consumed by padding, margin and borders.
-
-=item I<outside_width>
-
-Get the width consumed by padding, margin and borders.
-
-=item I<finalize>
-
-Method provided to give component one last opportunity to put it's contents
-into the provided space.  Called after prepare.
-
-=item I<padding>
+=head2 padding
 
 Set this component's padding, which should be an instance of
 L<Insets|Graphics::Primitive::Insets>.  Padding is the space I<inside> the
 component's bounding box, as in CSS.  This padding should be between the
 border and the component's content.
 
-=item I<page>
+=head2 page
 
 If true then this component represents stand-alone page.  This informs the
 driver that this component (and any children) are to be renderered on a single
 surface.  This only really makes sense in formats that have pages such as PDF
 of PostScript.
 
-=item I<prepare>
+=head2 visible
+
+Set/Get this component's visible flag.
+
+=head1 METHODS
+
+=head2 finalize
+
+Method provided to give component one last opportunity to put it's contents
+into the provided space.  Called after prepare.
+
+=head2 inside_bounding_box
+
+Returns a L<Rectangle|Geometry::Primitive::Rectangle> that defines the edges
+of the 'inside' box for this component.  This box is relative to the origin
+of the component.
+
+=head2 inside_dimensions
+
+Get the width available in this container after taking away space for
+padding, margin and borders.
+
+=head2 outside_dimensions
+
+Get the height consumed by padding, margin and borders.
+
+=head2 prepare
 
 Method to prepare this component for drawing.  This is an empty sub and is
 meant to be overriden by a specific implemntation.
 
-=item I<preferred_height>
-
-Set/Get this component's preferred height.  Used to inform a layout manager.
-
-=item I<preferred_width>
-
-Set/Get this component's preferred width.  Used to inform a layout manager.
-
-=item I<to_string>
+=head2 to_string
 
 Get a string representation of this component in the form of:
 
   $name $x,$y ($widthx$height)
 
-=item I<visible>
+=head1 SEE ALSO
 
-Set/Get this component's visible flag.
-
-=item I<width>
-
-Set/Get this component's width.
-
-=back
+L<Scene::Graph::Node::Spatial>
 
 =head1 AUTHOR
 
 Cory Watson, C<< <gphat@cpan.org> >>
 
-=head1 BUGS
-
-Please report any bugs or feature requests to C<bug-geometry-primitive at rt.cpan.org>, or through
-the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Geometry-Primitive>.  I will be notified, and then you'll
-automatically be notified of progress on your bug as I make changes.
-
 =head1 COPYRIGHT & LICENSE
 
-Copyright 2008-2009 by Cory G Watson.
+Copyright 2008-2010 by Cory G Watson.
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.

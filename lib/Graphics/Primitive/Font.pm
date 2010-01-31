@@ -1,35 +1,17 @@
 package Graphics::Primitive::Font;
 use Moose;
 use MooseX::Storage;
-use Moose::Util::TypeConstraints;
 
 with qw(MooseX::Clone MooseX::Storage::Deferred);
 
-enum 'Graphics::Primitive::Font::AntialiasModes' => (
-    qw(default none gray subpixel)
-);
-enum 'Graphics::Primitive::Font::HintMetrics' => (
-    'default', 'off', 'on'
-);
-enum 'Graphics::Primitive::Font::HintStyles' => (
-    'default', 'none', 'slight', 'medium', 'full'
-);
-enum 'Graphics::Primitive::Font::Slants' => (
-    'normal', 'italic', 'oblique'
-);
-enum 'Graphics::Primitive::Font::SubpixelOrders' => (
-    qw(default rgb bgr vrgb vbgr)
-);
-enum 'Graphics::Primitive::Font::Variants' => (
-    'normal', 'small-caps'
-);
-enum 'Graphics::Primitive::Font::Weights' => (
-    'normal', 'bold'
+use Graphics::Primitive::Types qw(
+    AntialiasModes HintMetrics HintStyles Slants SubpixelOrders Variants
+    Weights
 );
 
 has 'antialias_mode' => (
     is => 'rw',
-    isa => 'Graphics::Primitive::Font::AntialiasModes',
+    isa => AntialiasModes,
     default => 'default'
 );
 has 'family' => (
@@ -39,12 +21,12 @@ has 'family' => (
 );
 has 'hint_metrics' => (
     is => 'rw',
-    isa => 'Graphics::Primitive::Font::HintMetrics',
+    isa => HintMetrics,
     default => 'default'
 );
 has 'hint_style' => (
     is => 'rw',
-    isa => 'Graphics::Primitive::Font::HintStyles',
+    isa => HintStyles,
     default => 'default'
 );
 has 'size' => (
@@ -54,22 +36,22 @@ has 'size' => (
 );
 has 'slant' => (
     is => 'rw',
-    isa => 'Graphics::Primitive::Font::Slants',
+    isa => Slants,
     default => 'normal'
 );
 has 'subpixel_order' => (
     is => 'rw',
-    isa => 'Graphics::Primitive::Font::SubpixelOrders',
+    isa => SubpixelOrders,
     default => 'default'
 );
 has 'variant' => (
     is => 'rw',
-    isa => 'Graphics::Primitive::Font::Variants',
+    isa => Variants,
     default => 'normal'
 );
 has 'weight' => (
     is => 'rw',
-    isa => 'Graphics::Primitive::Font::Weights',
+    isa => Weights,
     default => 'normal'
 );
 

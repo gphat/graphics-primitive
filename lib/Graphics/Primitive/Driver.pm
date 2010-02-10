@@ -2,6 +2,7 @@ package Graphics::Primitive::Driver;
 use Moose::Role;
 
 use Geometry::Primitive::Dimension;
+use Scene::Graph::Traverser;
 
 requires qw(
     _draw_arc _draw_bezier _draw_canvas _draw_circle _draw_component
@@ -11,43 +12,42 @@ requires qw(
 );
 
 has 'dimensions' => (
-    is => 'ro',
+    is => 'rw',
     isa => 'Geometry::Primitive::Dimension',
-    default => sub { Geometry::Primitive::Dimension->new }
+    predicate => 'has_dimensions'
 );
 
 sub draw {
-    my ($self, $comp) = @_;
+    my ($self, $root) = @_;
 
-    if($comp->page) {
-        # FIRST_PAGE is a little protection to ensure that we don't call
-        # show page on the first page, as that would mean we'd have an
-        # empty first page all the time.
-        if($self->{FIRST_PAGE}) {
-            $self->_finish_page;
-        } else {
-            $self->{FIRST_PAGE} = 1;
+    my $traverser = Scene::Graph::Traverser->new(scene => $root);
+
+    while(my $comp = $traverser->next) {
+
+        if($comp->page) {
+            # FIRST_PAGE is a little protection to ensure that we don't call
+            # show page on the first page, as that would mean we'd have an
+            # empty first page all the time.
+            if($self->{FIRST_PAGE}) {
+                $self->_finish_page;
+            } else {
+                $self->{FIRST_PAGE} = 1;
+            }
+            $self->_resize($comp->width, $comp->height);
         }
-        $self->_resize($comp->width, $comp->height);
-    }
 
-    die('Components must be objects.') unless ref($comp);
-    # The order of this is important, since isa will return true for any
-    # superclass...
-    # TODO Check::ISA
-    if($comp->isa('Graphics::Primitive::Canvas')) {
-        $self->_draw_canvas($comp);
-    } elsif($comp->isa('Graphics::Primitive::Image')) {
-        $self->_draw_image($comp);
-    } elsif($comp->isa('Graphics::Primitive::TextBox')) {
-        $self->_draw_textbox($comp);
-    } elsif($comp->isa('Graphics::Primitive::Component')) {
-        $self->_draw_component($comp);
-    }
-
-    unless($comp->is_leaf) {
-        foreach my $subcomp (@{ $comp->children }) {
-            $self->draw($subcomp);
+        die('Components must be objects.') unless ref($comp);
+        # The order of this is important, since isa will return true for any
+        # superclass...
+        # TODO Check::ISA
+        if($comp->isa('Graphics::Primitive::Canvas')) {
+            $self->_draw_canvas($comp);
+        } elsif($comp->isa('Graphics::Primitive::Image')) {
+            $self->_draw_image($comp);
+        } elsif($comp->isa('Graphics::Primitive::TextBox')) {
+            $self->_draw_textbox($comp);
+        } elsif($comp->isa('Graphics::Primitive::Component')) {
+            $self->_draw_component($comp);
         }
     }
 }
@@ -69,6 +69,12 @@ sub finalize {
 sub prepare {
     my ($self, $comp) = @_;
 
+    unless($self->has_dimensions) {
+        $self->dimensions(Geometry::Primitive::Dimension->new(
+            width => $comp->dimensions->width,
+            height => $comp->dimensions->height
+        ));
+    }
     unless($self->dimensions->width) {
         $self->dimensions->width($comp->dimensions->width);
     }

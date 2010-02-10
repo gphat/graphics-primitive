@@ -4,10 +4,15 @@ use Moose;
 
 with 'Graphics::Primitive::Driver';
 
-has 'draw_component_called' => (
+has 'drawn_components' => (
+    traits => [qw(Array)],
     is => 'rw',
-    isa => 'Int',
-    default => 0
+    isa => 'ArrayRef',
+    default => sub { [] },
+    handles => {
+        'draw_component_called' => 'count',
+        'add_drawn_component' => 'push'
+    }
 );
 
 sub _do_fill { }
@@ -25,9 +30,10 @@ sub _draw_circle { }
 sub _draw_component {
     my ($self, $comp) = @_;
 
-    $self->draw_component_called(
-        $self->draw_component_called + 1
-    );
+    $self->add_drawn_component($comp);
+    # $self->draw_component_called(
+    #     $self->draw_component_called + 1
+    # );
 }
 
 sub _draw_ellipse { }

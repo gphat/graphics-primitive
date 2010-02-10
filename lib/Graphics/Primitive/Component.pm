@@ -38,6 +38,16 @@ has 'dimensions' => (
     default => sub { Geometry::Primitive::Dimension->new },
     coerce => 1
 );
+has 'inside_bounding_box' => (
+    is => 'ro',
+    isa => 'Geometry::Primitive::Rectangle',
+    lazy_build => 1
+);
+has 'inside_dimensions' => (
+    is => 'ro',
+    isa => 'Geometry::Primitive::Dimension',
+    lazy_build => 1
+);
 has 'layout_manager' => (
     is => 'rw',
     isa => 'Layout::Manager',
@@ -51,6 +61,11 @@ has 'margins' => (
     coerce => 1,
 );
 has 'name' => ( is => 'rw', isa => 'Str' );
+has 'outside_dimensions' => (
+    is => 'ro',
+    isa => 'Geometry::Primitive::Dimension',
+    lazy_build => 1
+);
 has 'padding' => (
     is => 'rw',
     isa => 'Graphics::Primitive::Insets',
@@ -62,7 +77,26 @@ has 'visible' => ( is => 'rw', isa => 'Bool', default => 1 );
 
 sub finalize { }
 
-sub inside_dimensions {
+sub _build_inside_bounding_box {
+
+    my ($self) = @_;
+
+    my $padding = $self->padding;
+    my $margins = $self->margins;
+    my $border = $self->border;
+
+    my $id = $self->inside_dimensions;
+    my $rect = Geometry::Primitive::Rectangle->new(
+        origin => Geometry::Primitive::Point->new(
+            x => $padding->left + $border->left->width + $margins->left,
+            y => $padding->top + $border->right->width + $margins->top
+        ),
+        width => $id->width,
+        height => $id->height
+    );
+}
+
+sub _build_inside_dimensions {
     my ($self) = @_;
 
     my $w = $self->dimensions->width;
@@ -89,48 +123,7 @@ sub inside_dimensions {
     return Geometry::Primitive::Dimension->new(width => $w, height => $h);
 }
 
-sub minimum_dimensions {
-    my ($self) = @_;
-
-    my $padding = $self->padding;
-    my $margins = $self->margins;
-    my $border = $self->border;
-
-    my $w = 0;
-    $w -= $padding->left + $padding->right;
-    $w -= $margins->left + $margins->right;
-    $w -= $border->left->width + $border->right->width;
-    $w = 0 if $w < 0;
-
-    my $h = 0;
-    $h -= $padding->bottom + $padding->top;
-    $h -= $margins->bottom + $margins->top;
-    $h -= $border->top->width + $border->bottom->width;
-    $h = 0 if $h < 0;
-
-    return Geometry::Primitive::Dimension->new(width => $w, height => $h);
-}
-
-sub inside_bounding_box {
-
-    my ($self) = @_;
-
-    my $padding = $self->padding;
-    my $margins = $self->margins;
-    my $border = $self->border;
-
-    my $id = $self->inside_dimensions;
-    my $rect = Geometry::Primitive::Rectangle->new(
-        origin => Geometry::Primitive::Point->new(
-            x => $padding->left + $border->left->width + $margins->left,
-            y => $padding->top + $border->right->width + $margins->top
-        ),
-        width => $id->width,
-        height => $id->height
-    );
-}
-
-sub outside_dimensions {
+sub _build_outside_dimensions {
     my ($self) = @_;
 
     my $padding = $self->padding;
@@ -159,7 +152,7 @@ sub to_string {
 
     my $buff = defined($self->name) ? $self->name : ref($self);
     $buff .= ': '.$self->origin->to_string;
-    $buff .= ' ('.$self->width.'x'.$self->height.')';
+    $buff .= ' ('.$self->dimensions->width.'x'.$self->dimensions->height.')';
     return $buff;
 }
 
@@ -257,6 +250,17 @@ This component's foreground color.
 
 This node's dimensions.  See L<Geometry::Primitive::Dimension>.
 
+=head2 inside_bounding_box
+
+Returns a L<Rectangle|Geometry::Primitive::Rectangle> that defines the edges
+of the 'inside' box for this component.  This box is relative to the origin
+of the component.  Lazily computed.
+
+=head2 inside_dimensions
+
+Get the width available in this container after taking away space for
+padding, margin and borders.  Lazily computed.
+
 head2 margins
 
 This component's margins, which should be an instance of
@@ -273,6 +277,10 @@ component.  Pay attention to that library's documentation.
 
 The origin point for this component.  Provided by
 L<Scene::Graph::Node::Spatial>.
+
+=head2 outside_dimensions
+
+Get the height consumed by padding, margin and borders.  Lazily computed.
 
 =head2 padding
 
@@ -298,21 +306,6 @@ Set/Get this component's visible flag.
 
 Method provided to give component one last opportunity to put it's contents
 into the provided space.  Called after prepare.
-
-=head2 inside_bounding_box
-
-Returns a L<Rectangle|Geometry::Primitive::Rectangle> that defines the edges
-of the 'inside' box for this component.  This box is relative to the origin
-of the component.
-
-=head2 inside_dimensions
-
-Get the width available in this container after taking away space for
-padding, margin and borders.
-
-=head2 outside_dimensions
-
-Get the height consumed by padding, margin and borders.
 
 =head2 prepare
 

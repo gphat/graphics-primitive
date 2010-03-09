@@ -5,8 +5,6 @@ use MooseX::Storage;
 with 'MooseX::Clone';
 with Storage (format => 'JSON', io => 'File');
 
-use MooseX::AttributeHelpers;
-
 use Geometry::Primitive::Arc;
 use Geometry::Primitive::Bezier;
 use Geometry::Primitive::Ellipse;
@@ -26,27 +24,25 @@ has 'contiguous' => (
     default =>  sub { 0 },
 );
 has 'hints' => (
-    metaclass => 'Collection::Array',
     is => 'rw',
     isa => 'ArrayRef[HashRef]',
-    traits => [qw(Clone)],
+    traits => [qw(Array Clone)],
     default => sub { [] },
-    provides => {
-        push => 'add_hint',
-        get => 'get_hint',
+    handles => {
+        add_hint => 'push',
+        get_hint => 'get',
     }
 );
 has 'primitives' => (
-    metaclass => 'Collection::Array',
     is => 'rw',
     isa => 'ArrayRef',
-    traits => [qw(Clone)],
+    traits => [qw(Array Clone)],
     default => sub { [] },
-    provides => {
-        'push' => 'add_primitive',
-        'clear' => 'clear_primitives',
-        'count' => 'primitive_count',
-        'get' => 'get_primitive'
+    handles => {
+        add_primitive => 'push',
+        clear_primitives => 'clear',
+        primitive_count => 'count',
+        get_primitive => 'get'
     }
 );
 

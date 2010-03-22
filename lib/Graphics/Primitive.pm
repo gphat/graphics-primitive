@@ -87,6 +87,10 @@ L<CSS|http://www.w3.org/Style/CSS/>'s box model.
 
 Cory Watson, C<< <gphat@cpan.org> >>
 
+=head1 CONTRIBUTORS
+
+Florian Ragwitz
+
 =head1 ACKNOWLEDGEMENTS
 
 Many of the ideas here come from my experience using the Cairo library.

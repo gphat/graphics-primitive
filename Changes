@@ -1,5 +1,6 @@
 Revision history for Graphics-Primitive
 
+0.41    March 22, 2010
   - Convert all remaining uses of AttributeHelpers with native traits
     (Florian Ragwitz).
 

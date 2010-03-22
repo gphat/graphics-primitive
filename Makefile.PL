@@ -15,4 +15,6 @@ requires 'MooseX::Storage' => '0.17';
 requires 'Forest' => '0.06';
 requires 'JSON::Any' => '1.22';
 
+repository 'git://github.com/gphat/graphics-primitive.git';
+
 WriteAll;

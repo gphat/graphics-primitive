@@ -1,6 +1,5 @@
 package Graphics::Primitive::Canvas;
 use Moose;
-use MooseX::AttributeHelpers;
 use MooseX::Storage;
 
 extends 'Graphics::Primitive::Component';
@@ -21,28 +20,26 @@ has path => (
 );
 
 has paths => (
-    metaclass => 'Collection::Array',
+    traits => [qw(Array Clone)],
     isa => 'ArrayRef',
     is  => 'rw',
-    traits => [qw(Clone)],
     default =>  sub { [] },
-    provides => {
-        push => 'add_path',
-        count=> 'path_count',
-        get => 'get_path'
+    handles => {
+        add_path => 'push',
+        path_count => 'count',
+        get_path => 'get',
     }
 );
 
 has saved_paths => (
-    metaclass => 'Collection::Array',
+    traits => [qw(Array Copy)],
     isa => 'ArrayRef',
     is  => 'rw',
-    traits => [qw(Copy)],
     default =>  sub { [] },
-    provides => {
-        push => 'push_path',
-        pop  => 'pop_path',
-        count => 'saved_path_count'
+    handles => {
+        push_path => 'push',
+        pop_path => 'pop',
+        saved_path_count => 'count',
     }
 );
 

@@ -1,7 +1,6 @@
 package Graphics::Primitive::Paint::Gradient::Radial;
 use Moose;
 use Moose::Util::TypeConstraints;
-use MooseX::AttributeHelpers;
 use MooseX::Storage;
 
 extends 'Graphics::Primitive::Paint::Gradient';

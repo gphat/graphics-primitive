@@ -1,5 +1,8 @@
 Revision history for Graphics-Primitive
 
+  - Convert all remaining uses of AttributeHelpers with native traits
+    (Florian Ragwitz).
+
 0.40    March 9, 2010
   - Convert Path to use Moose's native traits rather than AttributeHelpers
 

@@ -29,7 +29,7 @@ cmp_ok($driver->draw_component_called, '==', 2, '2 component draws');
 cmp_ok($driver->drawn_components->[0]->origin->x, '==', 0, 'first component x:0');
 cmp_ok($driver->drawn_components->[0]->origin->y, '==', 0, 'first component y:0');
 
-cmp_ok($driver->drawn_components->[1]->origin->x, '==', 16, 'first component x:0');
-cmp_ok($driver->drawn_components->[1]->origin->y, '==', 16, 'first component y:0');
+cmp_ok($driver->drawn_components->[1]->origin->x, '==', 8, 'first component x:0');
+cmp_ok($driver->drawn_components->[1]->origin->y, '==', 8, 'first component y:0');
 
 done_testing;

@@ -48,17 +48,17 @@ has 'inside_dimensions' => (
     isa => 'Geometry::Primitive::Dimension',
     lazy_build => 1
 );
-has 'layout_manager' => (
-    is => 'rw',
-    isa => 'Layout::Manager',
-    handles => [ 'do_layout' ],
-    predicate => 'has_layout_manager'
-);
 has 'margins' => (
     is => 'rw',
     isa => 'Graphics::Primitive::Insets',
     default => sub { Graphics::Primitive::Insets->new },
     coerce => 1,
+);
+has 'minimum_dimensions' => (
+    is => 'rw',
+    isa => 'Geometry::Primitive::Dimension',
+    default => sub { Geometry::Primitive::Dimension->new },
+    coerce => 1
 );
 has 'name' => ( is => 'rw', isa => 'Str' );
 has 'outside_dimensions' => (
@@ -139,6 +139,18 @@ sub _build_outside_dimensions {
     $h += $border->bottom->width + $border->top->width;
 
     return Geometry::Primitive::Dimension->new(width => $w, height => $h);
+}
+
+sub minimum_height {
+    my ($self) = @_;
+
+    return $self->minimum_dimensions->height;
+}
+
+sub minimum_width {
+    my ($self) = @_;
+
+    return $self->minimum_dimensions->width;
 }
 
 sub prepare {
@@ -267,6 +279,18 @@ This component's margins, which should be an instance of
 L<Insets|Graphics::Primitive::Insets>.  Margins are the space I<outside> the
 component's bounding box, as in CSS.  The margins should be outside the
 border.
+
+=head2 minimum_dimensions
+
+This node's minimum dimensions. See L<Geometry::Primitive::Dimension>.
+
+=head2 minimum_height
+
+Shortcut for C<minimum_dimensions->height>.
+
+=head2 minimum_width
+
+Shortcut for C<minimum_dimensions->width>.
 
 =head2 name
 

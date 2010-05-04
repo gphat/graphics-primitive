@@ -9,6 +9,7 @@ build_requires 'Test::More';
 requires 'Geometry::Primitive' => '0.21';
 requires 'Graphics::Color' => '0.20';
 requires 'Moose' => '0.90';
+requires 'MooseX::Aliases' => '0.08';
 requires 'MooseX::Clone' => '0.04';
 requires 'MooseX::Storage' => '0.17';
 requires 'MooseX::Types' => '0.21';

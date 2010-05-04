@@ -48,11 +48,7 @@ drawing.
 The root object for Graphics::Primitive is the
 L<Component|Graphics::Primitive::Component>.  Components contain all the
 common elements that you'd expect: margins, padding, background color etc.
-
-The next most important is the L<Container|Graphics::Primitive::Container>.
-Containers are Components that can hold other Components.  Containers have all
-the attributes and methods of a Component with the addition of the
-I<layout_manager> attribute for us with L<Layout::Manager>.
+They may also have child components.
 
 Another important Component is the L<Canvas|Graphics::Primitive::Canvas>.
 The Canvas differs from other components by being a container for various

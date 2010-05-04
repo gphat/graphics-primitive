@@ -6,10 +6,17 @@ Revision history for Graphics-Primitive
     just that one package, since it has nothing in it)
   - Use MooseX::Storage::Deferred, removing dependency on JSON::Any
   - Use MooseX::Types rather than defining types in the class
-  - Remove MX::AH, use native traits
   - Define font's types in ::Types
 
-0.49    January 10th, 2009
+0.51    March 22, 2010
+  - Convert all remaining uses of AttributeHelpers with native traits
+    (Florian Ragwitz).
+
+0.50    March 9, 2010
+  - Convert Path to use Moose's native traits rather than AttributeHelpers
+
+0.49    January 10th, 2010
+>>>>>>> master
   - Remove typing for Path's primitives accessor
 
 0.48    December 24th, 2009

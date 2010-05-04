@@ -12,8 +12,8 @@ has color_stops => (
     is  => 'rw',
     default =>  sub { {} },
     handles => {
-        get_stop    => 'get',
         add_stop    => 'set',
+        get_stop    => 'get',
         stop_count  => 'count',
         stops       => 'keys'
     }

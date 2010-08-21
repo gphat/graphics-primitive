@@ -1,5 +1,8 @@
 Revision history for Graphics-Primitive
 
+0.52    Aug 21, 2010
+  - POD updates
+
 0.51    March 22, 2010
   - Convert all remaining uses of AttributeHelpers with native traits
     (Florian Ragwitz).

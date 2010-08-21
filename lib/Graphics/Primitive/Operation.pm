@@ -39,7 +39,7 @@ Cory Watson <gphat@cpan.org>
 
 =head1 COPYRIGHT & LICENSE
 
-Copyright 2008-2009 by Cory G Watson.
+Copyright 2008-2010 by Cory G Watson.
 
 You can redistribute and/or modify this code under the same terms as Perl
 itself.

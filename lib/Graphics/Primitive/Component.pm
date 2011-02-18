@@ -345,7 +345,7 @@ L<Border|Graphics::Primitive::Border>.
 
 Optional callback that is fired at the beginning of the C<finalize> phase.
 This allows you to add some sort of custom code that can modify the component
-just before it is rendered.
+just before it is rendered.  The only argument is the component itself.
 
 Note that changing the position or the dimensions of the component will B<not>
 re-layout the scene.  You may have weird results of you manipulate the

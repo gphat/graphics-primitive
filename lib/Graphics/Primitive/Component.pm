@@ -23,6 +23,15 @@ has 'border' => (
     default => sub { Graphics::Primitive::Border->new },
     trigger => sub { my ($self) = @_; $self->prepared(0); }
 );
+has 'callback' => (
+    traits => ['Code'],
+    is => 'rw',
+    isa => 'CodeRef',
+    predicate => 'has_callback',
+    handles => {
+        fire_callback => 'execute'
+    }
+);
 has 'class' => ( is => 'rw', isa => 'Str' );
 has 'color' => (
     is => 'rw', isa => 'Graphics::Color',
@@ -209,7 +218,11 @@ sub outside_height {
     return $w;
 }
 
-sub finalize { }
+sub finalize {
+    my ($self) = @_;
+
+    $self->fire_callback if $self->has_callback;
+}
 
 sub prepare {
     my ($self, $driver) = @_;
@@ -328,6 +341,16 @@ Set this component's background color.
 Set this component's border, which should be an instance of
 L<Border|Graphics::Primitive::Border>.
 
+=item I<callback>
+
+Optional callback that is fired at the beginning of the C<finalize> phase.
+This allows you to add some sort of custom code that can modify the component
+just before it is rendered.
+
+Note that changing the position or the dimensions of the component will B<not>
+re-layout the scene.  You may have weird results of you manipulate the
+component's dimensions here.
+
 =item I<class>
 
 Set/Get this component's class, which is an abitrary string.
@@ -338,10 +361,18 @@ outside use.
 
 Set this component's foreground color.
 
+=item I<fire_callback>
+
+Method to execute this component's C<callback>.
+
 =item I<get_tree>
 
 Get a tree for this component.  Since components are -- by definiton -- leaf
 nodes, this tree will only have the one member at it's root.
+
+=item I<has_callback>
+
+Predicate that tells if this component has a C<callback>.
 
 =item I<height>
 

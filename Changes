@@ -1,5 +1,8 @@
 Revision history for Graphics-Primitive
 
+0.53    Feb 18, 2011
+  - Add callback to Component
+
 0.52    Aug 21, 2010
   - POD updates
 

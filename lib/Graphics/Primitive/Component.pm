@@ -221,7 +221,7 @@ sub outside_height {
 sub finalize {
     my ($self) = @_;
 
-    $self->fire_callback if $self->has_callback;
+    $self->fire_callback($self) if $self->has_callback;
 }
 
 sub prepare {

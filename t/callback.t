@@ -14,20 +14,21 @@ BEGIN {
 my $driver = DummyDriver->new;
 isa_ok($driver, 'DummyDriver');
 
-my $container = Graphics::Primitive::Container->new;
-my $comp = Graphics::Primitive::Component->new;
+my $container = Graphics::Primitive::Container->new(class => 'container');
+my $comp = Graphics::Primitive::Component->new(class => 'component');
 my $comp_call = 0;
-$comp->callback(sub { $comp_call = 1 });
+$comp->callback(sub { $comp_call = $_[0]->class });
 
 $container->add_component($comp, 'c');
 
 my $cont_call = 0;
-$container->callback(sub { $cont_call = 1 });
+use Data::Dumper;
+$container->callback(sub { $cont_call = $_[0]->class });
 
 $driver->prepare($container);
 $driver->finalize($container);
 
-cmp_ok($cont_call, '==', 1, 'container callback fired');
-cmp_ok($comp_call, '==', 1, 'component callback fired');
+cmp_ok($cont_call, 'eq', 'container', 'container callback fired');
+cmp_ok($comp_call, 'eq', 'component', 'component callback fired');
 
 done_testing;

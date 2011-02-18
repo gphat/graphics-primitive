@@ -53,4 +53,5 @@ t/70-paint-gradient.t
 t/80-serialize.t
 t/author/pod-coverage.t
 t/author/pod.t
+t/callback.t
 t/lib/DummyDriver.pm

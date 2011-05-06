@@ -33,7 +33,7 @@ has 'height' => (
     is => 'rw',
     isa => 'Num',
     default => sub { 0 },
-    trigger => sub { my ($self) = @_; $self->prepared(0); }
+    trigger => sub { my ($self) = @_; $self->prepared(0); if($self->height < $self->minimum_height) { $self->height($self->minimum_height); } }
 );
 has 'margins' => (
     is => 'rw',
@@ -80,7 +80,7 @@ has 'width' => (
     is => 'rw',
     isa => 'Num',
     default => sub { 0 },
-    trigger => sub { my ($self) = @_; $self->prepared(0); }
+    trigger => sub { my ($self) = @_; $self->prepared(0); if($self->width < $self->minimum_width) { $self->width($self->minimum_width); } }
 );
 
 sub get_tree {

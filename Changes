@@ -1,5 +1,12 @@
 Revision history for Graphics-Primitive
 
+0.61    Jun 2, 2011
+  - Fix broken merge (thanks Ansgar Burchardt)
+
+0.60    May 5, 2011
+  - If minimum_width or minimum_height is set, don't allow height or width to
+    be set to anything smaller!
+
 0.53    Feb 18, 2011
   - Add callback to Component
 

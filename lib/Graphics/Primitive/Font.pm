@@ -6,27 +6,27 @@ use Moose::Util::TypeConstraints;
 with 'MooseX::Clone';
 with Storage (format => 'JSON', io => 'File');
 
-enum 'Graphics::Primitive::Font::AntialiasModes' => (
+enum 'Graphics::Primitive::Font::AntialiasModes' => [
     qw(default none gray subpixel)
-);
-enum 'Graphics::Primitive::Font::HintMetrics' => (
+];
+enum 'Graphics::Primitive::Font::HintMetrics' => [
     'default', 'off', 'on'
-);
-enum 'Graphics::Primitive::Font::HintStyles' => (
+];
+enum 'Graphics::Primitive::Font::HintStyles' => [
     'default', 'none', 'slight', 'medium', 'full'
-);
-enum 'Graphics::Primitive::Font::Slants' => (
+];
+enum 'Graphics::Primitive::Font::Slants' => [
     'normal', 'italic', 'oblique'
-);
-enum 'Graphics::Primitive::Font::SubpixelOrders' => (
+];
+enum 'Graphics::Primitive::Font::SubpixelOrders' => [
     qw(default rgb bgr vrgb vbgr)
-);
-enum 'Graphics::Primitive::Font::Variants' => (
+];
+enum 'Graphics::Primitive::Font::Variants' => [
     'normal', 'small-caps'
-);
-enum 'Graphics::Primitive::Font::Weights' => (
+];
+enum 'Graphics::Primitive::Font::Weights' => [
     'normal', 'bold'
-);
+];
 
 has 'antialias_mode' => (
     is => 'rw',

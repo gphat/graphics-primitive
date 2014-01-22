@@ -3,8 +3,8 @@ use Moose::Role;
 
 use Moose::Util::TypeConstraints;
 
-enum 'Graphics::Primitive::Alignment::Horizontals' => qw(center left right);
-enum 'Graphics::Primitive::Alignment::Verticals' => qw(bottom center top);
+enum 'Graphics::Primitive::Alignment::Horizontals' => [qw(center left right)];
+enum 'Graphics::Primitive::Alignment::Verticals' => [qw(bottom center top)];
 
 has 'horizontal_alignment' => (
     is => 'rw',

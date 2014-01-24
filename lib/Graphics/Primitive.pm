@@ -1,7 +1,7 @@
 package Graphics::Primitive;
 use Moose;
 
-our $VERSION = '0.61';
+our $VERSION = '0.62';
 
 __PACKAGE__->meta->make_immutable;
 

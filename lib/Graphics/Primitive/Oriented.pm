@@ -3,7 +3,7 @@ use Moose::Role;
 
 use Moose::Util::TypeConstraints;
 
-enum 'Graphics::Primitive::Orientations' => qw(vertical horizontal);
+enum 'Graphics::Primitive::Orientations' => [qw(vertical horizontal)];
 
 has 'orientation' => (
     is => 'rw',

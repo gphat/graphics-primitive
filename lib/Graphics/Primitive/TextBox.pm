@@ -3,13 +3,13 @@ use Moose;
 use MooseX::Storage;
 use Moose::Util::TypeConstraints;
 
-# enum 'Graphics::Primitive::TextBox::Directions' => (
+# enum 'Graphics::Primitive::TextBox::Directions' => [(
 #     'auto', 'ltr', 'rtl'
-# );
+# )];
 # enum 'Graphics::Primitive::TextBox::WrapModes'
-#     => qw(word char word_char);
+#     => [qw(word char word_char)];
 # enum 'Graphics::Primitive::TextBox::EllipsizeModes'
-#     => qw(none start middle end);
+#     => [qw(none start middle end)];
 
 extends 'Graphics::Primitive::Component';
 

@@ -6,8 +6,8 @@ use MooseX::Storage;
 with 'MooseX::Clone';
 with Storage (format => 'JSON', io => 'File');
 
-enum 'LineCap' => qw(butt round square);
-enum 'LineJoin' => qw(miter round bevel);
+enum 'LineCap' => [qw(butt round square)];
+enum 'LineJoin' => [qw(miter round bevel)];
 
 has 'color' => ( is => 'rw', isa => 'Graphics::Color', traits => [qw(Clone)] );
 has 'dash_pattern' => ( is => 'rw', isa => 'ArrayRef' );

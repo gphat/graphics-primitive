@@ -205,6 +205,8 @@ no Moose;
 
 __END__
 
+=encoding UTF-8
+
 =head1 NAME
 
 Graphics::Primitive::Path - Collection of primitives

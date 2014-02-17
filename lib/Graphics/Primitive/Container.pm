@@ -191,7 +191,7 @@ arrayref of removed components.
 
 =item I<validate_component>
 
-Optionally overriden by an implementation, allows it to deem a component as
+Optionally overridden by an implementation, allows it to deem a component as
 invalid.  If this sub returns false, the component won't be added.
 
 =back

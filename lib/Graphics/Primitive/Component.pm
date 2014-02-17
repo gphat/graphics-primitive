@@ -466,7 +466,7 @@ of PostScript.
 =item I<prepare>
 
 Method to prepare this component for drawing.  This is an empty sub and is
-meant to be overriden by a specific implemntation.
+meant to be overridden by a specific implementation.
 
 =item I<preferred_height>
 

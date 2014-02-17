@@ -1,5 +1,8 @@
 Revision history for Graphics-Primitive
 
+0.63    Feb 17, 2014
+  - Doc speclling fixes (thanks Gregor Herrmann!)
+
 0.61    Jun 2, 2011
   - Fix broken merge (thanks Ansgar Burchardt)
 

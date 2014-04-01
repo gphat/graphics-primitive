@@ -1,5 +1,8 @@
 Revision history for Graphics-Primitive
 
+0.65    Mar 31, 2014
+  - Make a TextLayout's component a weak_ref to prevent circular references.
+
 0.64    Feb 17, 2014
   - POD encoding fixes (thanks Gregor Herrmann)
 
@@ -175,7 +178,7 @@ Revision history for Graphics-Primitive
 
 0.14
   - TextBox: handle text layout with Text::Flow
-  - Component: coercion of Insets from ArrayRef and Num 
+  - Component: coercion of Insets from ArrayRef and Num
   - Add pop_component to Container for removing the last component.
   - POD updates
   - Component: explicitly return from outside_width and outside_height

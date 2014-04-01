@@ -6,7 +6,8 @@ requires 'slice';
 has 'component' => (
     is => 'rw',
     isa => 'Graphics::Primitive::TextBox',
-    required => 1
+    required => 1,
+    weak_ref => 1
 );
 has 'height' => (
     is => 'rw',

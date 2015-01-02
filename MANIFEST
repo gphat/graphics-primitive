@@ -51,6 +51,7 @@ t/70-op-fill.t
 t/70-op-stroke.t
 t/70-paint-gradient.t
 t/80-serialize.t
+t/author/cpan-changes.t
 t/author/pod-coverage.t
 t/author/pod.t
 t/callback.t

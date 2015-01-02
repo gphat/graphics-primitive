@@ -1,5 +1,8 @@
 Revision history for Graphics-Primitive
 
+0.66    UNKNOWN
+  - Add a missing requires on Data::Visitor::Callback (tests failed without it)
+
 0.65    Mar 31, 2014
   - Make a TextLayout's component a weak_ref to prevent circular references.
 

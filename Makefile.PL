@@ -13,6 +13,7 @@ requires 'MooseX::Clone' => '0.04';
 requires 'MooseX::Storage' => '0.17';
 requires 'Forest' => '0.06';
 requires 'JSON::Any' => '1.22';
+requires 'Data::Visitor::Callback' => '0.30';
 
 repository 'git://github.com/gphat/graphics-primitive.git';
 

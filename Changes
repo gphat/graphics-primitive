@@ -1,6 +1,6 @@
 Revision history for Graphics-Primitive
 
-0.66    Unknown
+0.66    2014-01-04
   - Add a missing requires on Data::Visitor::Callback (tests failed without it)
   - Convert "Changes" to the CPAN::Changes spec.
 

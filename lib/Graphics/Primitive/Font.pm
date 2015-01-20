@@ -36,7 +36,7 @@ has 'antialias_mode' => (
 has 'family' => (
     is => 'rw',
     isa => 'Str',
-    default => 'Sans'
+    default => $ENV{GRAPHICS_PRIMITIVE_DEFAULT_FONT} || ($^O eq 'MSWin32'?'Arial':'Sans')
 );
 has 'hint_metrics' => (
     is => 'rw',

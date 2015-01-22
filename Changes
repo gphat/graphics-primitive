@@ -1,5 +1,9 @@
 Revision history for Graphics-Primitive
 
+0.67    2015-01-21
+  - Allow default font to be overridden with $GRAPHICS_PRIMITIVE_DEFAULT_FONT
+    and default MSWin32 to 'Arial' (TobyLL)
+
 0.66    2014-01-04
   - Add a missing requires on Data::Visitor::Callback (tests failed without it)
   - Convert "Changes" to the CPAN::Changes spec.

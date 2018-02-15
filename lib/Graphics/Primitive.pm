@@ -26,7 +26,10 @@ and the like.
           red => 1, green => 0, blue => 0
       ),
       width => 500, height => 350,
-      border => new Graphics::Primitive::Border->new( width => 5 )
+      border => Graphics::Primitive::Border->new(
+        width => 5,
+        color => Graphics::Color::RGB->new(red => 0, green => 0, blue => 1)
+      )
     );
 
     my $driver = Graphics::Primitive::Driver::Cairo->new(format => 'SVG');
